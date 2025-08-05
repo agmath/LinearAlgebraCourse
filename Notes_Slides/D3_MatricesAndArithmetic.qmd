@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Introduction and What to Expect"
+title: "MAT 350: Matrices, Matrix Arithmetic, and Operations"
 author: Dr. Gilbert
 format: 
   revealjs:
@@ -43,6 +43,355 @@ a:visited {
 
 ## Matrices (Definition)
 
+. . .
+
+A **matrix** is a rectangular array of numbers arranged in rows and columns. 
+
++ Matrices are used to represent and solve systems of linear equations, perform transformations, and model various real-world systems in science and engineering.
+
+. . .
+
+***Note*:** In MAT350, we'll consider matrices whose entries are real numbers, although this restriction is not generally required.
+
+## Dimensions of Matrices
+
+. . .
+
+The **dimension** (or size) of a matrix is described as $m \times n$ (read: "$m$ by $n$"), where $m$ is the number of rows and $n$ is the number of columns.
+
+. . . 
+
+**Example:** The matrix $A = \begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{bmatrix}$ is a $2 \times 3$ matrix.
+
+. . .
+
+**Example:** Find the dimensions of each of the following matrices
+
+. . .
+
+$$B = \begin{bmatrix} 2 & 8\\ -3 & 1\\ -5 & -2\\ 0 & 7\end{bmatrix}~~~~~~C = \begin{bmatrix} -2 & 0\\ 0 & 0\end{bmatrix}~~~~~~D = \begin{bmatrix} -9\\ 0\\ 1\\ 4\\ -3\end{bmatrix}$$
+
+## Transposing Matrices
+
+. . .
+
+Similar to vectors, we can *transpose* a matrix. 
+
++ If the matrix $A$ is an $m\times n$ matrix, then the matrix $A^T$ is an $n\times m$ matrix whose rows are the columns of the matrix $A$. 
+
+    + The first row of the matrix $A$ is the first column of the matrix $A^T$ and so on.
+
+. . .
+
+**Example:** Determine the *transpose* for each of the following matrices.
+
++ $A = \begin{bmatrix} 1 & 2 & 3\\ 4 & 5 & 6\end{bmatrix}$
++ $B = \begin{bmatrix} 1 & 4 & -1\\ 2 & 5 & 0\\ 3 & 0 & 6\end{bmatrix}$.
+
+. . .
+
+**Example:** If the matrix $A$ is a $5\times 7$ matrix, then what are the dimensions of the matrix $A^T$?
+
+## Scalar Multiplication
+
+. . .
+
+Consider the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ and a scalar $c$. 
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The product $cA$ is obtained by multiplying every element of $A$ by the scalar $c$. That is,
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Scalar Multiplication
+
+Consider the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ and a scalar $c$. 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The product $cA$ is obtained by multiplying every element of $A$ by the scalar $c$. That is,
+
+:::
+
+:::{.column width=50%}
+
+$$cA = \begin{bmatrix} ca_{11} & ca_{12} & \cdots & ca_{1n}\\
+ca_{21} & ca_{22} & \cdots & ca_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+ca_{m1} & ca_{m2} & \cdots & ca_{mn}\end{bmatrix}$$
+
+:::
+
+::::
+
+. . .
+
+**Example:** Consider the matrix $A = \begin{bmatrix} 5 & -2 & 0 & 11 & 7\\
+-3 & 1 & 1 & 4 & 0\\
+0 & 0 & 2 & 1 & -5\end{bmatrix}$. Compute the product $-2A$.
+
+## Matrix Addition and Subtraction
+
+. . .
+
+Like vectors, matrices can be added or subtracted if they have the same dimensions. 
+
+. . .
+
+Addition and subtraction are performed element-wise. That is, if
+
+. . .
+
+$$A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}~~~~~\text{and}~~~~~B = \begin{bmatrix} b_{11} & b_{12} & \cdots & b_{1n}\\
+b_{21} & b_{22} & \cdots & b_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+b_{m1} & b_{m2} & \cdots & b_{mn}\end{bmatrix}$$
+
+. . .
+
+then
+
+$$A + B = \begin{bmatrix} a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n}\\
+a_{21} + b_{21} & a_{22} + B_{22} & \cdots & a_{2n} + b_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}\end{bmatrix}$$
+
+## Matrix Addition and Subtraction
+
+$$A + B = \begin{bmatrix} a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n}\\
+a_{21} + b_{21} & a_{22} + B_{22} & \cdots & a_{2n} + b_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}\end{bmatrix}$$
+
+. . .
+
+**Example:** Let $A = \begin{bmatrix}
+1 & -2 & 0 \\
+0 & 7 & -1
+\end{bmatrix}$
+and $B = \begin{bmatrix}
+5 & -3 & 1 \\
+-1 & 2 & 8
+\end{bmatrix}$, then compute
+
++ $A + B$
++ $A - B$, note that $A - B$ is the same as $A + (-1B)$
++ $B - A$
+
+## Matrix Multiplication
+
+. . .
+
+Matrix multiplication is not done element-wise, instead it is based on row-by-column dot products. 
+
+. . .
+
+Given matrices $A$ and $B$, the $ij^{\text{th}}$ entry (the entry in row $i$ and column $j$) of the matrix product $AB$ is given by the dot product between row $i$ of matrix $A$ and column $j$ of matrix $B$.
+
+. . .
+
+**Requirements and Results:** Because the matrix product $AB$ consists of dot products between rows of $A$ and columns of $B$, then
+
++ the number of columns in the matrix $A$ must match the number of rows in the matrix $B$.
++ the matrix $AB$ has the same number of rows as the matrix $A$ but the same number of columns as the matrix $B$.
+
+## Matrix Multiplication
+
+**Example:** Given the matrices below, compute the matrix products if they are defined. If the matrix product is not defined, describe why.
+
++ Compute $AB$ where $A = \begin{bmatrix} 1 & 0 & -2\\ 3 & 1 & 1\end{bmatrix}$ and $B=\begin{bmatrix} 1 & 4\\ 0 & -2\\ 3 & 0\end{bmatrix}$
++ Compute $AB$ where $A = \begin{bmatrix} 3 & -2\\ 1 & 6\end{bmatrix}$ and $B = \begin{bmatrix} 0 & 3\\ -2 & 1\end{bmatrix}$
++ Compute $BA$ for the matrices $A$ and $B$ defined in the previous part.
++ Compute $AB$ where $A = \begin{bmatrix} -1 & 0\\ 3 & -1\end{bmatrix}$ and $B = \begin{bmatrix} 1 & -1\\ 2 & 0\\ -3 & 5\end{bmatrix}$
++ Compute $BA$ for the matrices $A$ and $B$ defined in the previous part.
+
+## Matrix-Vector Multiplication
+
+. . .
+
+We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors is also possible (and often very useful!).
+
+. . .
+
+**Example:** Compute the product $A\vec{v}$ where $A = \begin{bmatrix} 1 & 0 & -1\\ 0 & 2 & 3\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 2\\ -1\\ 3\end{bmatrix}$
+
+## Vector Products Revisited
+
+. . .
+
+We saw vector products in the last notebook but, with our knowledge of matrix multiplication, we can define the *dot product* (or *inner product*) and the *outer product* just as special cases of matrix multiplication.
+
+. . .
+
+Consider two $n\times 1$ vectors $\vec{u} = \begin{bmatrix} u_1\\ u_2\\ \vdots\\ u_n\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} v_1\\ v_2\\ \vdots\\ v_n\end{bmatrix}$.
+
++ The *dot product* $\vec{u}\cdot\vec{v} = \vec{u}^T\vec{v}$
++ The *outer product* $\vec{u}\otimes \vec{v} = \vec{u}\vec{v}^T$
+
+. . .
+
+**Example:** Given the vectors $\vec{u} = \begin{bmatrix} -2\\ 7\\ 0\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 1\\ 1\\ -3\end{bmatrix}$, compute the following:
+
+::::{.columns}
+
+:::{.column width=50%}
+
++ The *dot product* $\vec{u}\cdot\vec{v}$
+
+:::
+
+:::{.columns width=50%}
+
++ The *outer product* $\vec{u}\otimes\vec{v}$
+
+:::
+
+::::
+
+## Preview: Alternative Ways to Think About Matrix-Vector Products
+
+. . . 
+
+Rewrite the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots &  &  \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ as $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+. . .
+
+Where $\vec{a_i} = \begin{bmatrix} a_{1i}\\ a_{2i}\\ \vdots\\ a_{mi}\end{bmatrix}$
+    
+## Preview: Alternative Ways to Think About Matrix-Vector Products
+
+Consider the product $A\vec{v}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} v_1\\ v_2\\ \vdots\\ v_n\end{bmatrix}$
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} A\vec{v} &= \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} v_1\\ v_2\\ \vdots\\ v_n\end{bmatrix}\\
+&= v_1\vec{a_1} + v_2\vec{a_2} + \cdots + v_n\vec{a_n}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
++ The result is a sum of scalar multiples of the columns of $A$ 
+
+    + This is a *linear combination*of $A$'s columns
+    + Linear combinations play a very large role in linear algebra
+    
+:::
+
+::::
+
+## Matrix Division 
+
+. . .
+
+**This Section Intentionally Left Undefined...***
+
++ As with vectors, there is no division operation with matrices. 
++ This, unfortunately, means that "undoing" matrix multiplication is not as simple as "undoing" scalar multiplication. 
++ This will have several impacts for us moving forward, in particular when we try to solve matrix equations of the form $A\vec{x} = \vec{b}$.
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+. . .
+
+**Identity Matrix:** The $n\times n$ identity matrix, $I_n$, is a matrix such that $I_nA = AI_n = A$. That is, multiplying a matrix $A$ by a compatible identity matrix leaves the matrix $A$ unchanged.
+
+. . .
+
+The form of the $n\times n$ identity matrix is
+
+. . .
+
+$$I_n = \begin{bmatrix} 1 & 0 & \cdots & 0\\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & 1\end{bmatrix}$$
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+The form of the $n\times n$ **identity matrix** is
+
+$$I_n = \begin{bmatrix} 1 & 0 & \cdots & 0\\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & 1\end{bmatrix}$$
+
+. . .
+
+**Example:** Consider the matrix $A = \begin{bmatrix} 1 & 0 & -2\\ 0 & 3 & 8\\ 3 & 0 & -1\end{bmatrix}$. Compute the following products.
+
++ $I_nA$
++ $AI_n$
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
++ We mentioned that matrix division does not exist
++ Some matrices have corresponding inverse matrices, though
+
+. . .
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+. . .
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+. . .
+
+**Example:** Use the matrix $B$ above to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+
+## Summary
+
+In this slide deck, you've seen and practiced...
+
++ recognizing the dimension of a matrix
++ multiplying a matrix by a scalar
++ adding and subtracting compatible matrices
++ multiplying matrices and vectors
+
+    + an alternative, and useful, way to think about matrix-vector products
++ identifying and using an identity matrix
++ verifying two matrices are inverses of one another
++ using the inverse of a matrix to solve a matrix equation
 
 ## Homework
 
@@ -72,3 +421,5 @@ $$\Huge{\text{on MyOpenMath}}$$
 $\Huge{\text{Finding Solutions to Linear Systems}}$
 
 </center>
+
+
