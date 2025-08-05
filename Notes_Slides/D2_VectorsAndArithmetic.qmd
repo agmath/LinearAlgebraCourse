@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Introduction and What to Expect"
+title: "MAT 350: Vectors, Vector Arithmetic, and Operations"
 author: Dr. Gilbert
 format: 
   revealjs:
