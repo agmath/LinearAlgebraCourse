@@ -22,6 +22,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
 ## What Are We Here For?
 
 . . .
