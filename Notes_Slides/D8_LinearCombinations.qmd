@@ -1,0 +1,585 @@
+---
+title: "MAT 350: Linear Combinations"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+1. Let $\vec{v} = \begin{bmatrix} 2\\ -1\\ 0\\ 4\end{bmatrix}$ Compute $3\vec{v}$ and $-2\vec{v}$.
+
+2. Let $\vec{u} = \begin{bmatrix} 4\\ 0\\ -2\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} -1\\ 3\\ 8\end{bmatrix}$ and compute $\vec{u} + \vec{v}$.
+
+3. Let $\vec{u} = \begin{bmatrix} 1\\ 2\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 3\\ -1\end{bmatrix}$ and compute $2\vec{u} + 3\vec{v}$.
+
+4. Let $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ -1\\ 1\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ -2\\ 0\\ 3\end{bmatrix}$, and $\vec{v_3} = \begin{bmatrix} 2\\ 0\\ 0\\ 4\end{bmatrix}$. Construct the vector $\vec{w}$ if $\vec{w} = 2\vec{v_1} - 3\vec{v_2} + \vec{v_3}$.
+
+:::
+
+## Reminders and Today's Goal
+
++ Vectors encode both a direction and magnitude
++ We can multiply vectors by scalars -- in this case, each element is multiplied by the scalar
+
+    + Scalar multiplication stretches, shrinks, or reflects a vector but does not change its directionality
++ We can add and subtract vectors of the same size
+
+    + Vector addition is done head-to-tail
+
++ We can move throughout space by scaling and summing vectors together
+
+. . .
+
+**Goals for Today:** Define what is meant by the notion of a *linear combination* of vectors, identify whether or not a vector can be written as a linear combination of a set of other vectors, and connect linear combinations to what we've already learned about linear systems and matrix equations.
+
+## Linear Combinations and Vector Equations
+
++ Many important properties of linear systems can be described through the lens of vectors. 
+
+    + For example, a solution to a linear system in $n$ variables is a vector with $n$ components. 
+
++ We encountered vectors and vector operations earlier this semester and the warm-up problems have provided you a reminder of the most important operations we'll encounter today...
+
+    + scalar multiplication and addition between vectors.
+
+## Linear Combinations of Vectors
+
+. . .
+
+The concept of a *linear combination* will be extremely important to us in linear algebra. 
+. . .
+
+**Definition (Linear Combination of Vectors):** The vector $\vec{y}$ defined by
+
+. . .
+
+$$\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p}$$
+
+. . .
+
+is a *linear combination* of the vectors $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}$ with *weights* $c_1,~c_2,~\cdots,~c_p$.
+
+. . .
+
+<br/>
+
+**Example:** Let $\vec{v_1} = \begin{bmatrix} 1\\ 2\\ -1\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ -3\\ 1\end{bmatrix}$ and $\vec{v_3} = \begin{bmatrix} -4\\ 1\\ 2\end{bmatrix}$ be vectors. Compute the linear combination $c_1\vec{v_1} + c_2\vec{v_2} + c_3\vec{v_3}$ where $c_1 = -2$, $c_2 = 4$, and $c_3 = 5$.
+
+## Vector Equations
+
+. . . 
+
+The definition of a linear combination leads naturally to the definition of a *vector equation*.
+
+. . .
+
+**Definition (Vector Equation):** A *vector equation* is an equation of the form
+
+. . .
+
+$$x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n} = \vec{b}$$
+
+. . . 
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 3\\ 1\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} -3\\ 2\\ 1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$. Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+. . .
+
+The vector equation is equivalent to the matrix equation
+
+. . .
+
+$$\begin{bmatrix} 1 & -3\\ 3 & 2\\ 1 & 1\end{bmatrix}\begin{bmatrix} x_1\\ x_1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$$
+
+. . . 
+
+Because of this, we can solve the vector equation in the same way that we solve the matrix equation...
+
+. . . 
+
+...by row-reducing an augmented matrix
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+. . . 
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right]
+\end{align*}
+
+:::
+
+::::
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right] &\substack{R_2 \leftarrow R_2 + (-3R_1)\\ R_3 \leftarrow R_3 + (-1R_1)\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 11 & 44\\ 0 & 2 & 8\end{array}\right]
+\end{align*}
+
+:::
+
+::::
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right] &\substack{R_2 \leftarrow R_2 + (-3R_1)\\ R_3 \leftarrow R_3 + (-1R_1)\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 11 & 44\\ 0 & 2 & 8\end{array}\right]\\
+&\substack{R_2 \leftarrow (1/11)R_2\\ R_3 \leftarrow (1/2)R_3\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 1 & 4\\ 0 & 1 & 4\end{array}\right]
+\end{align*}
+
+:::
+
+::::
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right] &\substack{R_2 \leftarrow R_2 + (-3R_1)\\ R_3 \leftarrow R_3 + (-1R_1)\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 11 & 44\\ 0 & 2 & 8\end{array}\right]\\
+&\substack{R_2 \leftarrow (1/11)R_2\\ R_3 \leftarrow (1/2)R_3\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 1 & 4\\ 0 & 1 & 4\end{array}\right]\\
+&\substack{R_3 \leftarrow R_3 + (-1R_2)\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 1 & 4\\ 0 & 0 & 0\end{array}\right]
+\end{align*}
+
+:::
+
+::::
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right] &\sim \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 1 & 4\\ 0 & 0 & 0\end{array}\right]
+\end{align*}
+
+:::
+
+::::
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right] &\sim \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 1 & 4\\ 0 & 0 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow R_1 + (3R_2)\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 0 & -3\\ 0 & 1 & 4\\ 0 & 0 & 0\end{array}\right]
+\end{align*}
+
+:::
+
+:::{.column width=40%}
+
+
+:::
+
+::::
+
+## Solving a Vector Equation
+
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align*} \left[\begin{array}{rr|r} 1 & -3 & -15\\ 3 & 2 & -1\\ 1 & -1 & -7\end{array}\right] &\sim \left[\begin{array}{rr|r} 1 & -3 & -15\\ 0 & 1 & 4\\ 0 & 0 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow R_1 + (3R_2)\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 0 & -3\\ 0 & 1 & 4\\ 0 & 0 & 0\end{array}\right]
+\end{align*}
+
+:::
+
+:::{.column width=40%}
+
+<br/> 
+<br/>
+
+The reduced-row-echelon matrix above suggests that $\boxed{~\displaystyle{x_1 = -3 \text{ and } x_2 = 4}~}$ $_\blacktriangledown$
+
+:::
+
+::::
+
+## Equivalencies of Vector Equations, Matrix Equations, and Linear Systems
+
+. . .
+
+In solving the previous example, we noted that the vector equation
+
+. . . 
+
+$$x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n} = \vec{b}$$
+
+. . .
+
+has the same solution set as the augmented coefficient matrix
+
+. . .
+
+$$\left[\begin{array}{cccc|c}\vec{a_1} & \vec{a_2} & \cdots & \vec{a_n} & \vec{b}\end{array}\right]$$
+
+. . .
+
+That is, the augmented coefficient matrix whose columns are the vectors $\vec{a_i}$.
+
+## Equivalencies (Cont'd)
+
+This means that vector equations are not new. 
+
+. . .
+
+For any given vector equation, there is a corresponding...
+
++ augmented coefficient matrix
++ matrix equation
++ linear system 
+
+. . .
+
+The tools we've used to investigate and find solutions in those scenarios remain directly applicable again here.
+
+## Equivalencies (Cont'd)
+
+. . .
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{a_3} = \begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$. 
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The vector equation
+
+$$x_1 \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix} + x_2 \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix} + x_3\begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$$
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+:::: 
+
+## Equivalencies (Cont'd)
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{a_3} = \begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$. 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The vector equation
+
+$$x_1 \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix} + x_2 \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix} + x_3\begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$$
+
+:::
+
+:::{.column width=50%}
+
+is equivalent to the matrix equation
+
+$$\begin{bmatrix} 1 & 3 & 0\\
+0 & 1 & 2\\
+-2 & 1 & -2\\
+3 & 0 & -1\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ x_3\end{bmatrix} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$$
+
+:::
+
+:::: 
+
+## Equivalencies (Cont'd)
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{a_3} = \begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$. 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The matrix equation
+
+$$\begin{bmatrix} 1 & 3 & 0\\
+0 & 1 & 2\\
+-2 & 1 & -2\\
+3 & 0 & -1\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ x_3\end{bmatrix} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$$
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+:::: 
+
+## Equivalencies (Cont'd)
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{a_3} = \begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$. 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The matrix equation
+
+$$\begin{bmatrix} 1 & 3 & 0\\
+0 & 1 & 2\\
+-2 & 1 & -2\\
+3 & 0 & -1\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ x_3\end{bmatrix} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$$
+
+:::
+
+:::{.column width=50%}
+
+is equivalent to the augmented coefficient matrix
+
+$$\left[\begin{array}{ccc|c} 1 & 3 & 0 & 1\\
+0 & 1 & 2 & 1\\
+-2 & 1 & -2 & 2\\
+3 & 0 & 1 & -2\end{array}\right]$$
+
+:::
+
+:::: 
+
+## Equivalencies (Cont'd)
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{a_3} = \begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$. 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The augmented coefficient matrix
+
+$$\left[\begin{array}{ccc|c} 1 & 3 & 0 & 1\\
+0 & 1 & 2 & 1\\
+-2 & 1 & -2 & 2\\
+3 & 0 & 1 & -2\end{array}\right]$$
+
+:::
+
+:::{.column width=50%}
+
+
+:::
+
+:::: 
+
+## Equivalencies (Cont'd)
+
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 0\\ -2\\ 3\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} 3\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{a_3} = \begin{bmatrix} 0\\ 2\\ -2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 1\\ 1\\ 2\\ -2\end{bmatrix}$. 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+The augmented coefficient matrix
+
+$$\left[\begin{array}{ccc|c} 1 & 3 & 0 & 1\\
+0 & 1 & 2 & 1\\
+-2 & 1 & -2 & 2\\
+3 & 0 & 1 & -2\end{array}\right]$$
+
+:::
+
+:::{.column width=50%}
+
+is equivalent to the system
+
+$$\left\{\begin{array}{rcr} x_1 + 3x_2 & = & 1\\
+x_2 + 2x_3 & = & 1\\
+-2x_1 + x_2 - 2x_3 & = & 2\\
+3x_1 + x_3 & = & -2\end{array}\right.$$
+
+:::
+
+:::: 
+
+## Recap of Question Contexts
+
++ We've just highlighted that vector equations, matrix equations, and linear systems are all in correspondence with one another. 
++ While they each arise naturally from different contexts, the tools and approaches for investigating and solving them are the same. 
++ Additionally, we can always convert from one type into any other that we prefer.
+
+. . .
+
+It's worth taking a moment to recap the different types of equations and contexts we've encountered. 
+
+. . .
+
+We'll do that next, with a particular focus on the types of questions we are asking when we write an equation of a particular type.
+
+## Recap of Question Contexts
+
+. . .
+
+**Vector Equations:** $x_1\vec{v_1} + x_2\vec{v_2} + \cdots x_p\vec{v_p} = \vec{y}$
+
++ **Question:** Can I arrive at the vector $\vec{y}$ by starting from the origin ($\vec{0}$) and taking steps only in the directions of $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}$?
+
+## Recap of Question Contexts
+
+**Matrix Equations:** $A\vec{x} = \vec{b}$
+
++ **Question:** Assuming $A$ is an $m\times n$ matrix, is there a vector $\vec{x}\in\mathbb{R}^n$ such that $\vec{x}$ gets mapped to the vector $\vec{b}\in \mathbb{R}^m$ when we multiply $\vec{x}$ on the left by the matrix $A$?
+
+. . .
+
+Alternatively, we could let $f: \mathbb{R}^n\to \mathbb{R}^m$ be a function such that $f\left(\vec{x}\right) = A\vec{x}$. 
+
++ From this lens, we want to know whether there is some $\vec{x}$ in the domain of $f$ such that $f\left(\vec{x}\right) = \vec{b}$. 
+
+    + This is a question you likely asked often in a PreCalculus course (just with real-valued functions from $\mathbb{R}$ to $\mathbb{R}$ instead of the higher dimensional spaces we are working in now).
+
+## Recap of Question Contexts
+
+**Linear Systems:** $\left\{\begin{array}{rcr} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n & = & b_2\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n & = & b_m\end{array}\right.$
+
++ **Question:** Are there scalars $x_1,~x_2,~\cdots,~x_n$ that make all $m$ of the linear equations in the system true at the same time?
+
+## Examples to Try: Example \#1
+
+**Example:** For the vectors $\vec{u} = \left[\begin{array}{c}5\\ -3\end{array}\right]$ and $\vec{v} = \left[\begin{array}{c} -2\\ 1\end{array}\right]$, compute $\vec{u} + \vec{v}$ and $\vec{u} - 2\vec{v}$. Draw the vectors $\vec{u}$, $\vec{v}$ and the resultant vectors in the plane.
+
+## Examples to Try: Example \#2
+
+**Example:** Let $\vec{u} = \begin{bmatrix} 1\\ 2\end{bmatrix}$, $\vec{v} = \begin{bmatrix} 3\\ -1\end{bmatrix}$, and $\vec{w} = \begin{bmatrix} 9\\ 1\end{bmatrix}$. Can $\vec{w}$ be written as a linear combination of $\vec{u}$ and $\vec{v}$? In order words, do there exist scalars $c_1$ and $c_2$ such that $c_1\vec{u} + c_2\vec{v} = \vec{w}$?
+
+## Examples to Try: Example \#3
+
+**Example:** Find and describe all solutions to the vector equation below, if solutions exist.
+
+$$x_1\begin{bmatrix}1\\ 0\\ 1\\ 0\end{bmatrix} + x_2\begin{bmatrix} 0\\ 1\\ 0\\ 1\end{bmatrix} + x_3\begin{bmatrix} 1\\ 1\\ 1\\ 1\end{bmatrix} = \begin{bmatrix} 3\\ 2\\ 3\\ 2\end{bmatrix}$$
+
+## Examples to Try: Example \#4
+
+**Example:** Given the vectors $\vec{u_1} = \begin{bmatrix} 1\\ 1\\ 0\\ 0\\ 0\end{bmatrix}$, $\vec{u_2} - \begin{bmatrix} 0\\ 0\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{u_3} = \begin{bmatrix} 0\\ 0\\ 0\\ 1\\ 1\end{bmatrix}$, and $\vec{y} = \begin{bmatrix} 2\\ 2\\ 3\\ 5\\ 2\end{bmatrix}$, find weights that allow you to write $\vec{y}$ as a linear combination of the vectors $\vec{u_1}$ , $\vec{u_2}$, and $\vec{u_3}$. If such weights do not exist, provide justification for why they do not.
+
+## Examples to Try: Example \#5
+
+**Example:** Write a system of linear equations and an augmented coefficient matrix which is equivalent to the vector equation
+
+$$x_1\left[\begin{array}{c}3\\ 0\\ 1\end{array}\right] + x_2\left[\begin{array}{c}0\\ 1\\ 1\end{array}\right] + x_3\left[\begin{array}{c}1\\ 1\\ -2\end{array}\right] = \left[\begin{array}{c}3\\ -5\\ 4\end{array}\right]$$
+
+Use a series of elementary row operations to solve the system.
+
+## Examples to Try: Example \#6
+
+**Try It! 6:** Write a vector equation that is equivalent to the system of equations $\left\{\begin{array}{rcr} 5x_1 + 2x_2 - 4x_3 & = & 20\\
+x_1 + 2x_2 + x_3 & = & 6\\
+-2x_1 - x_2 + 3x_3 & = & 1\end{array}\right.$.
+
+Use an augmented coefficient matrix and a series of elementary row operations to solve the system and corresponding vector equation.
+
+## Examples to Try: Example \#7
+
+**Example:** Determine whether the vector $\vec{b} = \left[\begin{array}{c} 1\\ 2\\ 5\\ -5\end{array}\right]$ is a linear combination of the vectors $\vec{v_1} = \left[\begin{array}{c}1\\ 1\\ 0\\ 0\end{array}\right]$, $\vec{v_2} = \left[\begin{array}{c}0\\ 1\\ 2\\ -2\end{array}\right]$, and $\vec{v_3} = \left[\begin{array}{c}0\\ 0\\ -1\\ 1\end{array}\right]$.
+
+## Summary
+
+To be added...
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Start Homework 4}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Matrix Multiplication and}}$ 
+
+$\Huge{\text{Linear Combinations}}$
+
+</center>
+
+
