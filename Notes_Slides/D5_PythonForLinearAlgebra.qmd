@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Finding Solutions to Linear Systems"
+title: "MAT 350: Python for Linear Algebra"
 author: Dr. Gilbert
 format: 
   revealjs:
