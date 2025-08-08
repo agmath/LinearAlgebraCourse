@@ -1,0 +1,508 @@
+---
+title: "MAT 350: Finding Solutions to Linear Systems"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::::{.nonincremental}
+
+**Examples:** Reduce the following matrices into their ***reduced row echelon*** form.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+i) $\left[\begin{array}{rrr} 1 & -3\\ 2 & 5\\ 0 & 0\end{array}\right]$
+iii) $\left[\begin{array}{rrr} 2 & 0\\ 0 & 1\\ -1 & 0\end{array}\right]$
+
+:::
+
+:::{.column width=50%}
+
+ii) $\left[\begin{array}{rrr} 1 & -7 & -4\\ 1 & 2 & -4\\ -2 & -4 & -8\\ 0 & 0 & 0\end{array}\right]$
+iv) $\left[\begin{array}{rrr} 1 & -2 & 1\\ 1 & -9 & 0\\ 1 & 2 & 0\\ 6 & 12 & 0\\ -2 & -4 & 0\end{array}\right]$
+
+:::
+
+::::
+
+:::::
+
+## Reminders and Today's Goal
+
++ We can rewrite linear systems of equations as matrices
+
+    + An $m \times n$ system can be encoded as an $m\times \left(n+1\right)$ *augmented* matrix
++ We can use our three permissible *row-reduction operations* (scaling, swapping, and replacement) to reduce these matrices to simpler forms
+
+    + Solutions read from a reduced augmented matrix are the same as the solutions from an original augmented matrix
+
+::::{.columns}
+
+:::{.column width=50%}
+
++ An augmented matrix in ***row echelon form*** $$\small{\left[\begin{array}{cccc|c} \blacksquare & * & \cdots & * & b_1\\
+0 & \blacksquare & \cdots & * & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \blacksquare & b_n\end{array}\right]}$$
+
+:::
+
+:::{.column width=50%}
+
++ An augmented matrix in ***reduced row echelon form*** $$\left[\begin{array}{cccc|c} \boxed{~1~} & 0 & \cdots & 0 & b_1\\
+0 & \boxed{~1~} & \cdots & 0 & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \boxed{~1~} & b_n\end{array}\right]$$
+
+:::
+
+::::
+
+## Reminders and Today's Goal
+
+:::::{.nonincremental}
+
+::::{.columns}
+
+:::{.column width=50%}
+
++ An augmented matrix in ***row echelon form*** $$\small{\left[\begin{array}{cccc|c} \blacksquare & * & \cdots & * & b_1\\
+0 & \blacksquare & \cdots & * & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \blacksquare & b_n\end{array}\right]}$$
+
+:::
+
+:::{.column width=50%}
+
++ An augmented matrix in ***reduced row echelon form*** $$\left[\begin{array}{cccc|c} \boxed{~1~} & 0 & \cdots & 0 & b_1\\
+0 & \boxed{~1~} & \cdots & 0 & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \boxed{~1~} & b_n\end{array}\right]$$
+
+:::
+
+::::
+
+:::::
+
++ Those leftmost non-zero entries in each row are called ***pivots***
++ *Pivots* and their locations tell us about the character of the solution space for the corresponding system
+
+. . .
+
+**Goal for Today:** Learn to use Python for basic calculations, vector and matrix math, and row-reduction  (**note:** you'll still need to show that you can do row-reduction by hand)
+
+## About Python Use in MAT350
+
++ Python is a general-purpose programming language, which means it's used for a wide range of tasks
++ In MAT350, we'll use Python as a tool to help us work more efficiently with mathematical objects like vectors and matrices. 
+
+    + Python can quickly (and accurately) perform computations including tedious ones like matrix multiplication and performing row reduction!
+
++ Because understanding how to row-reduce by hand is still an important skill, you'll be required to pass a row-reduction "*Gateway Exam*" in this course. 
++ After that, you'll often be encouraged to let Python do the heavy lifting for you. 
++ This will free up your cognitive energy to focus on understanding and applying new concepts, rather than spending all your time crunching through row operations.
+
+
+## Python via Google Colab
+
++ Navigate to [colab.research.google.com](https://colab.research.google.com/) while logged into your Google/Gmail account
++ Click the pop-up to create a new notebook
+
+    + This notebook will be saved in your Google Drive to a folder named `Colab Notebooks`
+
+. . . 
+
+**Note:** If you would prefer to use Python in another environment (VScode, spyder, etc.), then you are welcome to do so. I won't help troubleshooting individual environments though.
+
++ Colab notebooks are Jupyter notebooks run directly from your Google Drive
++ The notebooks consist of text/markdown cells (white background) and code cells (grey background)
+
+    + You can run Python code written in a code cell by holding down `shift` and hitting `enter`/`return`
+
+## Python and Arithmetic
+
++ We can use python for all basic mathematical operations -- addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), and exponentiation (`**`).
+
+    + **Warning:** When you want to multiply, you'll need to explicitly use the `*` operator. While writing `5(8 - 6)` makes perfect sense mathematically, python will think you are trying to "*plug $6 - 8$ into a function named $5$*".
+
+. . .
+
+**Example:** Try evaluating each of the following expressions using the code cell below.
+
+. . .
+
+:::::{.nonincremental}
+
+::::{.columns}
+
+:::{.column width=50%}
+
+i) $\displaystyle{\frac{3 + 18}{7}}$
+ii) $\displaystyle{3 + 4\left(2\right)}$
+iii) $\displaystyle{\left(3^2\right)^4}$
+
+:::
+
+:::{.column width=50%}
+
+iv) $\displaystyle{\left(\frac{16}{2}\right)^2}$
+v) $\displaystyle{2\left(5 + 3\right) - \frac{5}{2}}$
+
+:::
+
+::::
+
+:::::
+
+. . .
+
+**On Printing:** Perhaps you noticed that only the result of the last line in the code cell is printed out. You'll need to explicitly wrap your expression in `print()` if you want earlier results printed out as well. Go back and try it!
+
+## Variable Assignment in Python
+
++ In any programming language, we often want to store values into variables for future use. Python is no different.
++ In python, we store values into variables with the `=` assignment operator. 
+
+    + The name of the variable goes to the left of the `=` sign and the value to store in that variable goes to the right.
+
+. . .
+
+**Examples:** 
+
++ `x = 5` assigns the integer `5` to the variable `x`
++ `my_list = [1, 4, 9, 16]` assigns the *list* `[1, 4, 9, 16]` to the variable `my_list`.
+
+. . .
+
+Python will infer the data type required to store an object. We do not need to initialize variables in python, nor do we need to declare their classes. This is a convenience that can potentially cause problems.
+
+## Variable Naming
+
++ When choosing variable names, try to be descriptive. 
+
+    + You'll want to know what you did upon returning to a python session.
+    + Using clear, meaningful variable makes your job of getting back up to speed with "previous you" easier. 
+
+. . .
+    
+Consider the following tips and recommendations.
+
++ Variable names should start with a letter and can include letters, numbers, and underscores, but no spaces.
++ Variable names are case sensitive, so `height` and `Height` are different variables.
++ There are several conventions for typesetting variable names, for example, `this_is_snake_case` and `ThisIsCamelCase` -- choose one and stick to it.
++ Find a balance between descriptive and concise variable names
+
+    + For example, `eqn1_sol` is a better choice for variable name than `the_solution_we_found_for_equation_1`.
+
+## Beyond Base Python: Importing Modules
+
++ To keep Python lightweight, not all of Python's functionality is made available to you by default. 
++ You'll need to import modules in order to complete many specialized tasks. 
+
+    + For the most part, we'll be making use of the `{sympy}` (SYmbolic Mathematics in PYthon) module since it has functionality for nearly everything we encounter in an introduction to Linear Algebra. 
+    + It is also worth knowing, however, the existence of the `{numpy}` (NUMerical PYthon) module which handles numerical operations on vectors and matrices very well.
+
++ When importing modules, we can either load the entire module (ie. `import sympy`) or we can just load a single function from that module (ie. `from numpy.linalg import inv`).
+
+## Using Imported Module Functionality
+
++ Running `import sympy` will load the `{sympy}` module to the current Python session
++ With `{sympy}` imported, we can call and utilize functionality from that module. 
+
+    + We use `sympy.Matrix()` to tell Python to go to the `{sympy}` module and find the `Matrix()` function. 
+
++ Because we need to reference the module name when calling functionality from it, Python users often ***alias*** their module names when importing in order to reduce typing.
+
+  + We `import sympy as sp` and then can use `sp.Matrix()` instead
+  
+. . . 
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([[1.0, 5, 9, 22], [0, 2, 17, -11]])
+print(A)
+```
+
+## Defining Matrices and Vectors with `{sympy}`
+
+. . . 
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([[1.0, 5, 9, 22], [0, 2, 17, -11]])
+print(A)
+```
+
+. . . 
+
+The code cell above defines and prints the matrix $A = \begin{bmatrix} 1 & 5 & 9 & 22\\
+0 & 2 & 17 & -11\end{bmatrix}$
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+**Example:** Open a code cell and use Python and `{sympy}` to define the matrix $B = \begin{bmatrix} -2 & 8 & 5\\
+0 & 7 & -11/2\\
+2 & 1/2 & 5/8\\
+1/2 & -4 & 6\end{bmatrix}$
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Defining Matrices and Vectors with `{sympy}`
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([[1.0, 5, 9, 22], [0, 2, 17, -11]])
+print(A)
+```
+
+The code cell above defines and prints the matrix $A = \begin{bmatrix} 1 & 5 & 9 & 22\\
+0 & 2 & 17 & -11\end{bmatrix}$
+
+::::{.columns}
+
+:::{.column width=50%}
+
+**Example:** Open a code cell and use Python and `{sympy}` to define the matrix $B = \begin{bmatrix} -2 & 8 & 5\\
+0 & 7 & -11/2\\
+2 & 1/2 & 5/8\\
+1/2 & -4 & 6\end{bmatrix}$
+
+:::
+
+:::{.column width=50%}
+
+**Example:** Recall that we can think of a vector as a matrix with a single column. Use the code cell below to define the vector $\vec{v} = \begin{bmatrix} -2\\ 1\\ 3/2\end{bmatrix}$
+
+:::
+
+::::
+
+## Vector and Matrix Addition and Subtraction
+
++ Because addition and subtraction are elementwise operations for both vectors and matrices, two matrices or two vectors must have the same dimensions in order for their sum or difference to be defined.
++ We can add or subtract compatible matrices or vectors using the usual `+` and `-` operators as long as our objects have been defined using `{sympy}`.
+
+. . .
+
+**Example:** Use Python to compute the sums and differences below.
+
++ Compute $\vec{u} + \vec{v}$ where $\vec{u} = \begin{bmatrix} 7\\ 0\\ -2\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 1\\ -3\\ 4\end{bmatrix}$.
+
+## Vector and Matrix Addition and Subtraction
+
+**Example:** Use Python to compute the sums and differences below.
+
+:::{.nonincremental}
+
++ Compute $\vec{u} + \vec{v}$ where $\vec{u} = \begin{bmatrix} 7\\ 0\\ -2\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 1\\ -3\\ 4\end{bmatrix}$.
+
+:::
+
++ Compute $\vec{x} - 2\vec{y}$ where $\vec{x} = \begin{bmatrix} 2\\ -1\\ 0\\ 5\end{bmatrix}$ and $\vec{y} = \begin{bmatrix} -3\\ 6\\ 1\\ -2\end{bmatrix}$. 
+
+. . .
+
+(**Note:** Scalar multiplication can be performed as usual, using the `*` operator)
+
++ Compute $A + B$ where $A = \begin{bmatrix} 0 & 4 & -2\\ 1 & -1 & 3\end{bmatrix}$ and $B = \begin{bmatrix} 5 & -4 & 2\\ -3 & 0 & 1\end{bmatrix}$.
+
+## Matrix Multiplication
+
++ Matrix multiplication is *not* an elementwise operation.
++Instead, to compute the product $AB$, we take the dot products between rows of $A$ and columns of $B$ to construct the corresponding entries of $AB$. 
+
+    + This requires that the number of columns of the matrix $A$ match the number of rows of the matrix $B$.
+
++ In Python, as long as we've defined our matrices using `{sympy}`, then we can use the usual `*` operator to execute matrix multiplication.
+
+## Matrix Multiplication
+
+**Example:** Define the following matrices in Python and calculate the desired products. What happens in scenarios where the matrix product is not defined because of dimension incompatibility?
+
+::::{.columns}
+
+:::{.column width=80%}
+
+i) Compute $AB$ where $\small{A = \begin{bmatrix} 1 & 0 & -2\\ 3 & 1 & 1\end{bmatrix}}$ and $\small{B=\begin{bmatrix} 1 & 4\\ 0 & -2\\ 3 & 0\end{bmatrix}}$
+ii) Compute $AB$ where $\small{A = \begin{bmatrix} 3 & -2\\ 1 & 6\end{bmatrix}}$ and $\small{B = \begin{bmatrix} 0 & 3\\ -2 & 1\end{bmatrix}}$
+iii) Compute $BA$ for the matrices $A$ and $B$ defined in part 2.
+iv) Compute $AB$ where $\small{A = \begin{bmatrix} -1 & 0\\ 3 & -1\end{bmatrix}}$ and $\small{B = \begin{bmatrix} 1 & -1\\ 2 & 0\\ -3 & 5\end{bmatrix}}$
+v) Compute $BA$ for the matrices $A$ and $B$ defined in part 4.
+
+:::
+
+:::{.column width=20%}
+vi) Compute $A\vec{v}$ where $\small{A = \begin{bmatrix} 1 & 0 & -1\\ 0 & 2 & 3\end{bmatrix}}$ and $\small{\vec{v} = \begin{bmatrix} 2\\ -1\\ 3\end{bmatrix}}$.
+
+:::
+
+::::
+
+## Special Vector Products
+
+We can also use Python to compute vector products like the *dot product* and *cross product*. Given vectors `u` and `v` defined,
+
++ we can calculate the *dot product* ($\vec{u}\cdot\vec{v}$) using `u.dot(v)`.
++ we can calculate the *cross product* ($\vec{u}\times \vec{v}$) using `u.cross(v)`.
+
+. . .
+
+**Example:** Consider the vectors $\vec{u} = \begin{bmatrix} -3\\ 1\\ 1\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 0\\ -2\\ -1\end{bmatrix}$. Use the code cell below to
+
+i) compute the *dot product* $\vec{u}\cdot\vec{v}$
+ii) compute the *cross product* $\vec{u}\times \vec{v}$
+
+## Matrix Row Reduction
+
+. . .
+
+Without a doubt, the most useful functionality for you this entire semester will be the ability to quickly row reduce a matrix. 
+
+. . .
+
+As long as the matrix $A$ has been defined using `{sympy}`, we can use the `.rref()` method to obtain the *reduced row echelon form* of $A$.
+
+. . .
+
+**Example:** Consider the matrix $A = \begin{bmatrix} 3 & -2 & 0 & 1\\
+0 & 2 & 5 & -6\\
+4 & 4 & -2 & -1\\
+-2 & -3 & 0 & 9\\
+1 & 0 & 0 & -4\end{bmatrix}$. We define the matrix and obtain its *reduced row echelon form* below.
+
+. . .
+
+```{python}
+#| echo: true
+#| eval: false
+
+A = sp.Matrix([[3, -2, 0, 1], [0, 2, 5, -6], [4, 4, -2, -1], [-2, -3, 0, 9], [1, 0, 0, -4]])
+A.rref()
+```
+
+. . .
+
+**Note:** The resulting output is the *reduced row echelon form* of the matrix, along with a tuple containing the *pivot columns* of the matrix.
+
+## Examples to Try
+
+. . .
+
+**Example:** For the linear systems below, construct the corresponding augmented coefficient matrices, define them in Python using `{sympy}`, use the `.rref()` method to obtain their *reduced row echelon form*, and then describe the solution set for each system.
+
+. . .
+
+$$(A)~~\left\{\begin{array}{rcr} x + 2y -z & = & 4\\
+2x - y + 3z & = & 1\\
+-3x + y +2z & = & -5\end{array}\right.~~~~~(B) \left\{\begin{array}{rcr} x_1 + x_2 + x_3 & = & 2\\
+2x_1 - x_2 + 3x_3 & = & 5\end{array}\right.$$
+
+. . .
+
+$$(C)~~\left\{\begin{array}{rcr}x_1 + x_2 + x_3 & = & 3\\
+2x_1 - x_2 + x_3 & = & 1\\
+x_1 + 2x_2 - x_3 & = & 4\\
+3x_1 + x_2 + 2x_3 & = & 7\end{array}\right.~~~~~(D)~~\left\{\begin{array}{rcr}x_1 + 2x_2 - x_3 & = & 1\\
+2x_1 + 4x_2 -2x_3 & = & 2\\
+-x_1 - 2x_2 + x_3 & = & -1\\
+3x_1 + 6x_2 - 3x_3 & = & 3\end{array}\right.$$
+
+. . .
+
+$$(E)~~\left\{\begin{array}{rcr} 2x_1 - 3x_2 & = & 6\\
+8x_1 - 12x_2 & = & 24\end{array}\right.$$
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Finish Homework 2}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Pivots and Solutions}}$
+
+</center>
+
+
