@@ -1,0 +1,856 @@
+---
+title: "MAT 350: Finding Solutions to Linear Systems"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+**Examples:** Do your best to describe all of the solutions to each of the following linear systems.
+
+1. $\left\{\begin{array}{rcr} x & = & 2\\ y & = & -1\end{array}\right.$
+2. $\left\{\begin{array}{rcr} -x + 2y - z & = & -3\\ 3y + z & = & -1\\ 2z & = & 4\end{array}\right.$
+3. $\left\{\begin{array}{rcr} x + 3y & = & -1\\ 2x + y & = & 3\end{array}\right.$
+4. $\left\{\begin{array}{rcr} x + y & = & 8\\ 0x & = & 5\end{array}\right.$
+5. $\left\{\begin{array}{rcr} x + y & = & 8\\ 0x & = & 0\end{array}\right.$
+
+:::
+
+## Reminders and Today's Goal
+
++ At our first class meeting, we introduced the notion of systems of linear equations and their solutions. 
++ A solution to a linear system is a collection of values which satisfy all equations in the system simultaneously. 
++ We are generally interested in the full collection of solutions to a linear system -- the **solution set** (or **solution *space***, as we'll see later).
+
+. . .
+
+**Reminder:** There are three possibilities for the *solution set of a linear system*.
+
++ The solution set is empty
++ The solution set contains exactly one element
++ The solution set contains infinitely many elements
+
+. . .
+
+No other alternatives are possible.
+
+. . .
+
+**Goal for Today:** Develop a framework which can be used to investigate systems, arrive at solutions, and to describe those solution spaces.
+
+## Unpacking Permissible Operations
+
+. . .
+
+Operations you've made use of, whether you noticed or not...
+
+1. **Scaling:** You can scale an equation by a non-zero constant. That is, you are free to multiply an equation by any non-zero real number.
+2. **Interchange:** You can swap the order of the equations in the system.
+3. **Replacement:** You can scale an equation by a non-zero real number, add it to any other equation in the system, and replace that equation with the resulting equation.
+
+. . .
+
+None of these operations change the solution set to a system.
+
+. . .
+
+Working with systems in their raw forms, as we've seen them so far, makes it difficult to develop and apply a standard algorithm for solving systems. 
+
+. . .
+
+$\bigstar$ Encoding these systems via matrices will afford us this opportunity.
+
+## Matrix Representations of Linear Systems
+
+. . . 
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+
+:::
+
+:::{.column width=40%}
+
+
+:::
+
+::::
+
+## Matrix Representations of Linear Systems
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its coefficient matrix is defined as the $m\times n$ matrix
+
+:::
+
+:::{.column width=40%}
+
+
+:::
+
+::::
+
+## Matrix Representations of Linear Systems
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its coefficient matrix is defined as the $m\times n$ matrix
+
+$$\left[\begin{array}{cccc} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+## Matrix Representations of Linear Systems
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its coefficient matrix is defined as the $m\times n$ matrix
+
+$$\left[\begin{array}{cccc} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+**Example (Coefficient Matrix):** For example, the coefficient matrix corresponding to the linear system $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$ is...
+
+:::
+
+::::
+
+## Matrix Representations of Linear Systems
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its coefficient matrix is defined as the $m\times n$ matrix
+
+$$\left[\begin{array}{cccc} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+**Example (Coefficient Matrix):** For example, the coefficient matrix corresponding to the linear system $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$ is $\left[\begin{array}{cc} 2 & 5\\ -2 & 3\end{array}\right]$.
+
+:::
+
+::::
+
+## Matrix Representations (Cont'd)
+
+. . .
+
+The coefficient matrix on its own is not enough to encode our systems. We'll almost always be interested in the *augmented coefficient matrix* instead.
+
+. . . 
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Augmented Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its augmented coefficient matrix is defined as
+
+$$\left[\begin{array}{cccc|c} a_{11} & a_{12} & \cdots & a_{1n} & b_1\\
+a_{21} & a_{22} & \cdots & a_{2n} & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+**Example (Coefficient Matrix):** For example, the augmented coefficient matrix corresponding to the linear system $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$ is $\left[\begin{array}{cc|c} 2 & 5 & 13\\ -2 & 3 & 11\end{array}\right]$.
+
+:::
+
+::::
+
+## Matrix Representations (Cont'd)
+
+. . .
+
+The coefficient matrix on its own is not enough to encode our systems. We'll almost always be interested in the *augmented coefficient matrix* instead.
+
+. . . 
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Augmented Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+## Matrix Representations (Cont'd)
+
+The coefficient matrix on its own is not enough to encode our systems. We'll almost always be interested in the *augmented coefficient matrix* instead.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Augmented Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its augmented coefficient matrix is defined as
+
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+## Matrix Representations (Cont'd)
+
+The coefficient matrix on its own is not enough to encode our systems. We'll almost always be interested in the *augmented coefficient matrix* instead.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Augmented Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its augmented coefficient matrix is defined as
+
+$$\left[\begin{array}{cccc|c} a_{11} & a_{12} & \cdots & a_{1n} & b_1\\
+a_{21} & a_{22} & \cdots & a_{2n} & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+## Matrix Representations (Cont'd)
+
+The coefficient matrix on its own is not enough to encode our systems. We'll almost always be interested in the *augmented coefficient matrix* instead.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Augmented Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its augmented coefficient matrix is defined as
+
+$$\left[\begin{array}{cccc|c} a_{11} & a_{12} & \cdots & a_{1n} & b_1\\
+a_{21} & a_{22} & \cdots & a_{2n} & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+**Example (Coefficient Matrix):** For example, the augmented coefficient matrix corresponding to the linear system $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$ is... 
+
+:::
+
+::::
+
+## Matrix Representations (Cont'd)
+
+The coefficient matrix on its own is not enough to encode our systems. We'll almost always be interested in the *augmented coefficient matrix* instead.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+**Definition (Augmented Coefficient Matrix):** Given a system
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots a_{2n}x_n & = & b_1\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots a_{mn}x_n & = & b_m
+\end{array}\right.$$
+
+its augmented coefficient matrix is defined as
+
+$$\left[\begin{array}{cccc|c} a_{11} & a_{12} & \cdots & a_{1n} & b_1\\
+a_{21} & a_{22} & \cdots & a_{2n} & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
+\end{array}\right]$$
+
+:::
+
+:::{.column width=40%}
+
+**Example (Coefficient Matrix):** For example, the augmented coefficient matrix corresponding to the linear system $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$ is $\left[\begin{array}{cc|c} 2 & 5 & 13\\ -2 & 3 & 11\end{array}\right]$.
+
+:::
+
+::::
+
+## Augmented Coefficient Matrices and Row Operations
+
++ These augmented coefficient matrices are a much more efficient method of encoding a system. 
++ **Bonus:** any algebraic manipulations we would make to a simplify a system of linear equations correspond to combinations of three *elementary row operations* on a matrix.
+
+. . .
+
+**Definition (Elementary Row Operations):** Any of the following elementary row operations can be done on an augmented coefficient matrix corresponding to a system of linear equations without changing the solution set.
+
+1. **Scaling:** Replace a row with a non-zero constant multiple of itself. ($R_i \leftarrow c\cdot R_i$)
+2. **Interchange:** Swap the positions of two *rows*.
+3. **Replacement:** Replace one row by the sum of itself and a multiple of another row. ($R_i \leftarrow R_i + c\cdot R_j$)
+
+## Solving a System via Row Reduction
+
+. . . 
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system. 
+
+. . .
+
+(*Hint.* Try to obtain an augmented coefficient matrix of the form $\left[\begin{array}{ccc|c} \blacksquare & * & * & *\\
+0 & \blacksquare & * & *\\
+0 & 0 & \blacksquare & *\end{array}\right]$)
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* We'll start with the corresponding augmented coefficient matrix and then row-reduce it.
+
+. . . 
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 6 & 2 & 1 & 10\\ 0 & -4 & 1 & -2\end{array}\right] 
+\end{align*}
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* We'll start with the corresponding augmented coefficient matrix and then row-reduce it.
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 6 & 2 & 1 & 10\\ 0 & -4 & 1 & -2\end{array}\right] &\substack{R_2 \leftarrow R_2 + \left(-3\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 5 & -8 & -11\\ 0 & -4 & 1 & -2\end{array}\right]
+\end{align*}
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* We'll start with the corresponding augmented coefficient matrix and then row-reduce it.
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 5 & -8 & -11\\ 0 & -4 & 1 & -2\end{array}\right]
+\end{align*}
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* We'll start with the corresponding augmented coefficient matrix and then row-reduce it.
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 5 & -8 & -11\\ 0 & -4 & 1 & -2\end{array}\right] &\substack{R_2 \leftarrow 4R_2\\ R_3 \leftarrow 5R_3\\ \longrightarrow} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & -20 & 5 & -10\end{array}\right]
+\end{align*}
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* We'll start with the corresponding augmented coefficient matrix and then row-reduce it.
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & -20 & 5 & -10\end{array}\right]
+\end{align*}
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* We'll start with the corresponding augmented coefficient matrix and then row-reduce it.
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & -20 & 5 & -10\end{array}\right] &\substack{R_3 \leftarrow R_3 + R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & 0 & -27 & -54\end{array}\right]\\
+\end{align*}
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* 
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 6 & 2 & 1 & 10\\ 0 & -4 & 1 & -2\end{array}\right] &\sim \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & 0 & -27 & -54\end{array}\right]\\
+\end{align*}
+
+. . .
+
+From here, the bottom row of the augmented coefficient matrix gives $-27x_3 = -54$, so $\boxed{~\displaystyle{x_3 = 2}~}$.
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* 
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 6 & 2 & 1 & 10\\ 0 & -4 & 1 & -2\end{array}\right] &\sim \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & 0 & -27 & -54\end{array}\right]\\
+\end{align*}
+
+From here, the bottom row of the augmented coefficient matrix gives $-27x_3 = -54$, so $\boxed{~\displaystyle{x_3 = 2}~}$. The second row now tells us that $20x_2 - 32\left(2\right) = -44$, so $\boxed{~\displaystyle{x_2 = 1}~}$.
+
+## Solving a System via Row Reduction
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+6x_1 + 2x_2 + x_3 & = & 10\\
+-4x_2 + x_3 & = & -2\end{array}\right.$ and use elementary row operations to solve the system.
+
+*Solution.* 
+
+\begin{align*} \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 6 & 2 & 1 & 10\\ 0 & -4 & 1 & -2\end{array}\right] &\sim \left[\begin{array}{rrr|r} 2 & -1 & 3 & 7\\ 0 & 20 & -32 & -44\\ 0 & 0 & -27 & -54\end{array}\right]\\
+\end{align*}
+
+From here, the bottom row of the augmented coefficient matrix gives $-27x_3 = -54$, so $\boxed{~\displaystyle{x_3 = 2}~}$. The second row now tells us that $20x_2 - 32\left(2\right) = -44$, so $\boxed{~\displaystyle{x_2 = 1}~}$. Finally, the first row tells us that $2x_1 - (1) + 3(2) = 7$, giving that $\boxed{~\displaystyle{x_1 = 1}~}$. $_\blacktriangledown$
+
+## An Example to Try \#1
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcl} 2x_1 + 4x_2 &= & 10\\ x_1 - 3x_2 &= & 15\end{array}\right.$ and solve the system using elementary row operations. 
+
+. . .
+
+(*Hint.* Try to obtain an augmented coefficient matrix of the form $\left[\begin{array}{cc|c} \blacksquare & * & *\\
+0 & \blacksquare & *\end{array}\right]$)
+
+## An Example to Try \#2
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+-4x_1 + x_2 + x_3 & = & -1\\
+-4x_2 + x_3 & = & 10\end{array}\right.$ and use elementary row operations to solve the system. 
+
+. . .
+
+(*Hint.* Try to obtain an augmented coefficient matrix of the form $\left[\begin{array}{ccc|c} \blacksquare & * & * & *\\
+0 & \blacksquare & * & *\\
+0 & 0 & \blacksquare & *\end{array}\right]$)
+
+## An Example to Try \#3
+
+**Example:** Construct the augmented coefficient matrix corresponding to the system $\left\{\begin{array}{rcr}2x_1 - x_2 + 3x_3 & = & 7\\
+4x_1 + x_2 +x_3 & = & 7\\
+4x_1 - 2x_2 + 6x_3 & = & 14\end{array}\right.$ and use elementary row operations to solve the system. 
+
+. . .
+
+(*Hint.* Try to obtain an augmented coefficient matrix of the form $\left[\begin{array}{ccc|c} \blacksquare & * & * & *\\
+0 & \blacksquare & * & *\\
+0 & 0 & \blacksquare & *\end{array}\right]$)
+
+## Reduced Forms for Augmented Coefficient Matrices
+
++ As we've seen, reading a solution from the initial augmented coefficient matrix corresponding to a system is not immediately possible. 
++ Instead, we utilized row-reduction operations in order to obtain a staircase format like the one below:
+
+. . .
+
+$$\left[\begin{array}{cccc|c} \blacksquare & * & \cdots & * & b_1\\
+0 & \blacksquare & \cdots & * & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \blacksquare & b_n\end{array}\right]$$
+
+. . .
+
+The form shown above is called ***row echelon form***
+
+. . .
+
+From this form, we can use ***back substitution*** to solve the corresponding system
+
+## Row Echelon Form (REF)
+
+::::{.columns}
+
+:::{.column width=40%}
+
+$$\left[\begin{array}{cccc|c} \blacksquare & * & \cdots & * & b_1\\
+0 & \blacksquare & \cdots & * & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \blacksquare & b_n\end{array}\right]$$
+
+:::
+
+:::{.column width=60%}
+
++ In REF, the black squares ($\blacksquare$) denote the first non-zero entry in each row
+
+    + We'll come to call these *pivots*, and they'll play an enormous role for us 
+
++ All entries below these *pivots* are $0$'s, but values above *pivots* are permitted to be anything.
+
+:::
+
+::::
+
+## REF Examples
+
+. . .
+
+**Example:** All of the following matrices are in *row echelon* form. The pivot entries are boxed up for convenience.
+
+. . .
+
+$$A = \left[\begin{array}{cc|c} \boxed{~8~} & 2 & -4\\ 0 & \boxed{~3~} & 5\end{array}\right]~~~~~B = \left[\begin{array}{cccc|c} \boxed{~1~} & -4 & 1 & 9 & -2\\ 0 & 0 & \boxed{~3~} & 1 & -1\\ 0 & 0 & 0 & \boxed{~2~} & 4\end{array}\right]$$
+
+. . .
+
+$$C = \left[\begin{array}{ccc|c} \boxed{~4~} & -2 & 9 & -1\\ 0 & \boxed{~4~} & 1 & -4\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\end{array}\right]~~~~~D = \left[\begin{array}{ccc|c} \boxed{~7~} & 2 & 1 & 5\\ 0 & 0 & 0 & \boxed{~-3~}\end{array}\right]$$
+
+. . .
+
+**Note:** It is not necessarily the case that every diagonal element contains a pivot. 
+
+## A Non-REF Matrix
+
+. . .
+
+**Example:** The matrix $\begin{bmatrix} 2 & -4 & 0 & 11\\
+0 & 0 & 3 & 6\\
+0 & 5 & -2 & 1\end{bmatrix}$ is *not* in *row echelon form*. 
+
+. . .
+
+However, swapping rows 2 and 3 would put the matrix into *row echelon form*.
+
+## Limitations to REF
+
+There are a few "limitations" with *row echelon form* worth noting:
+
+1. *row echelon form* is not unique
+2. it is not possible to read solutions directly off of an augmented coefficient matrix in *row echelon form*
+
+. . . 
+
+**The Good News:** However, obtaining *row echelon form* can often be enough to give us several insights about a system. 
+
+. . .
+
+In particular, we'll see that *row echelon form* is enough to
+
+1. identify *pivot columns* within an augmented coefficient matrix.
+2. identify whether a system has 0, 1, or infinitely many solutions.
+
+## Reduced Row Echelon Form (RREF)
+
+. . .
+
+If we want more than just these insights, then we'll need to pursue an even further reduced form
+
+. . .
+
+We'll perform additional row reduction in order to obtain ***reduced row echelon form***. 
+
++ In ***reduced row echelon (RREF)*** form, each pivot entry is a $1$ and the pivots are the only non-zero entries in their columns. 
+
+. . .
+
+When our goal is RREF, our target matrix is a matrix of the form
+
+. . .
+
+$$\left[\begin{array}{cccc|c} 1 & 0 & \cdots & 0 & b_1\\
+0 & 1 & \cdots & 0 & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & 1 & b_n\end{array}\right]$$
+
+## RREF Examples
+
+. . .
+
+**Example:** The following matrices are all in *reduced row echelon* form. Again, the pivots are boxed up for convenience.
+
+. . .
+
+$$A = \left[\begin{array}{ccc|c} \boxed{~1~} & 0 & 0 & -5\\ 0 & \boxed{~1~} & 0 & 4\end{array}\right]~~~~~B = \left[\begin{array}{cc|c} \boxed{~1~} & 0 & 0\\ 0 & 0 & \boxed{~1~}\end{array}\right]$$
+
+. . .
+
+$$C = \left[\begin{array}{cccc|c} \boxed{~1~} & 0 & 0 & 0 & -3\\ 0 & \boxed{~1~} & 0 & 0 & 2\\ 0 & 0 & \boxed{~1~} & 0 & 0\\ 0 & 0 & 0 & \boxed{~1~} & 8\end{array}\right]~~~~~~D = \left[\begin{array}{ccccc|c} \boxed{~1~} & 2 & 0 & 1 & -8 & 2\\ 0 & 0 & \boxed{~1~} & -1 & 3 & -7\\ 0 & 0 & 0 & 0 & 0 & 0\end{array}\right]$$
+
+From *reduced row echelon* form, we have an easier time reading solutions off of the augmented coefficient matrix.
+
+## RREF and Solutions to Systems
+
+. . . 
+
+**Example:** Revisit the augmented coefficient matrices in their *reduced row echelon* form. For each one, identify how many solutions the system has and use the matrices to describe the solution sets.
+
+. . .
+
+$$A = \left[\begin{array}{ccc|c} \boxed{~1~} & 0 & 0 & -5\\ 0 & \boxed{~1~} & 0 & 4\end{array}\right]~~~~~B = \left[\begin{array}{cc|c} \boxed{~1~} & 0 & 0\\ 0 & 0 & \boxed{~1~}\end{array}\right]$$
+
+$$C = \left[\begin{array}{cccc|c} \boxed{~1~} & 0 & 0 & 0 & -3\\ 0 & \boxed{~1~} & 0 & 0 & 2\\ 0 & 0 & \boxed{~1~} & 0 & 0\\ 0 & 0 & 0 & \boxed{~1~} & 8\end{array}\right]~~~~~~D = \left[\begin{array}{ccccc|c} \boxed{~1~} & 2 & 0 & 1 & -8 & 2\\ 0 & 0 & \boxed{~1~} & -1 & 3 & -7\\ 0 & 0 & 0 & 0 & 0 & 0\end{array}\right]$$
+
+## Important Takeaways
+
+1. Linear systems can be rewritten as augmented coefficient matrices.
+2. We can use the three permissible row reduction operations (scaling, interchange, and replacement) to reduce systems to their *row echelon* or *reduced row echelon* forms.
+3. A *pivot* is the first non-zero entry in each row of a matrix in *row echelon form*.
+4. If the rightmost column of an augmented coefficient matrix is a *pivot column*, then that system has no solutions -- it is an *inconsistent system*.
+5. If any column other than the right-most column is not a pivot column, then the corresponding linear system has infinitely many solutions.
+
+## Examples to Try \#4
+
+**Example:** Use the following matrices in *reduced row echelon form* in order to describe the solution sets for the corresponding linear systems.
+
+$$A = \left[\begin{array}{ccc|c}
+1 & 0 & 0 & 2 \\
+0 & 1 & 0 & -1 \\
+0 & 0 & 1 & 4
+\end{array}\right]~~~~~B = \left[\begin{array}{ccc|c}
+1 & 0 & 3 & 5 \\
+0 & 1 & -2 & 7 \\
+0 & 0 & 0 & 1
+\end{array}\right]$$
+
+$$C = \left[\begin{array}{cc|c} 1 & 0 & 3\\
+0 & 0 & 0\end{array}\right]$$
+
+$$D = \left[\begin{array}{cccc|c} 1 & 0 & 0 & 0 & 2\\
+0 & 1 & 0 & 0 & -3\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & 5\end{array}\right]~~~~~E = \left[\begin{array}{ccc|c} 1 & 0 & -2 & 3\\ 0 & 0 & 0 & 1\end{array}\right]$$
+
+## Examples to Try \#5
+
+**Example:** The following augmented coefficient matrices are in *row echelon form*. Prior to doing any additional row reduction, determine the number of solutions in the solution set for the corresponding system. Once you've done this, if solutions exist, reduce the matrix further in order to obtain its RREF form and describe the solutions to the corresponding system.
+
+$$A = \left[\begin{array}{cc|c} -3 & 6 & -12\\ 0 & 1 & -1\end{array}\right]~~~~~B = \left[\begin{array}{ccc|c} 1 & 2 & -1 & 3\\
+0 & 2 & 8 & -4\\
+0 & 0 & 0 & -2\end{array}\right]~~~~~C = \left[\begin{array}{ccc|c} 3 & 9 & -6 & 15\\
+0 & 5 & 35 & -15\\
+0 & 0 & 1 & 3\end{array}\right]$$
+
+$$D = \left[\begin{array}{cccc|c} 1 & 2 & 0 & 1 & 4\\
+0 & 1 & 3 & -1 & 2\\
+0 & 0 & 0 & -2 & -10\\
+0 & 0 & 0 & 0 & 0\end{array}\right]~~~~~E = \left[\begin{array}{ccc|c} 4 & -4 & 8 & 0\\
+0 & 1 & -3 & 1\\
+0 & 0 & 2 & -3\\
+0 & 0 & 0 & 7\end{array}\right]$$
+
+## Examples to Try \#6
+
+**Example:** For the linear systems below, construct the corresponding augmented coefficient matrices, use row operations to reduce the matrices to their RREF form, and then describe the solution set for each system.
+
+$$(A)~~\left\{\begin{array}{rcr} x + 2y -z & = & 4\\
+2x - y + 3z & = & 1\\
+-3x + y +2z & = & -5\end{array}\right.~~~~~(B) \left\{\begin{array}{rcr} x_1 + x_2 + x_3 & = & 2\\
+2x_1 - x_2 + 3x_3 & = & 5\end{array}\right.$$
+
+$$(C)~~\left\{\begin{array}{rcr}x_1 + x_2 + x_3 & = & 3\\
+2x_1 - x_2 + x_3 & = & 1\\
+x_1 + 2x_2 - x_3 & = & 4\\
+3x_1 + x_2 + 2x_3 & = & 7\end{array}\right.~~~~~(D)~~\left\{\begin{array}{rcr}x_1 + 2x_2 - x_3 & = & 1\\
+2x_1 + 4x_2 -2x_3 & = & 2\\
+-x_1 - 2x_2 + x_3 & = & -1\\
+3x_1 + 6x_2 - 3x_3 & = & 3\end{array}\right.$$
+
+$$(E)~~\left\{\begin{array}{rcr} 2x_1 - 3x_2 & = & 6\\
+8x_1 - 12x_2 & = & 24\end{array}\right.$$
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Start Homework 2}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Python for Computing}}$
+
+</center>
+
+
