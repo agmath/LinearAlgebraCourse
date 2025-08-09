@@ -1,0 +1,476 @@
+---
+title: "MAT 350: Matrix Multiplication and Linear Combinations"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+
+from ipywidgets import interact, FloatText
+import matplotlib.patches as patches
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+Complete the following warm-up problems to re-familiarize yourself with matrix multiplication.
+
+1. Compute the linear combination $c_1\vec{v_1} + c_2\vec{v_2} + c_3\vec{v_3}$ where $\vec{v_1} = \begin{bmatrix} -3\\ 1\\ 5\end{bmatrix},~\vec{v_2} = \begin{bmatrix} 1\\ 1\\ -1\end{bmatrix}$, and $\vec{v_3} = \begin{bmatrix} 0\\ 0\\ 2\end{bmatrix}$ with $c_1 = -1$, $c_2 =-4$, and $c_3 = 5$.
+
+2. Determine whether the vector $\begin{bmatrix} -4\\ 3\end{bmatrix}$ is a linear combination of the vectors $\vec{v_1} = \begin{bmatrix} 2\\ 8\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} -1\\ 1\end{bmatrix}$.
+
+3. What must be true about all vectors which are linear combinations of the vectors $\vec{v_1} = \begin{bmatrix} -3\\ -1\\ 0\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}$?
+
+:::
+
+## Reminders and Today's Goal
+
++ A **linear combination** of vectors $\vec{v_1}, \vec{v_2}, \dots, \vec{v_k}$ is any vector that can be written as  
+  $\quad \vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \dots + c_k\vec{v_k}$  
+  where $c_1, c_2, \dots, c_k$ are scalars.
++ Linear combinations let us “move” through space by scaling and adding given vectors.
++ Our set of available vectors determines which parts of $\mathbb{R}^n$ we can reach.
+
+. . .
+
+**Goals for Today:** By the end of class, you should be able to:
+
++ Define the **span** of a collection of vectors.  
++ Decide whether a given vector $\vec{b}$ is in the span of a set of vectors.  
++ Describe the geometry of the span in $\mathbb{R}^n$ (point, line, plane, ...).
+
+## Motivating the *Span*
+
++ We've spent our last two meetings focused on *linear combinations* of vectors. 
++ Again, a vector $\vec{y}$ can be written as a *linear combination* of the vectors $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}$ if there exist scalars $c_1,~c_2,~\cdots,~c_p$ such that $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p} = \vec{y}$. 
+
+. . .
+
+**New Question:** Given the collection of vectors $\vec{v_1},~\vec{v_2},~\vdots,~\vec{v_p}$, "*what types of vectors can be written as linear combinations of the vectors in my collection?*"
+
++ This is similar to what was asked in the third warm-up problem in this notebook. 
++ That is the question we'll focus on in this notebook.
+
+## Spans of Vectors
+
+. . .
+
+**Definition (Span of a Collection of Vectors):** Given some collection of vectors $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}$ from $\mathbb{R}^n$, the set of all linear combinations of these vectors is called its *span* and is denoted by $\text{span}\left(\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}\right)$.
+
+. . .
+
+**Example:** Determine whether the vector $\vec{b} = \left[\begin{array}{r} -15\\ -1\\ -7\end{array}\right]$ is in $\text{span}\left(\left\{\left[\begin{array}{r} 1\\ 3\\ 1\end{array}\right], \left[\begin{array}{r} -3\\ 2\\ -1\end{array}\right]\right\}\right)$.
+
++ We are searching for $c_1$ and $c_2$ such that $c_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + c_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$
++ We construct an augmented matrix whose first two columns are the vectors whose span we are interested in, and whose augmented column is the vector $\vec{b}$
+
+## Spans of Vectors
+
+**Example:** Determine whether the vector $\vec{b} = \left[\begin{array}{r} -15\\ -1\\ -7\end{array}\right]$ is in $\text{span}\left(\left\{\left[\begin{array}{r} 1\\ 3\\ 1\end{array}\right], \left[\begin{array}{r} -3\\ 2\\ -1\end{array}\right]\right\}\right)$.
+
+:::{.nonincremental}
+
++ We are searching for $c_1$ and $c_2$ such that $c_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + c_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$
++ We construct an augmented matrix whose first two columns are the vectors whose span we are interested in, and whose augmented column is the vector $\vec{b}$
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+```{python}
+#| echo: true
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([[1.0, -3, -15], 
+              [3, 2, -1], 
+              [1, -1, -7]])
+A.rref()
+```
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Spans of Vectors
+
+**Example:** Determine whether the vector $\vec{b} = \left[\begin{array}{r} -15\\ -1\\ -7\end{array}\right]$ is in $\text{span}\left(\left\{\left[\begin{array}{r} 1\\ 3\\ 1\end{array}\right], \left[\begin{array}{r} -3\\ 2\\ -1\end{array}\right]\right\}\right)$.
+
+:::{.nonincremental}
+
++ We are searching for $c_1$ and $c_2$ such that $c_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + c_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$
++ We construct an augmented matrix whose first two columns are the vectors whose span we are interested in, and whose augmented column is the vector $\vec{b}$
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+```{python}
+#| echo: true
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([[1.0, -3, -15], 
+              [3, 2, -1],
+              [1, -1, -7]])
+A.rref()
+```
+
+:::
+
+:::{.column width=50%}
+
+So $c_1 = -3$ and $c_2 = 4$, and $\begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ is in $\text{span}\left(\left\{\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix}, \begin{bmatrix} -3\\ 2\\ -1\end{bmatrix}\right\}\right)~~_{\blacktriangledown}$
+
+:::
+
+::::
+
+## Example to Try \#1
+
+**Example:** Is the vector $\vec{b} = \left[\begin{array}{c}1\\ 5\\ 3\end{array}\right]$ in $\text{span}\left(\left\{\left[\begin{array}{c} 1\\ 1\\ 0\end{array}\right], \left[\begin{array}{c} 0\\ 1\\ 1\end{array}\right]\right\}\right)$?
+
+## Interesting Questions Around Spans
+
+. . .
+
+The question of what *space* a set of vectors *span* is quite an interesting one. 
+
++ For example, do the vectors $\vec{v_1} = \left[\begin{array}{c} 2\\ 3\end{array}\right]$ and $\vec{v_2} = \left[\begin{array}{c}4\\ 6\end{array}\right]$ span all of $\mathbb{R}^2$? 
++ This question amounts to asking *which points in $\mathbb{R}^2$ can be arrived at by taking scaled steps in the direction of $\vec{v_1}$ and $\vec{v_2}$*.
+
+. . .
+
+::::{.columns}
+
+:::{.column width=85%}
+
+```{python}
+#| echo: false
+
+#@title
+e1 = np.array([1, 0])
+e2 = np.array([0, 1])
+v1 = np.array([2, 3])
+v2 = np.array([4, 6])
+u1 = np.array([1, 0])
+u2 = np.array([1, 1])
+
+plt.figure(figsize = (12, 3))
+
+plt.subplot(1, 3, 1)
+plt.grid()
+plt.axvline(x = 0, color = "black", alpha = 0.4)
+plt.axhline(y = 0, color = "black", alpha = 0.4)
+plt.arrow(0, 0, e1[0], e1[1], length_includes_head = True, width = 0.05, head_width = 0.25, color = "C0")
+plt.arrow(0, 0, e2[0], e2[1], length_includes_head = True, width = 0.05, head_width = 0.25, color = "C0")
+
+for i in range(-2, 3):
+  for j in range(-2, 3):
+    plt.arrow(i, j, e1[0], e1[1], length_includes_head = True, width = 0.05, head_width = 0, color = "C0", ls = "--", alpha = 0.3)
+    plt.arrow(i, j, e2[0], e2[1], length_includes_head = True, width = 0.05, head_width = 0, color = "C0", ls = "--", alpha = 0.3)
+
+plt.xlim((-2, 2));
+plt.ylim((-2, 2));
+plt.title("e1 and e2 Span R2")
+
+plt.subplot(1, 3, 2)
+plt.arrow(0, 0, v1[0], v1[1], length_includes_head = True, width = 0.2, head_width = 1, color = "C0")
+plt.arrow(0, 0, v2[0], v2[1], length_includes_head = True, width = 0.2, head_width = 1, color = "C0")
+plt.grid()
+plt.axvline(x = 0, color = "black", alpha = 0.4)
+plt.axhline(y = 0, color = "black", alpha = 0.4)
+
+for i in range(-7, 8):
+  plt.arrow(2*i, 3*i, v1[0], v1[1], length_includes_head = True, width = 0.1, head_width = 0.1, color = "C0", ls = "--", alpha = 0.3)
+  plt.arrow(4*i, 6*i, v2[0], v2[1], length_includes_head = True, width = 0.1, head_width = 0.1, color = "C0", ls = "--", alpha = 0.2)
+
+plt.xlim((-8, 8));
+plt.ylim((-8, 8));
+plt.title("v1 and v2 Don't Span R2")
+
+plt.subplot(1, 3, 3)
+plt.grid()
+plt.axvline(x = 0, color = "black", alpha = 0.4)
+plt.axhline(y = 0, color = "black", alpha = 0.4)
+plt.arrow(0, 0, u1[0], u1[1], length_includes_head = True, width = 0.05, head_width = 0.25, color = "C0")
+plt.arrow(0, 0, u2[0], u2[1], length_includes_head = True, width = 0.05, head_width = 0.25, color = "C0")
+
+for i in range(-2, 3):
+  for j in range(-2, 3):
+    plt.arrow(i, j, u1[0], u1[1], length_includes_head = True, width = 0.05, head_width = 0, color = "C0", ls = "--", alpha = 0.3)
+    plt.arrow(i, j, u2[0], u2[1], length_includes_head = True, width = 0.05, head_width = 0, color = "C0", ls = "--", alpha = 0.3)
+
+plt.xlim((-2, 2));
+plt.ylim((-2, 2));
+plt.title("u1 and u2 Span R2")
+
+plt.show()
+```
+
+:::
+
+:::{.column width=15%}
+
+Check out [this "applet"](https://colab.research.google.com/drive/1d988QEgbhVIsN_E7ycq3Rb3Dw1rt4zKV?usp=sharing).
+
+:::
+
+::::
+
+## When do Vectors Span an Entire Space?
+
++ We've seen examples of pairs of vectors from $\mathbb{R}^2$ that *span* $\mathbb{R}^2$ and others that don't. 
+
+    + In the latter case, there were some vectors (locations in $\mathbb{R}^2$ which could not be reached using steps only in the directions of the two vectors being investigated). 
+
++ So, when do two vectors from $\mathbb{R}^2$ actually *span* all of $\mathbb{R}^2$? 
++ More generally, when does a collection of vectors from $\mathbb{R}^m$ *span* all of $\mathbb{R}^m$?
+
+## When do Vectors Span and Entire Space?
+
+**Equivalent Statements:** The following statements are equivalent.
+
+1. The collection of vectors $\left\{\vec{v_1}, \vec{v_2}, \cdots, \vec{v_p}\right\}$ spans $\mathbb{R}^m$.
+2. The vector equation $x_1\vec{v_1} + x_2\vec{v_2} + \cdots + x_p\vec{v_p} = \vec{b}$ has a solution for every $\vec{b} \in\mathbb{R}^m$.
+3. The matrix equation $\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p}\end{bmatrix}\vec{x} = \vec{b}$ has a solution for every $\vec{b}\in\mathbb{R}^m$.
+4. The matrix $\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p}\end{bmatrix}$ has a pivot in every row, making it impossible for the augmented matrix $\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p} & | & \vec{b}\end{bmatrix}$ to have a pivot in its rightmost column.
+5. The linear system $\left\{\begin{array}{rcr} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n & = & b_1\\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n & = & b_2\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n & = & b_n\end{array}\right.$ is consistent for all choices of $b_1,~b_2,~\cdots,~b_n$.
+
+## When do Vectors Span an Entire Space? Example to Try \#2
+
+. . .
+
+**Example:** Determine whether the collection of vectors $\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ -1\end{bmatrix}\right\}$ spans $\mathbb{R}^3$
+
+## Describing the Space Spanned
+
++ Even if a collection of vectors $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ does *not* span all of $\mathbb{R}^m$, it is possible to describe the subset of $\mathbb{R}^m$ that *is* spanned by the collection. 
+
+    + Solve the matrix equation $\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p}\end{bmatrix} \vec{x} = \vec{b}$ for an arbitrary $\vec{b}\in \mathbb{R}^m$. That is, we row-reduce the following augmented matrix
+
+. . .
+
+$$\left[\begin{array}{cccc|c} v_{11} & v_{12} & \cdots & v_{1p} & b_1\\
+v_{12} & v_{22} & \cdots & v_{2p} & b_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+v_{1m} & v_{m2} & \cdots & v_{mp} & b_m\end{array}\right]$$
+
++ All vectors $\vec{b}$ such that the right-most column is not a pivot column are in the span of the collection of vectors.
+
+    + Identifying the requirements for preventing the pivot will shed light on the vectors $\vec{b}\in\mathbb{R}^m$ which are spanned by $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$
+
+## Describing the Space Spanned: Example
+
+. . .
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+. . .
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] 
+\end{align}
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\stackrel{R_3 \leftarrow R_3 + R_1}{\longrightarrow} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+0 & 13 & 13 & b_1 + b_3\end{array}\right]
+\end{align}
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\stackrel{R_3 \leftarrow R_3 + R_1}{\longrightarrow} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+0 & 13 & 13 & b_1 + b_3\end{array}\right]\\
+&\stackrel{R_2 \leftarrow \frac{-1}{2}R_2}{\longrightarrow} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 13 & 13 & b_1 + b_3\end{array}\right]
+\end{align}
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\sim \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 13 & 13 & b_1 + b_3\end{array}\right]
+\end{align}
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\sim \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 13 & 13 & b_1 + b_3\end{array}\right]\\
+&\stackrel{R_3 \leftarrow R_3 + (-13)R_2}{\longrightarrow} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 0 & 0 & b_1 + b_3 + \frac{13}{2}b_2\end{array}\right]
+\end{align}
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\sim \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 0 & 0 & b_1 + b_3 + \frac{13}{2}b_2\end{array}\right]
+\end{align}
+
+. . .
+
+There is a pivot in the rightmost column of the augmented coefficient matrix unless $b_1 + b_3 + \frac{13}{2}b_2 = 0$.
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\sim \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 0 & 0 & b_1 + b_3 + \frac{13}{2}b_2\end{array}\right]
+\end{align}
+
+The system is *consistent* for any vector $\vec{b} = \begin{bmatrix} b_1\\ b_2\\ b_3\end{bmatrix}$ in $\mathbb{R}^3$ as long as $b_3 = -b_1 - \frac{13}{2}b_2$. 
+
+. . .
+
+This restriction defines a plane in $\mathbb{R}^3$. $~~_{\blacktriangledown}$
+
+## Describing the Space Spanned: Example
+
+**Example:** Describe $\text{span}\left(\left\{\begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}, \begin{bmatrix} 5\\ -2\\ 8\end{bmatrix}, \begin{bmatrix} 7\\ -2\\ 6\end{bmatrix}\right\}\right)$
+
+\begin{align} \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & -2 & -2 & b_2\\
+-1 & 8 & 6 & b_3\end{array}\right] &\sim \left[\begin{array}{ccc|c} 1 & 5 & 7 & b_1\\
+0 & 1 & 1 & \frac{-1}{2}b_2\\
+0 & 0 & 0 & b_1 + b_3 + \frac{13}{2}b_2\end{array}\right]
+\end{align}
+
+. . . 
+
+The approach taken here isn't actually how we'll answer this question in the future.
+
+. . .
+
+There is an easier way, but it requires a bit more background than we currently have.
+
+## Example to Try \#3
+
+**Example:** Determine what geometric object is spanned by the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 2\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} 2\\ 4\end{bmatrix}$.
+
+## Example to Try \#4
+
+**Example:** Is the vector $\vec{b} = \begin{bmatrix} 2\\ 1\\ 9\end{bmatrix}$ in the *span* of the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 2\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} -1\\ 1\\ 3\end{bmatrix}$?
+
+## Example to Try \#5
+
+**Example:** Can the set of vectors $\left\{\begin{bmatrix} 1\\ 0\\ 0\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 1\\ 0\\ 0\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\\ 1\end{bmatrix}\right\}$ span all of $\mathbb{R}^4$? Why or why not?
+
+## Example to Try \#6
+
+**Example:** Determine the span of the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 1\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} -1\\ 2\end{bmatrix}$. Would the span change if we included a third vector $\vec{v_3} = \begin{bmatrix} 2\\ 3\end{bmatrix}$? Why or why not?
+
+## Summary
+
+To be added...
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Start Homework 5}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Linear Independence}}$ 
+
+
+</center>
+
+
