@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Matrix Multiplication and Linear Combinations"
+title: "MAT 350: Spans of Collections of Vectors"
 author: Dr. Gilbert
 format: 
   revealjs:
