@@ -1,0 +1,680 @@
+---
+title: "MAT 350: Matrix Multiplication and Linear Combinations"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+Complete the following warm-up problems to re-familiarize yourself with matrix multiplication.
+
+1. Compute the matrix-vector product $\begin{bmatrix} 1 & 0 & -3\\
+2 & 4 & -2\\
+0 & 0 & 5\end{bmatrix}\begin{bmatrix} 3\\ -2\\ 1\end{bmatrix}$
+
+2. Compute the matrix-vector product $\begin{bmatrix} 1 & 0 & -3\\
+2 & 4 & -2\\
+0 & 0 & 5\\
+-1 & -1 & 0\end{bmatrix}\begin{bmatrix} 3\\ -2\\ 1\end{bmatrix}$
+
+3. Compute the matrix product $\begin{bmatrix} 2 & -1 & 0 & 6\\
+1 & 1 & -1 & 1\\
+0 & 4 & 1 & 0\end{bmatrix}\begin{bmatrix} 2 & -1\\
+0 & 8\\
+1 & 1\\
+3 & -1\end{bmatrix}$
+
+:::
+
+## Reminders and Today's Goal
+
++ The vector $\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_k\vec{v_k}$ is a ***linear combination*** of the vectors $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_k}$ with weights $c_1,~c_2,~\cdots,~c_k$
++ We can view the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\ a_{21} & a_{22} & \cdots & a_{2n}\\ \vdots & \vdots & \ddots & \vdots\\ a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ as a collection of column vectors, $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & a_{n}\end{bmatrix}$
++ The number of columns in a matrix $A$ must match the number of entries in a column vector $\vec{v}$ in order for the matrix-vector product $A\vec{v}$ to be defined.
+
+    + If $A$ is an $m\times n$ matrix and $\vec{v}$ is an $n\times 1$ vector, then the product $A\vec{v}$ is an $m\times 1$ vector.
+
+. . .
+
+**Goal for Today:** We revisit *linear combinations*, but rather than weighted sums of vectors, we consider how linear combinations can manifest themselves within matrix-vector products.
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+. . . 
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+
+
+:::
+
+::::
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+\begin{align} &\begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+Consider the matrix-vector product 
+
+\begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+\begin{align} &\begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+Consider the matrix-vector product 
+
+\begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
+&= \begin{bmatrix} 1\left(3\right) + 5\left(2\right) + \left(-3\right)\left(-4\right)\\
+8\left(3\right) + 4\left(2\right) + 0\left(-4\right)\\
+-2\left(3\right) + 2\left(2\right) + 1\left(-4\right)\\
+0\left(3\right) + 0\left(2\right) + \left(-1\right)\left(-4\right)\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+\begin{align}\begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+Consider the matrix-vector product 
+
+\begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
+&= 3\begin{bmatrix} 1\\ 8\\ -2\\ 0\end{bmatrix} + 2\begin{bmatrix} 5\\ 4\\ 2\\ 0\end{bmatrix} + \left(-4\right)\begin{bmatrix} -3\\ 0\\ 1\\ -1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+\begin{align} &\begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}\\
+&= x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+Consider the matrix-vector product 
+
+\begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
+&= 3\begin{bmatrix} 1\\ 8\\ -2\\ 0\end{bmatrix} + 2\begin{bmatrix} 5\\ 4\\ 2\\ 0\end{bmatrix} + \left(-4\right)\begin{bmatrix} -3\\ 0\\ 1\\ -1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+\begin{align} &\begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}\\
+&= \boxed{~x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n}~}
+\end{align}
+
+A *linear combination* of the columns of A
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+Consider the matrix-vector product 
+
+\begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
+&= 3\begin{bmatrix} 1\\ 8\\ -2\\ 0\end{bmatrix} + 2\begin{bmatrix} 5\\ 4\\ 2\\ 0\end{bmatrix} + \left(-4\right)\begin{bmatrix} -3\\ 0\\ 1\\ -1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Equivalence of Matrix Equations and Vector Equations Reiterated
+
+. . .
+
+We've already mentioned this equivalency, what we've just noted about the connection between matrix-vector products and linear combinations of the columns of $A$ is what allows us to claim matrix equations and vector equations are equivalent.
+
+. . .
+
+\begin{align} A\vec{x} &= \vec{b}
+\end{align}
+
+## Equivalence of Matrix Equations and Vector Equations Reiterated
+
+We've already mentioned this equivalency, what we've just noted about the connection between matrix-vector products and linear combinations of the columns of $A$ is what allows us to claim matrix equations and vector equations are equivalent.
+
+\begin{align} A\vec{x} &= \vec{b}\\
+\implies \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix} &= \vec{b}
+\end{align}
+
+## Equivalence of Matrix Equations and Vector Equations Reiterated
+
+We've already mentioned this equivalency, what we've just noted about the connection between matrix-vector products and linear combinations of the columns of $A$ is what allows us to claim matrix equations and vector equations are equivalent.
+
+\begin{align} A\vec{x} &= \vec{b}\\
+\implies \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix} &= \vec{b}\\
+\implies x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n} &= \vec{b}
+\end{align}
+
+## Context for Matrix Equations
+
++ While a matrix equation is indeed equivalent to a vector equation, the question a matrix equation naturally asks is not one about linear combinations. 
++ Instead, we can (and will) think of matrix multiplication as a function which *transforms* an input vector into an output vector. 
++ As we mentioned in our most recent discussion, we can think of a function $f: \mathbb{R}^n \to \mathbb{R}^m$ defined by $f\left(\vec{x}\right) = A\vec{x}$. 
+
+    + In this case, when we ask for a solution to the matrix equation $A\vec{x} = \vec{b}$, we are asking whether there exists some vector $\vec{x}$ in the domain of $f$ such that $f$ maps $\vec{x}$ onto the vector $\vec{b}$ in the codomain.
+
+. . .
+
+**Example:** Solve the matrix equation $A\vec{x} = \vec{b}$ where $A = \begin{bmatrix} 1 & -2 & 0 & 3\\ 4 & 1 & 5 & -1\end{bmatrix}$ and $\vec{b} = \begin{bmatrix} 7\\ 20\end{bmatrix}$
+
+## Aside: Additional Alternative Views of Matrix Multiplication (I)
+
+. . .
+
+While not generally the way we multiply matrices, pointing out that a matrix can be thought of as a collection of column vectors allows us to perform matrix-matrix multiplication as a series of matrix-vector products.
+
+. . .
+
+\begin{align} AB &= A\begin{bmatrix} \vec{b_1} & \vec{b_2} & \cdots & \vec{b_k}\end{bmatrix}\\
+&= \begin{bmatrix} A\vec{b_1} & A \vec{b_2} & \cdots & A\vec{b_k}\end{bmatrix}
+\end{align}
+
+. . .
+
+That is, the $i^{\text{th}}$ column of the matrix $AB$ is $A\vec{b_i}$, the product of the matrix $A$ and the $i^{\text{th}}$ column of the matrix $B$.
+
+. . .
+
+We won't generally make use of this, but it is a fact worth observing.
+
+## Aside: Additional Alternative Views of Matrix Multiplication (II)
+
+. . .
+
+We've seen that we can view a matrix $A$ as a collection of column vectors, but we could also view the matrix as a collection of row vectors.
+
+. . .
+
+Consider the matrix $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$ to be a collection of column vectors and the matrix $B = \begin{bmatrix} \leftarrow \vec{b_{1}^{*}} \rightarrow\\
+\leftarrow \vec{b_{2}^{*}} \rightarrow\\
+\vdots\\
+\leftarrow \vec{b_{m}^{*}} \rightarrow
+\end{bmatrix}$ as a collection of row-vectors.
+
+## Aside: Additional Alternative Views of Matrix Multiplication (II)
+
+Now the matrix-matrix product $AB$ can be viewed as
+
+\begin{align} AB &= \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} \leftarrow \vec{b_{1}^{*}} \rightarrow\\
+\leftarrow \vec{b_{2}^{*}} \rightarrow\\
+\vdots\\
+\leftarrow \vec{b_{m}^{*}} \rightarrow
+\end{bmatrix}\\
+&= \vec{a_1}\vec{b_{1}^*} + \vec{a_2}\vec{b_{2}^*} + \cdots + \vec{a_n}\vec{b_{m}^*}
+\end{align}
+
+. . . 
+
+A decomposition we won't use in MAT350, but which is critical to data compression, dimension reduction, and advanced techniques in machine learning.
+
+## Examples to Try: Example \#1
+
+**Example:** Let $A = \begin{bmatrix} 1 & 0 & -2\\
+2 & 1 & 1\\
+0 & 3 & -1\end{bmatrix}$ and $\vec{b} = \begin{bmatrix} -1\\ 7\\ 4\end{bmatrix}$. Solve the matrix equation $A\vec{x} = \vec{b}$ and identify the solution vector using parametric vector form if necessary.
+
+
+## Examples to Try: Example \#2
+
+**Example:** Find all of the solutions to the matrix equation $A\vec{x} = \vec{b}$ if $A = \begin{bmatrix} 1 & 2 & -1\\
+2 & 4 & -2\end{bmatrix}$ and $\vec{b} = \begin{bmatrix} 3\\ 7\end{bmatrix}$.
+
+## Examples to Try: Example \#3
+
+**Example:** Solve the matrix equation $\begin{bmatrix} 1 & -2 & 1\\
+0 & 0 & 0\end{bmatrix}\vec{x} = \begin{bmatrix} 4\\ 0\end{bmatrix}$, express the solution in parametric vector form, and describe the geometry of the solution space.
+
+## Examples to Try: Example \#4
+
+**Example:** Determine whether the vector $\vec{b} = \left[\begin{array}{c} 0\\ 5\\ -1\end{array}\right]$ is a linear combination of the columns of the matrix $A = \left[\begin{array}{rrr} 1 & 2 & -1\\
+3 & 0 & 2\\
+-1 & 1 & 0\end{array}\right]$.
+
+## Application: Bike Share
+
+. . .
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+. . .
+
+To keep track of the bicycles, we form a vector $\vec{x_k} = \begin{bmatrix} D_k\\ P_k\end{bmatrix}$ where $D_k$ is the number of bicycles at location $D$ and $P_k$ is the number of bicycles at location $p$ at the beginning of day $k$.
+
+. . .
+
+The information gathered tells us that we can construct the system
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+1. Suppose that we begin with 1000 bicycles at location $D$ and none at location $P$. Find the number of bicycles at each location on day 2.
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+2. Suppose that, at the beginning of a day, there are 1050 bicycles at location $D$ and 450 at location $P$. How many bicycles were there at each location on the previous day?
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+3. Suppose that there are 500 bicycles at location $D$ and 500 bicycles at location $P$ on Monday. How many bicycles are there at each location on Tuesday, Wednesday, and Thursday?
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+4. Consider the vectors $\vec{v_1} = \begin{bmatrix} 5\\ 2\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} -1\\ 1\end{bmatrix}$. Show that $A\vec{v_1} = \vec{v_1}$ and $A\vec{v_2} = 0.3\vec{v_2}$.
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+5. Suppose that $\vec{x_1} = c_1\vec{v_1} + c_2\vec{v_2}$, where $c_1$ and $c_2$ are scalars. Explain why
+
+$$\vec{x_2} = A\vec{x_1} = c_1\vec{v_1} + 0.3c_2\vec{v_2}$$
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+6. Continuing, explain why $\begin{array}{rcrcr} \vec{x_3} & = & A\vec{x_2} & = & c_1\vec{v_1} + \left(0.3\right)^2c_2\vec{v_2}\\
+\vec{x_4} & = & A\vec{x_3} & = & c_1\vec{v_1} + \left(0.3\right)^3c_2\vec{v_2}\\
+\vec{x_5} & = & A\vec{x_4} & = & c_1\vec{v_1} + \left(0.3\right)^4c_2\vec{v_2}\end{array}$
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+7. Suppose that there are initially 500 bicycles at location $D$ and 500 bicycles at location $P$. Write the vector $\vec{x_1}$ and find scalars $c_1$ and $c_2$ so that $\vec{x_1} = c_1\vec{v_1} + c_2\vec{v_2}$.
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+8. Use parts 5 and 6 of this problem to determine $\vec{x_2}$, $\vec{x_3}$, and $\vec{x_4}$.
+
+:::
+
+## Application: Bike Share
+
+**Bike Share:** Suppose that a city is starting a bicycle sharing program with bicycles at two locations -- downtown $D$ and the city park $P$. Bicycles that are rented at one location may be returned to either location at the end of the day. Over time, the city finds that 80% of bicycles rented at location $D$ are returned to $D$ with the other 20% returned to $P$. Similarly, 50% of bicycles rented at location $P$ are returned to $P$ and 50% to $D$.
+
+The information gathered tells us that we can construct the system (left) with corresponding matrix form (right)
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$\left\{\begin{array}{rcr} D_{k+1} &= 0.8D_k + 0.5P_k\\
+P_{k+1} &= 0.5D_k + 0.5P_k\end{array}\right.$$
+
+:::
+
+:::{.column width=50%}
+
+$$\vec{x_{k+1}} = \begin{bmatrix} 0.8 & 0.5\\ 0.5 & 0.5\end{bmatrix} \vec{x_k}$$
+
+:::
+
+::::
+
+:::{.nonincremental}
+
+9. In the long run, how are the bicycles distributed?
+
+:::
+
+## Summary
+
+To be added...
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Finish Homework 4}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Spans of Sets of Vectors}}$ 
+
+
+</center>
+
+
