@@ -49,7 +49,7 @@ a:visited {
 
 :::{.nonincremental}
 
-Complete the following warm-up problems to re-familiarize yourself with matrix multiplication.
+Complete the following warm-up problems to re-familiarize yourself with concepts we'll be leveraging today.
 
 1. Compute the linear combination $c_1\vec{v_1} + c_2\vec{v_2} + c_3\vec{v_3}$ where $\vec{v_1} = \begin{bmatrix} -3\\ 1\\ 5\end{bmatrix},~\vec{v_2} = \begin{bmatrix} 1\\ 1\\ -1\end{bmatrix}$, and $\vec{v_3} = \begin{bmatrix} 0\\ 0\\ 2\end{bmatrix}$ with $c_1 = -1$, $c_2 =-4$, and $c_3 = 5$.
 
