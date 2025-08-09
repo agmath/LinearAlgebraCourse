@@ -1,0 +1,326 @@
+---
+title: "MAT 350: Linear Independence"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+
+from ipywidgets import interact, FloatText
+import matplotlib.patches as patches
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+Complete the following warm-up problems to re-familiarize yourself with concepts we'll be leveraging today.
+
+1. Determine whether the vector $\vec{b} = \begin{bmatrix} -5\\ -2\\ -1\\ 4\end{bmatrix}$ is in $\text{span}\left(\left\{\begin{bmatrix} 1\\ 1\\ 0\\ 2\end{bmatrix}, \begin{bmatrix} -3\\ 0\\ 1\\ 1\end{bmatrix}, \begin{bmatrix} 0\\ 1\\ 1\\ 0\end{bmatrix}\right\}\right)$
+
+2. Do the columns of the matrix $\begin{bmatrix} 1 & 8 & -2 & 3\\
+0 & 0 & -1 & 1\\
+0 & 0 & 0 & 4\\
+0 & 0 & 0 & 0\end{bmatrix}$ span $\mathbb{R}^4$? Why or why not?
+
+3. Describe the space spanned by the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ -1\end{bmatrix}$, $\vec{v_2} =\begin{bmatrix} 2\\ 3\\ 0\end{bmatrix}$, and $\vec{v_3} = \begin{bmatrix} 6\\ 15\\ 4\end{bmatrix}$.
+
+:::
+
+## Reminders and Today's Goal
+
++ Recently we've discussed *linear combinations* of vectors and *spans* of collections of vectors. 
+    
+    + A **linear combination** of vectors $\vec{v_1}, \vec{v_2}, \dots, \vec{v_k}$ is any vector that can be written as $\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \dots + c_k\vec{v_k}$, where $c_1, c_2, \dots, c_k$ are scalars.
+  + The *span* of a collection of vectors is the set of all linear combinations of those vectors.
+
++ In our discussion on spans, we considered whether a collection of $m$-component vectors spanned all of $\mathbb{R}^m$ 
+
+    + For example, does a set of three vectors from $\mathbb{R}^3$ span all of $\mathbb{R}^3$?) and, when not, we tried to determine the geometry of the space spanned by the vectors.
+
++ It is natural now to start considering whether we can remove any vectors from a collection without changing its span. 
+
+## Reminders and Today's Goal
+
+**Goals for Today:** After today's discussion, you should be able to...
+
++ Define the notions of ***linear independence*** and ***linear dependence***
++ Test whether a collection $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ is ***linearly independent*** 
++ Explain what happens to the *span* if you
+
+    + remove a vector from a ***linearly independent*** set.
+    + remove a vector from a ***linearly dependent*** set.
+    
+## Motivating Linear Independence / Dependence
+
+. . . 
+
+Consider a collection of *non-zero* vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$
+
++ If we assume that one of the vectors can be written as a linear combination of the remaining vectors in $V$ (and -- for convenience -- we assume that we've ordered the vectors in $V$ such that it is $\vec{v_p}$), then we have: $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_{p-1}\vec{v_{p-1}} = \vec{v_p}$
++ Because of the item above, we can write the *zero-vector* as a linear combination of the vectors in $V$: $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_{p-1}\vec{v_{p-1}} - \vec{v_p} = \vec{0}$
++ In fact, there are infinitely many ways to write $\vec{0}$ as a linear combination of vectors from $V$ since: $s\cdot c_1\vec{v_1} + s\cdot c_2\vec{v_2} + \cdots + s\cdot c_{p-1}\vec{v_{p-1}} - s\vec{v_p} = \vec{0}$ for any scalar $s$
++ There is some redundancy here.
+
+## Motivating Linear Independence / Dependence
+
+Consider a collection of *non-zero* vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$
+
++ If we assume that no vector can be written as a linear combination of the other vectors in $V$, then the only way to write $\vec{0}$ as a linear combination of vectors from $V$ is to have all weights $c_i = 0$
+
+    + If there was another way, then we could write $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p} = \vec{0}$ where at least one of the $c_i$ is non-zero.
+    + For convenience, we could assume that we've ordered the vectors in $V$ such that $c_p$, the weight $\vec{v_p}$, is non-zero.
+    + In this case, $c_1\vec{v_1} + c_2\vec{v_2} + \cdots c_{p-1}\vec{v_{p-1}} = c_p\vec{v_p}$
+    + Which means that $\frac{c_1}{c_p}\vec{v_1} + \frac{c_2}{c_p} + \cdots + \frac{c_{p-1}}{c_p}\vec{v_{p-1}} = \vec{v_p}$
+    + This contradicts the assumption that $\vec{v_p}$ is not a linear combination of the other vectors in $V$.
+    
+## Definining Linear Independence / Dependence
+
+. . . 
+
+**Definition (Linear Independence):** Given a set of vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$, if the only solution to the vector equation $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p} = \vec{0}$ is that $c_1 = c_2 = \cdots = c_p = 0$, then the vectors in $V$ are ***linearly independent***.
+
+. . .
+
+**Definition (Linear Dependence):** Given a set of vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$, if there exists a solution to the vector equation $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p} = \vec{0}$ with at least one $c_i \neq 0$, then the vectors in $V$ are ***linearly dependent***.
+
++ **Linear Dependence and Vector Equations:** A collection of vectors is *linearly dependent* if the vector equation $x_1\vec{v_1} + x_2\vec{v_2} + \cdots + x_p\vec{v_p} = \vec{0}$ has infinitely many solutions.
+
+. . . 
+
+Notice that reducing a *linearly dependent* collection of vectors to a *linearly independent* collection does not change its *span*.
+
+## Definining Linear Independence / Dependence
+
+:::{.nonincremental}
+
+**Definition (Linear Independence):** Given a set of vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$, if the only solution to the vector equation $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p} = \vec{0}$ is that $c_1 = c_2 = \cdots = c_p = 0$, then the vectors in $V$ are ***linearly independent***.
+
+**Definition (Linear Dependence):** Given a set of vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$, if there exists a solution to the vector equation $c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p} = \vec{0}$ with at least one $c_i \neq 0$, then the vectors in $V$ are ***linearly dependent***.
+
++ **Linear Dependence and Vector Equations:** A collection of vectors is *linearly dependent* if the vector equation $x_1\vec{v_1} + x_2\vec{v_2} + \cdots + x_p\vec{v_p} = \vec{0}$ has infinitely many solutions.
+
+Notice that reducing a *linearly dependent* collection of vectors to a *linearly independent* collection does not change its *span*. In some sense, we might think of *linearly independent* collections as being "efficient".
+
+:::
+
+## Homogeneous Systems
+
+. . . 
+
+**Definition (Homogeneous System/Equation):** When the right-hand side / constant vector in a system or equation is the zero vector (ie. $\vec{b} = \vec{0}$), then that system or equation is called ***homogeneous***
+
+. . . 
+
+*Homogeneous* systems and equations are always consistent, because the zero-vector is always a solution.
+
+. . .
+
+$$\left\{\begin{array}{lcl} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1p}x_p & = & 0\\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2p}x_p & = & 0\\
+ & \vdots & \\
+a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mp}x_p & = & 0
+\end{array}\right.$$
+
+. . . 
+
+Has solution $x_1 = 0,~x_2 = 0,~\cdots,~x_p = 0$
+
+## Homogeneous Systems
+
+**Definition (Homogeneous System/Equation):** When the right-hand side / constant vector in a system or equation is the zero vector (ie. $\vec{b} = \vec{0}$), then that system or equation is called ***homogeneous***
+
+*Homogeneous* systems and equations are always consistent, because the zero-vector is always a solution.
+
+$$A\vec{x} = \vec{0} \text{ or } \left[\begin{array}{cccc|c} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_p} & \vec{0}\end{array}\right]$$
+
+. . . 
+
+Has solution $\vec{x} = \vec{0}$
+
+## Homogeneous Systems
+
+**Definition (Homogeneous System/Equation):** When the right-hand side / constant vector in a system or equation is the zero vector (ie. $\vec{b} = \vec{0}$), then that system or equation is called ***homogeneous***
+
+*Homogeneous* systems and equations are always consistent, because the zero-vector is always a solution.
+
+$$x_1\vec{v_1} + x_2\vec{v_2} + \cdots + x_p\vec{v_p} = \vec{0}$$
+
+. . . 
+
+Has solution $x_1 = 0,~x_2 = 0,~\cdots,~x_p = 0$
+
+## Homogeneous Systems and Linear Independence
+
+. . . 
+
+Investigating *homogeneous equations* provides us with a simple strategy for determining whether a collection of vectors is *linearly independent* or *linearly dependent*.
+
+. . . 
+
+**Strategy:** We identify whether $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ is linearly independent or dependent by determining whether or not the system corresponding to the augmented matrix $\left[\begin{array}{cccc|c} v_{11} & v_{12} & \cdots & v_{1p} & 0\\
+v_{21} & v_{22} & \cdots & v_{2p} & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+v_{m1} & v_{m2} & \cdots & v_{mp} & 0\\
+\end{array}\right]$ has a free variable.
+
+## Homogeneous Systems and Linear Independence
+
+**Strategy:** We identify whether $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ is linearly independent or dependent by determining whether or not the system corresponding to the augmented matrix $\left[\begin{array}{cccc|c} v_{11} & v_{12} & \cdots & v_{1p} & 0\\
+v_{21} & v_{22} & \cdots & v_{2p} & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+v_{m1} & v_{m2} & \cdots & v_{mp} & 0\\
+\end{array}\right]$ has a free variable.
+
+. . . 
+
+Recall that, since $\vec{x} = \vec{0}$ is a solution to the homogeneous system, the only way for a non-zero solution to exist is to have infinitely many solutions.
+
+. . . 
+
+We've discovered previously that a system has infinitely many solutions if it has at least one *free variable*.
+
+. . .
+
+Any column of the coefficient matrix which is not a *pivot column* corresponds to a *free variable*.
+
+## Completed Example \#1
+
+## Completed Example \#2
+
+## Linear Independence / Dependence: Special Cases
+
+. . .
+
+Although they align with our observations and strategy above, it is worth pointing out a couple of special cases.
+
+1. Any collection containing a single non-zero vector $\left\{\vec{v_1}\right\}$ is a *linearly independent* set.
+2. Any collection including the zero vector $\vec{0}$ as an element is *linearly dependent*.
+
+## Summary
+
++ A collection of vectors $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ is *linearly dependent* if at least one of the vectors in the set can be written as a linear combination of the other vectors in the set. Otherwise, the collection is *linearly independent*.
++ We can use several of the tools/investigations we've already encountered to determine whether collections $\left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ are linearly independent.
+
+  + If the corresponding *homogeneous system* has a ***unique solution***, then the collection is *linearly independent*, otherwise the collection is *linearly dependent*.
+  + The collection of vectors is *linearly independent* if the matrix $\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p}\end{bmatrix}$ has a pivot in every column. Otherwise, the collection is *linearly dependent*.
+
+## Summary (Cont'd)
+
+Below are a few observations that we can make. Some of them were mentioned earlier in these slides, but others are mentioned here for the first time.
+
++ A collection containing a single, non-zero vector is linearly independent.
++ Any collection containing the zero vector $\vec{0}$ is linearly dependent.
++ Any collection of vectors from $\mathbb{R}^m$ that contains more than $m$ vectors is linearly dependent.
+
+    + ***Note.*** The converse is not necessarily true.
+
+. . . 
+
+**Strategy:** The most reliable (broadly applicable) method for determining whether a collection of vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ is linearly independent is to determine whether the matrix $\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p}\end{bmatrix}$ has a *pivot* in every column.
+
++ If the answer is *yes*, then the vectors in $V$ are *linearly independent*.
++ If the answer is *no*, then the vectors in $V$ are *linearly dependent*.
+
+## Examples to Try \#1
+
+**Example:** Determine whether the collections of vectors below are linearly independent.
+
+1. $\left\{\left[\begin{array}{r} 1\\ -2\\ 0\\ 0\\ 3\end{array}\right]\right\}$
+
+2. $\left\{\left[\begin{array}{r} 1\\ 2\end{array}\right], \left[\begin{array}{r} -1\\ 1\end{array}\right], \left[\begin{array}{r} 3\\ 3\end{array}\right]\right\}$
+3. $\left\{\left[\begin{array}{r} 1\\ 0\\ 3\end{array}\right], \left[\begin{array}{r} 0\\ 0\\ 0\end{array}\right]\right\}$
+4. $\left\{\left[\begin{array}{r} 1\\ 1\\ 0\end{array}\right], \left[\begin{array}{r} 0\\ -2\\ 1\end{array}\right], \left[\begin{array}{r} -1\\ 0\\ 1\end{array}\right]\right\}$
+
+## Examples to Try \#2
+
+**Example:** Determine the value(s) for $h$ which make $\vec{v_3} \in \text{span}\left(\left\{\vec{v_1},~\vec{v_2}\right\}\right)$ where $\vec{v_1} = \left[\begin{array}{r} 1\\ -3\\ 5\end{array}\right]$, $\vec{v_2} = \left[\begin{array}{r} -3\\ 9\\ 15\end{array}\right]$, and $\vec{v_3} = \left[\begin{array}{r}2\\ -5\\ h\end{array}\right]$. For which values of $h$ is $\left\{\vec{v_1},~\vec{v_2},~\vec{v_3}\right\}$ linearly independent?
+
+## Examples to Try \#3
+
+**Example:** Determine the value(s) of $h$ which make $\left[\begin{array}{r} 1\\ -2\\ 4\end{array}\right]$, $\left[\begin{array}{r} -3\\ 7\\ 6\end{array}\right]$, and $\left[\begin{array}{r} 2\\ 1\\ h\end{array}\right]$ *linearly dependent*.
+
+## Examples to Try \#4
+
+**Example:** What are the possible *row echelon forms* of the matrices in the following scenarios:
+
+1. $A$ is a $2\times 2$ matrix with linearly dependent columns.
+2. $A$ is a $3\times 3$ matrix with linearly independent columns.
+3. $A$ is a $4\times 2$ matrix $\left[\begin{array}{rr} \vec{a_1} & \vec{a_2}\end{array}\right]$ with $\vec{a_2}$ not a scalar multiple of $\vec{a_1}$.
+4. $A$ is a $4\times 3$ matrix $\left[\begin{array}{rrr} \vec{a_1} & \vec{a_2} & \vec{a_3}\end{array}\right]$ such that $\left\{\vec{a_1},~\vec{a_2}\right\}$ is linearly independent and $\vec{a_3}$ is not in $\text{span}\left(\left\{\vec{a_1}, \vec{a_2}\right\}\right)$.
+
+## Examples to Try \#5
+
+**Example:** How many pivot columns must a $6\times 4$ matrix have if its columns span $\mathbb{R}^4$? Why?
+
+## Examples to Try \#6
+
+**Example:** Construct $3\times 2$ matrices $A$ and $B$ such that $A\vec{x} = \vec{0}$ has a non-trivial solution but $B\vec{x} = \vec{0}$ has only the trivial solution.
+
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Finish Homework 5}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Matrix Transformations}}$ 
+
+
+</center>
+
+
