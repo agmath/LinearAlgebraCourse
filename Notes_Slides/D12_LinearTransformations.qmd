@@ -1,0 +1,1000 @@
+---
+title: "MAT 350: Linear Transformations and their Matrix Representations"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+
+from ipywidgets import interact, FloatText
+import matplotlib.patches as patches
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+<div style="font-size: 16pt">
+
+Complete the following warm-up problems to re-familiarize yourself with concepts we'll be leveraging today.
+
+1. Consider the matrix $A = \begin{bmatrix} -2 & 0 & 5\\ 1 & 1 & 3\end{bmatrix}$ and the vector $\vec{x} = \begin{bmatrix} 5\\ -4\\ 1\end{bmatrix}$. Compute the product $A\vec{x}$.
+
+2. Consider the matrix $A = \begin{bmatrix} -1 & 0 & 1\\ 5 & 1 & -1\\ 0 & 0 & 3\end{bmatrix}$ and the vector $\vec{b} = \begin{bmatrix} 1\\ 4\\ -2\end{bmatrix}$. Determine whether solutions to the matrix equation $A\vec{x} = \vec{b}$ exists. Describe the geometry of the solution space.
+
+3. Let $f: \mathbb{R}^3\to \mathbb{R}^2$ be defined by $f\left(\vec{x}\right) = \begin{bmatrix} -2 & 0 & 5\\ 1 & 1 & 3\end{bmatrix}\vec{x}$. Evaluate $f\left(\begin{bmatrix} 5\\ -4\\ 1\end{bmatrix}\right)$
+
+4. Given the same function $f$ defined in part (3), compute both $f\left(\begin{bmatrix} -1\\ 2\\ 2\end{bmatrix}\right)$ and $f\left(-3\cdot\begin{bmatrix} -1\\ 2\\ 2\end{bmatrix}\right)$. What, if anything, do you notice?
+
+5. Using the same function $f$ defined in part (3) again, compute $f\left(\begin{bmatrix} 5\\ -4\\ 1\end{bmatrix} + \left(-3\right)\begin{bmatrix} -1\\ 2\\ 2\end{bmatrix}\right)$. What, if anything, do you notice now?
+
+</div>
+
+:::
+
+## Reminders and Today's Goal
+
++ Matrix-vector multiplication ($A\vec{x}$) is defined for matrices and vectors of compatible sizes.
+
+    + The number of columns in the matrix $A$ must match the number of entries in the vector $\vec{x}$.
+    + The result of multiplying an $m\times n$ matrix by an $n\times 1$ vector is an $m\times 1$ vector
+    + Multiplying an $n$-element vector by an $n\times n$ matrix moves that vector within the space $\mathbb{R}^n$
+    + Multiplying an $n$-element vector by an $m\times n$ matrix (with $m\neq n$) transforms the vector from $\mathbb{R}^n$ to $\mathbb{R}^m$
++ In the warm-up problems (specifically 3 - 5), you considered a function defined by matrix multiplication. 
++ In fact, this isn't the first time we've considered such functions. 
++ Each time we've encountered *matrix equations*, we've brought up this notion.
+
+## Reminders and Today's Goal
+
+**Goals for Today:** After today's discussion, you should be able to...
+
++ Define ***linear transformation*** as a special class of function from $\mathbb{R}^n$ to $\mathbb{R}^m$.
++ Identify characteristics that linear transformations must possess.
++ Determine whether a transformation is *linear*.
++ Write the matrix corresponding to a linear transformation.
+
+## Properties of Matrix Multiplication
+
+. . . 
+
+In order to develop and define the notion of a matrix transformation, we'll need to formalize some properties of matrix multiplication that we haven't explicitly mentioned yet.
+
+. . . 
+
+For the following, consider that $A$ and $B$ are matrices, $\vec{x}$ and $\vec{y}$ are vectors, and $c$ and $d$ are scalars.
+
++ $A\left(c\vec{x}\right) = cA\vec{x}$
++ $A\left(\vec{x} + \vec{y}\right) = A\vec{x} + A\vec{y}$
++ $\left(A + B\right)\vec{x} = A\vec{x} + B\vec{x}$
+
+. . . 
+
+Combining the first two bullet points above to notice that $A\left(\vec{x} + c\vec{y}\right) = A\vec{x} + cA\vec{y}$ will be particularly useful.
+
+. . .
+
+**Additional Reminders:** Since we're talking about matrix multiplication, its worth reminding ourselves that matrix multiplication is not commutative. That is, it is not generally the case that $AB$ and $BA$ are the same, and $A\vec{x}$ is not the same as $\vec{x}A$.
+
+## Matrix Transformations
+
++ Given an $m\times n$ matrix $A$, we can define a transformation $T:\mathbb{R}^n\to \mathbb{R}^m$ by $T\left(\vec{x}\right) = A\vec{x}$. 
++ Such a transformation will send vectors from $\mathbb{R}^n$ to $\mathbb{R}^m$.
+
+. . .
+
+**Example:** Consider the transformation $T\left(\vec{x}\right) = A\vec{x}$, where the matrix $A = \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}$. 
+
++ Since the matrix $A$ is a $3\times 2$ matrix, the transformation $T$ takes vectors from $\mathbb{R}^2$ (its domain) to $\mathbb{R}^3$ (its codomain). 
+
+## Matrix Transformations
+
+:::{.nonincremental}
+
+**Example:** Consider the transformation $T\left(\vec{x}\right) = A\vec{x}$, where the matrix $A = \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}$. 
+
++ Since the matrix $A$ is a $3\times 2$ matrix, the transformation $T$ takes vectors from $\mathbb{R}^2$ (its domain) to $\mathbb{R}^3$ (its codomain).
+
+:::
+
++ We can come up with a vector notation for the transformation as well.
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\end{bmatrix}\right) &= \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}\begin{bmatrix} x_1\\ x_2\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Matrix Transformations
+
+:::{.nonincremental}
+
+**Example:** Consider the transformation $T\left(\vec{x}\right) = A\vec{x}$, where the matrix $A = \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}$. 
+
++ Since the matrix $A$ is a $3\times 2$ matrix, the transformation $T$ takes vectors from $\mathbb{R}^2$ (its domain) to $\mathbb{R}^3$ (its codomain).
+
++ We can come up with a vector notation for the transformation as well.
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\end{bmatrix}\right) &= \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}\begin{bmatrix} x_1\\ x_2\end{bmatrix}\\
+&= \begin{bmatrix} 2x_1 - 3x_2\\ x_1\\ -4x_1 + 5x_2\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+
+:::
+
+::::
+
+## Matrix Transformations
+
+:::{.nonincremental}
+
+**Example:** Consider the transformation $T\left(\vec{x}\right) = A\vec{x}$, where the matrix $A = \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}$. 
+
++ Since the matrix $A$ is a $3\times 2$ matrix, the transformation $T$ takes vectors from $\mathbb{R}^2$ (its domain) to $\mathbb{R}^3$ (its codomain).
+
++ We can come up with a vector notation for the transformation as well.
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\end{bmatrix}\right) &= \begin{bmatrix} 2 & -3\\ 1 & 0\\ -4 & 5\end{bmatrix}\begin{bmatrix} x_1\\ x_2\end{bmatrix}\\
+&= \begin{bmatrix} 2x_1 - 3x_2\\ x_1\\ -4x_1 + 5x_2\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+That is, given an input vector $\vec{x} = \begin{bmatrix} x_1\\ x_2\end{bmatrix}$, we have $T\left(\begin{bmatrix} x_1\\ x_2\end{bmatrix}\right) = \begin{bmatrix} 3x_1 - 3x_2\\ x_1\\ -4x_1 + 5x_2\end{bmatrix}$
+
+:::
+
+::::
+
+## Linear Transformations
+
+. . . 
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+. . .
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+. . .
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+. . . 
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right)
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Linear Transformations
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right) &= A\left(\vec{x} + c\vec{y}\right)
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Linear Transformations
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right) &= A\left(\vec{x} + c\vec{y}\right)\\ 
+&= A\vec{x} + A\left(c\vec{y}\right)
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Linear Transformations
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right) &= A\left(\vec{x} + c\vec{y}\right)\\ 
+&= A\vec{x} + A\left(c\vec{y}\right)\\
+&= A\vec{x} + cA\vec{y}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Linear Transformations
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right) &= A\left(\vec{x} + c\vec{y}\right)\\ 
+&= A\vec{x} + A\left(c\vec{y}\right)\\
+&= A\vec{x} + cA\vec{y}\\
+&= T\left(\vec{x}\right) + cT\left(\vec{y}\right)
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Linear Transformations
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right) &= A\left(\vec{x} + c\vec{y}\right)\\ 
+&= A\vec{x} + A\left(c\vec{y}\right)\\
+&= A\vec{x} + cA\vec{y}\\
+&= T\left(\vec{x}\right) + cT\left(\vec{y}\right)
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+In fact, it can be shown that, for any general linear transformation $T: \mathbb{R}^n\to \mathbb{R}^m$, there exists an $m\times n$ matrix $A$ such that $T\left(\vec{x}\right) = A\vec{x}$
+
+:::
+
+::::
+
+## Linear Transformations
+
+We'll return to *matrix transformations* shortly, but let's define a general *linear transformation* first.
+
+**Definition (Linear Transformation):** A transformation $T: \mathbb{R}^n\to \mathbb{R}^m$ is called a ***linear transformation*** if, for any vectors $\vec{x},~\vec{y}\in\mathbb{R}^n$ and any scalar $c$, the following property holds
+
+$$T\left(\vec{x} + c\vec{y}\right) = T\left(\vec{x}\right) + cT\left(\vec{y}\right)$$
+
+Note that any *matrix transformation* is a *linear transformation* since, if $T\left(\vec{x}\right) = A\vec{x}$, then
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} T\left(\vec{x} + c\vec{y}\right) &= A\left(\vec{x} + c\vec{y}\right)\\ 
+&= A\vec{x} + A\left(c\vec{y}\right)\\
+&= A\vec{x} + cA\vec{y}\\
+&= T\left(\vec{x}\right) + cT\left(\vec{y}\right)
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+In fact, it can be shown that, for any general linear transformation $T: \mathbb{R}^n\to \mathbb{R}^m$, there exists an $m\times n$ matrix $A$ such that $T\left(\vec{x}\right) = A\vec{x}$
+
+That is, every *linear transformation* is also a *matrix transformation*.
+
+:::
+
+::::
+
+## Writing Linear Transformations as Matrix Transformations
+
+. . .
+
+We won't prove that every *linear transformation* is also a *matrix transformation* in complete generality.
+
+. . .
+
+We'll do it here through an example, showing a strategy to discover the matrix associated with any *linear transformation*.
+
+**Example:** Consider the linear transformation $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$. 
+
+## Writing Linear Transformations as Matrix Transformations
+
+**Example:** Consider the linear transformation <span style="font-size: 16pt"> $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$ </span>. 
+
+. . .
+
+::::{.columns}
+
+:::{.column width=75%}
+
+<div style="font-size: 16pt">
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) 
+\end{align}
+
+</div>
+
+:::
+
+::::
+
+## Writing Linear Transformations as Matrix Transformations
+
+**Example:** Consider the linear transformation <span style="font-size: 16pt"> $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$ </span>.  
+
+::::{.columns}
+
+:::{.column width=75%}
+
+<div style="font-size: 16pt">
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) &= \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}
+\end{align}
+
+</div>
+
+:::
+
+::::
+
+## Writing Linear Transformations as Matrix Transformations
+
+**Example:** Consider the linear transformation <span style="font-size: 16pt"> $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$ </span>. 
+
+::::{.columns}
+
+:::{.column width=75%}
+
+<div style="font-size: 16pt">
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) &= \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}\\
+&= \begin{bmatrix} x_1\\ 0\end{bmatrix} + \begin{bmatrix} -3x_3\\ x_3\end{bmatrix} + x_4\begin{bmatrix} x_4\\ -3x_4\end{bmatrix}
+\end{align}
+
+</div>
+
+:::
+
+::::
+
+## Writing Linear Transformations as Matrix Transformations
+
+**Example:** Consider the linear transformation <span style="font-size: 16pt"> $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$ </span>. 
+
+::::{.columns}
+
+:::{.column width=75%}
+
+<div style="font-size: 16pt">
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) &= \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}\\
+&= \begin{bmatrix} x_1\\ 0\end{bmatrix} + \begin{bmatrix} -3x_3\\ x_3\end{bmatrix} + x_4\begin{bmatrix} x_4\\ -3x_4\end{bmatrix}\\
+&= x_1\begin{bmatrix}1\\ 0\end{bmatrix} + x_2\begin{bmatrix} 0\\ 0\end{bmatrix} + x_3\begin{bmatrix} -3\\ 1\end{bmatrix} + x_4\begin{bmatrix} 1\\ -3\end{bmatrix}
+\end{align}
+
+</div>
+
+:::
+
+::::
+
+## Writing Linear Transformations as Matrix Transformations
+
+**Example:** Consider the linear transformation <span style="font-size: 16pt"> $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$ </span>. 
+
+::::{.columns}
+
+:::{.column width=75%}
+
+<div style="font-size: 16pt">
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) &= \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}\\
+&= \begin{bmatrix} x_1\\ 0\end{bmatrix} + \begin{bmatrix} -3x_3\\ x_3\end{bmatrix} + x_4\begin{bmatrix} x_4\\ -3x_4\end{bmatrix}\\
+&= x_1\begin{bmatrix}1\\ 0\end{bmatrix} + x_2\begin{bmatrix} 0\\ 0\end{bmatrix} + x_3\begin{bmatrix} -3\\ 1\end{bmatrix} + x_4\begin{bmatrix} 1\\ -3\end{bmatrix}\\
+&= \begin{bmatrix}1 & 0 & -3 & 1\\ 0 & 0 & 1 & -3\end{bmatrix}\begin{bmatrix}x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}
+\end{align}
+
+</div>
+
+:::
+
+:::{.column width=25%}
+
+
+:::
+
+::::
+
+## Writing Linear Transformations as Matrix Transformations
+
+**Example:** Consider the linear transformation <span style="font-size: 16pt"> $T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) = \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}$ </span>. 
+
+::::{.columns}
+
+:::{.column width=75%}
+
+<div style="font-size: 16pt">
+
+\begin{align} T\left(\begin{bmatrix} x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}\right) &= \begin{bmatrix} x_1 - 3x_3 + x_4\\ x_3 - 3x_4\end{bmatrix}\\
+&= \begin{bmatrix} x_1\\ 0\end{bmatrix} + \begin{bmatrix} -3x_3\\ x_3\end{bmatrix} + x_4\begin{bmatrix} x_4\\ -3x_4\end{bmatrix}\\
+&= x_1\begin{bmatrix}1\\ 0\end{bmatrix} + x_2\begin{bmatrix} 0\\ 0\end{bmatrix} + x_3\begin{bmatrix} -3\\ 1\end{bmatrix} + x_4\begin{bmatrix} 1\\ -3\end{bmatrix}\\
+&= \begin{bmatrix}1 & 0 & -3 & 1\\ 0 & 0 & 1 & -3\end{bmatrix}\begin{bmatrix}x_1\\ x_2\\ x_3\\ x_4\end{bmatrix}
+\end{align}
+
+</div>
+
+:::
+
+:::{.column width=25%}
+
+That is, $T\left(\vec{x}\right) = A\vec{x}$ where $A = \begin{bmatrix} 1 & 0 & -3 & 1\\ 0 & 0 & 1 & -3\end{bmatrix}$.
+
+:::
+
+::::
+
+## Examples to Try \#1
+
+Before we move forward, here are a couple of example problems for you to verify your understanding with. For each example, consider the transformation $T\left(\vec{x}\right) = A\vec{x}$ where $A = \begin{bmatrix} 2 & 1\\ 1 & 2\end{bmatrix}$.
+
+1. Evaluate $T\left(\begin{bmatrix} 1\\ -2\end{bmatrix}\right)$
+2. Evaluate $T\left(\begin{bmatrix} 1\\ 0\end{bmatrix}\right)$
+3. Evaluate $T\left(\begin{bmatrix} 0\\ 1\end{bmatrix}\right)$
+4. Is there a vector $\vec{x}$ such that $T\left(\vec{x}\right) = \begin{bmatrix} 3\\ 0\end{bmatrix}$
+5. Write $T\left(\begin{bmatrix} x_1\\ x_2\end{bmatrix}\right)$ as a linear combination of vectors with weights $x_1$ and $x_2$
+
+## Properties of Linear Transformations
+
+. . .
+
+Now that we've identified that any *linear transformation* corresponds to some *matrix transformation*, we can investigate properties of *linear transformations*. 
+
+. . .
+
+All of the upcoming properties result from properties of matrix multiplication.
+
+. . .
+
+**Property 1 (Transformation of $\vec{0}$):** $T\left(\vec{0}\right) = \vec{0}$
+\begin{align} \textit{Proof. } T\left(\vec{0}\right) & = A\vec{0}\\
+&= \vec{0}
+\end{align}
+
+## Properties of Linear Transformations
+
+**Property 2 (Linearity):** Consider the vectors $\vec{x_1}$ and $\vec{x_2}$, along with the scalar $c$, then $T\left(\vec{x_1} + c\vec{x_2}\right) = T\left(\vec{x_1}\right) + cT\left(\vec{x_2}\right)$
+\begin{align} \textit{Proof. } T\left(\vec{x_1} + c\vec{x_2}\right) &= A\left(\vec{x_1} + c\vec{x_2}\right)\\
+&= A\vec{x_1} + A\left(c\vec{x_2}\right)\\
+&= A\vec{x_1} + cA\vec{x_2}\\
+&= T\left(\vec{x_1}\right) + cT\left(\vec{x_2}\right)
+\end{align}
+
+## Properties of Linear Transformations
+
+**New Ideas/Notations Needed:** We need a few new ideas and notations before listing out additional properties of linear transformations.
+
+. . .
+
+::::{.columns}
+
+:::{.column width=60%}
+
+Consider the following special vectors, which we'll investigate in greater detail soon.
+
+$$\vec{e_1} = \begin{bmatrix}1\\ 0\\ 0\\ \vdots\\ 0\\ 0\end{bmatrix}~,\vec{e_2} = \begin{bmatrix} 0\\ 1\\ 0\\ \vdots\\ 0\\ 0\end{bmatrix},~\cdots,~\vec{e_n} = \begin{bmatrix} 0\\ 0\\ 0\\ \vdots\\ 0\\ 1\end{bmatrix}$$
+
+:::
+
+:::{.column width=40%}
+
++ The vectors $\vec{e_i}$ point in the directions of the usual axes in $\mathbb{R}^n$. 
+
+    + For clarity, consider $\vec{e_1} = \begin{bmatrix} 1\\ 0\end{bmatrix}$ and $\vec{e_2} = \begin{bmatrix} 0\\ 1\end{bmatrix}$ in $\mathbb{R}^2$.
+
+:::
+
+::::
+
+## Properties of Linear Transformations
+
+**Property 3 (Structure of the Matrix A):** If $A = \begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_n}\end{bmatrix}$, then $T\left(\vec{e_i}\right) = \vec{v_i}$. This means that, if $T\left(\vec{x}\right) = A\vec{x}$, then
+$$A = \begin{bmatrix} T\left(\vec{e_1}\right) & T\left(\vec{e_2}\right) & \cdots & T\left(\vec{e_n}\right)\end{bmatrix}$$
+  
+*Proof.* Omitted for this course...
+
+. . . 
+
+This property is extremely useful for two reasons. If you know the result of $T\left(\vec{e_i}\right)$ for all $i$,
+
+1. you can construct the matrix corresponding to the linear transformation.
+2. you can evaluate $T\left(\vec{x}\right)$ for any $\vec{x}$ in the domain of $T$.
+
+. . . 
+
+**Preview:** This property will generalize and will be even more impactful later in our course.
+
+## Completed Example \#2
+
+. . .
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) 
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= T\left(-4\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix} + 2\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix} -3\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= T\left(-4\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix} + 2\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix} -3\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)\\
+&= T\left(-4\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}\right) + T\left(2\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) + T\left(-3\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= T\left(-4\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix} + 2\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix} -3\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)\\
+&= T\left(-4\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}\right) + T\left(2\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) + T\left(-3\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)\\
+&= -4T\left(\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}\right) + 2T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) + \left(-3\right)T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)
+\end{align}
+
+</div>
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= -4T\left(\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}\right) + 2T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) + (-3)T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= -4T\left(\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}\right) + 2T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) + (-3)T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)\\
+&= -4\begin{bmatrix} 2\\ -3\\ 1\\ 1\end{bmatrix} + 2\begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix} + \left(-3\right)\begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= -4T\left(\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}\right) + 2T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) + (-3)T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right)\\
+&= -4\begin{bmatrix} 2\\ -3\\ 1\\ 1\end{bmatrix} + 2\begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix} + \left(-3\right)\begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}\\
+&= \begin{bmatrix} -8\\ 12\\ -4\\ -4\end{bmatrix} + \begin{bmatrix} 2\\ 0\\ -4\\ 10\end{bmatrix} + \begin{bmatrix} 0\\ -3\\ -12\\ 3\end{bmatrix}
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= \begin{bmatrix} -8\\ 12\\ -4\\ -4\end{bmatrix} + \begin{bmatrix} 2\\ 0\\ -4\\ 10\end{bmatrix} + \begin{bmatrix} 0\\ -3\\ -12\\ 3\end{bmatrix}
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= \begin{bmatrix} -8\\ 12\\ -4\\ -4\end{bmatrix} + \begin{bmatrix} 2\\ 0\\ -4\\ 10\end{bmatrix} + \begin{bmatrix} 0\\ -3\\ -12\\ 3\end{bmatrix}\\
+&= \begin{bmatrix} -6\\ 9\\ -20\\ 9\end{bmatrix}
+\end{align}
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size:16pt">
+
+**Example:** Consider the transformation $T:\mathbb{R}^3\to \mathbb{R}^4$ satisfying the following:
+
+::::{.columns}
+
+:::{.column width=65%}
+
+$$T\left(\begin{bmatrix} 1\\ 0\\ 0\end{bmatrix}\right) = \begin{bmatrix}2\\ -3\\ 1\\ 1\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 1\\ 0\end{bmatrix}\right) = \begin{bmatrix} 1\\ 0\\ -2\\ 5\end{bmatrix}~~~~~T\left(\begin{bmatrix} 0\\ 0\\ 1\end{bmatrix}\right) = \begin{bmatrix} 0\\ 1\\ 4\\ -1\end{bmatrix}$$
+
+:::
+
+:::{.column width=35%}
+
+Evaluate $T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right)$.
+
+:::
+
+::::
+
+\begin{align} T\left(\begin{bmatrix} -4\\ 2\\ -3\end{bmatrix}\right) &= \begin{bmatrix} -8\\ 12\\ -4\\ -4\end{bmatrix} + \begin{bmatrix} 2\\ 0\\ -4\\ 10\end{bmatrix} + \begin{bmatrix} 0\\ -3\\ -12\\ 3\end{bmatrix}\\
+&= \boxed{~\begin{bmatrix} -6\\ 9\\ -20\\ 9\end{bmatrix}~}
+\end{align}
+
+</div>
+
+## Superposition Principle
+
+. . .
+
+In that recent example, we made use of an extension of the linearity property of linear transformations, which we'll state explicitly below.
+
+. . .
+
+**Linear Transformations and Linear Combinations:** For any linear transformation $T$, we have that
+
+$$T\left(c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_n\vec{v_n}\right) = c_1T\left(\vec{v_1}\right) + c_2T\left(\vec{v_2}\right) + \cdots + c_nT\left(\vec{v_n}\right)$$
+
+. . .
+
+The extension above gives rise to the **superposition principle** from engineering and physics. 
+
+. . .
+
+**Superposition Principle:** If we consider $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_n}$ as signals entering a system and $T\left(\vec{v_1}\right),~T\left(\vec{v_2}\right),~\cdots,~T\left(\vec{v_n}\right)$ as the responses of the system to each signal, then the response to a linear combination of the signals will be a linear combination of the responses to the individual signals with the same weights.
+
+## Summary
+
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Finish Homework 5}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Matrix Transformations}}$ 
+
+
+</center>
+
+
