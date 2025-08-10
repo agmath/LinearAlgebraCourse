@@ -977,7 +977,7 @@ The extension above gives rise to the **superposition principle** from engineeri
 
 <center>
 
-$$\Huge{\text{Finish Homework 5}}$$ 
+$$\Huge{\text{Start Homework 6}}$$ 
 $$\Huge{\text{on MyOpenMath}}$$
 
 </center>
@@ -992,7 +992,9 @@ $$\Huge{\text{on MyOpenMath}}$$
 
 <center>
 
-$\Huge{\text{Matrix Transformations}}$ 
+$\Huge{\text{Geometry of Matrix}}$
+
+$\Huge{\text{Transformations}}$ 
 
 
 </center>
