@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Invertibility"
+title: "MAT 350: Bases and Coordinate Systems"
 author: Dr. Gilbert
 format: 
   revealjs:
