@@ -1,0 +1,532 @@
+---
+title: "MAT 350: Determinants"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+
+from ipywidgets import interact, FloatSlider, FloatText
+from IPython.display import display, Math
+
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
+def plot_parallelogram(a1, a2, b1, b2):
+    A = np.array([[a1, b1],
+                  [a2, b2]])
+    origin = np.array([[0, 0], [0, 0]])
+    vectors = np.array([[a1, a2], [b1, b2]])
+
+    A_mat = sp.Matrix(A)
+    #latex_string = r"\large{"  + "A = " + sp.latex(A_mat) + "}"
+    #display(Math(latex_string))
+
+    fig, ax = plt.subplots(figsize=(5,3))
+    ax.quiver(*origin, vectors[:, 0], vectors[:, 1], angles='xy', scale_units='xy', scale=1, color=['r','b'])
+
+    # Draw parallelogram
+    p1 = [0, 0]
+    p2 = [a1, a2]
+    p3 = [a1 + b1, a2 + b2]
+    p4 = [b1, b2]
+    parallelogram = np.array([p1, p2, p3, p4, p1])
+    ax.plot(parallelogram[:, 0], parallelogram[:, 1], 'k--')
+
+    det = np.linalg.det(A)
+    ax.set_title(f"Parallelogram has Area = {abs(det):.2f}")
+    ax.set_xlim(min(-5, a1 + b1) - 1, max(5, a1 + b1) + 1)
+    ax.set_ylim(min(-5, a2 + b2) - 1, max(5, a2 + b2) + 1)
+    ax.axhline(y=0, color='black')
+    ax.axvline(x=0, color='black')
+    ax.set_aspect('equal')
+    plt.grid(True)
+    plt.show()
+    
+    return None
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+Complete the following warm-up problems to re-familiarize yourself with concepts we'll be leveraging today.
+
+Consider the standard basis vectors for $\mathbb{R}^2$, $\vec{v_1} = \begin{bmatrix} 1\\ 0\end{bmatrix}$ and $\vec[v_2} = \begin{bmatrix} 0\\ 1\end{bmatrix}$. 
+
+1. Draw the vectors $\vec{v_1}$, $\vec{v_2}$, and $\vec{v_1} + \vec{v_2}$.
+2. Calculate the area of the shape enclosed by these vectors.
+3. Consider the matrix $A = \begin{bmatrix} 2 & 0\\ 0 & 3\end{bmatrix}$. Calculate $A\vec{v_1}$ and $A\vec{v_2}$.
+4. Draw the vectors $A\vec{v_1}$, $A\vec{v_2}$, and $A\vec{v_1} + A\vec{v_2}$.
+5. Calculate the area enclosed within this new shape. Can you connect the change in area to the structure of the matrix $A$?
+
+:::
+
+## Reminders and Today's Goal
+
++ Vectors are elements of a space ($\mathbb{R}^n$, for example), with both *direction* and *magnitude*.
++ Vectors are added head to tail
+
+    + If $\vec{v_1}$ and $\vec{v_2}$ are linearly independent (non-parallel) in $\mathbb{R}^2$, then the vectors $\vec{v_1}$, $\vec{v_2}$, and $\vec{v_1} + \vec{v_2}$ form the vertices of a parallelogram
+    + If $\vec{v_1}$, $\vec{v_2}$, and $\vec{v_3}$ are linearly independent vectors in $\mathbb{R}^3$, then the vectors along with the sums $\vec{v_1} + \vec{v_2}$, $\vec{v_1} + \vec{v_3}$, and $\vec{v_2} + \vec{v_3}$ form the vertices of a parallelepiped.
+
++ We say that a matrix with $m$ rows and $n$ columns is an $m\times n$ matrix -- if a matrix has the same number of rows and columns, we call it *square*.
++ We can view square matrices as functions that transform vectors (or shapes) in their space ($\mathbb{R}^n$).
+
+## Reminders and Today's Goal
+
+**Goals for Today:** After today's discussion, you should be able to
+
++ Provide geometric interpretations of the determinant.
++ Identify conclusions that can be made about a matrix and its columns when a determinant is $0$.
++ Calculate the determinant of a $2\times 2$ matrix.
++ Use strategic cofactor expansions to calculate the determinant of $3\times 3$ or larger matrices.
++ Quickly calculate the determinant of *triangular* matrices, and identify the utility of conducting row-reduction before calculating a determinant.
+
+## Motivation for Determinants
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+A parallelogram created using the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} 0\\ 1\end{bmatrix}$
+
+```{python}
+plot_parallelogram(0, 1, 1, 0);
+```
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Motivation for Determinants
+
+::::{.columns}
+
+:::{.column width=50%}
+
+A parallelogram created using the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} 0\\ 1\end{bmatrix}$
+
+```{python}
+plot_parallelogram(0, 1, 1, 0);
+```
+
+:::
+
+:::{.column width=50%}
+
+A parallelogram created using the vectors $\vec{u_1} = \begin{bmatrix} 5\\ 2\end{bmatrix}$ and $\vec{u_2} = \begin{bmatrix} 1\\ -1\end{bmatrix}$
+
+```{python}
+
+plot_parallelogram(5, 2, 1, -1);
+```
+
+:::
+
+::::
+
+. . . 
+
+Check out [this interactive parallelogram explorer](https://colab.research.google.com/drive/1-RUfwE2cqfRbZFsQGhbJ1Y80bWMCXkZq?usp=sharing) and experiment with different initial vectors in both the $\mathbb{R}^2$ and $\mathbb{R}^3$ settings.
+
+. . .
+
+Explore a variety of vectors including *linearly independent* and *linearly dependent* sets.
+
+## Summary of Takeaways
+
+. . . 
+
+Think about what you observed as you explored different combinations of initial vectors in both the $\mathbb{R}^2$ and $\mathbb{R}^3$ settings.
+
+. . .
+
+**Summary:** The area of a parallelogram formed by two two-dimensional vectors, the volume of a parallelepiped formed by three three-dimensional vectors, and their higher dimensional analogs can be used to identify whether or not... 
+
++ the columns of a matrix are *linearly independent*
++ the matrix is *invertible*
+
+. . . 
+
+If the column vectors are not linearly independent, then the dimension of the shape formed by those column vectors collapses and the corresponding measure (area, volume, etc.) will be $0$. 
+
+. . .
+
+In this case, the matrix is not invertible.
+
+## The Determinant for Area, Volume, and Higher-Dimensional Analogs
+
+. . .
+
+We've identified that the area, volume, etc. will give us information about the invertibility of a matrix.
+
+. . .
+
+**Claim (without proof):** Determinants will calculate these quantities for us. 
+
++ One caveat though is that it is possible to have a negative determinant. 
++ This is the case if pairs of vectors are *negatively oriented*, meaning that the angle measured counterclockwise between consecutive column vectors $\vec{v_i}$ and $\vec{v_{i+1}}$ is greater than $180^\circ$.
+
+## Calculating Determinants
+
+. . .
+
+We saw the definition of a *determinant* of a $2\times 2$ matrix during our discussion on *invertibility*.
+
+. . .
+
+**Recall (Inverse of a $2\times 2$ Matrix):** Let $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$, then as long as $\det\left(A\right) = ad - bc$ is non-zero, we have that $A$ is invertible and $\displaystyle{A^{-1} = \frac{1}{ad - bc}\left[\begin{array}{rr} d & -b\\ -c & a\end{array}\right]}$.
+
+. . .
+
+We'll add to this by showing how to compute the determinant of a square matrix which is larger than $2\times 2$, but for now, the definition of the determinant of a $2\times 2$ matrix is reiterated below.
+
+. . .
+
+**Definition (Determinant of a $2\times 2$ Matrix):** Consider the matrix $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$. We have $\det\left(A\right) = ad - bc$.
+
+## Completed Example \#1
+
+**Definition (Determinant of a $2\times 2$ Matrix):** Consider the matrix $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$. We have $\det\left(A\right) = ad - bc$.
+
+. . .
+
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]\right) 
+\end{align*}
+
+## Completed Example \#1
+
+**Definition (Determinant of a $2\times 2$ Matrix):** Consider the matrix $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$. We have $\det\left(A\right) = ad - bc$.
+
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]\right) &= 2\left(5\right) - \left(-6\right)\left(1\right)
+\end{align*}
+
+## Completed Example \#1
+
+**Definition (Determinant of a $2\times 2$ Matrix):** Consider the matrix $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$. We have $\det\left(A\right) = ad - bc$.
+
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]\right) &= 2\left(5\right) - \left(-6\right)\left(1\right)\\
+&= 10 + 6
+\end{align*}
+
+## Completed Example \#1
+
+**Definition (Determinant of a $2\times 2$ Matrix):** Consider the matrix $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$. We have $\det\left(A\right) = ad - bc$.
+
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 2 & -6\\ 1 & 5\end{array}\right]\right) &= 2\left(5\right) - \left(-6\right)\left(1\right)\\
+&= 10 + 6\\
+&= 16
+\end{align*}
+
+. . . 
+
+**Interpretations:** The area of the parallelogram created by the vectors $\vec{v_1} = \begin{bmatrix} 2\\ 1\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} -6\\ 5\end{bmatrix}$ is $16$, and the matrix $A$ is invertible.
+
+## Examples to Try \#1
+
+**Definition (Determinant of a $2\times 2$ Matrix):** Consider the matrix $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$. We have $\det\left(A\right) = ad - bc$.
+
+. . .
+
+**Example:** Calculate the determinant of each of the following $2\times 2$ matrices.
+
++ $A = \begin{bmatrix} 5 & 1\\ 2  & 6\end{bmatrix}$
++ $B = \begin{bmatrix} 6 & 2\\ 18 & 6\end{bmatrix}$
++ $C = \begin{bmatrix} 2 & 7\\ 3 & 9\end{bmatrix}$
+
+## Cofactor Expansion for Larger Matrices
+
+. . .
+
+**Definition ($ij$-Cofactor of $A$):** Let $A$ be an $n\times n$ matrix. We define the $ij$-cofactor of $A$, denoted by $A_{ij}$ to be the $\left(n-1\right) \times \left(n-1\right)$ matrix obtained from $A$ by deleting `row i` and `column j`.
+
+. . .
+
+**Definition (Determinant of an $n\times n$ Matrix):** Let $A$ be an $n\times n$ matrix. We can compute $\det\left(A\right)$ using cofactor expansion along any row, $i$. That is,
+
+. . .
+
+\begin{align*}\det\left(A\right) &= \sum_{j = 1}^{n}{\left(-1\right)^{i+j}a_{ij}\det\left(A_{ij}\right)}\\
+&= \left(-1\right)^{i + 1}a_{i1}\det\left(A_{i1}\right) + \left(-1\right)^{i + 2}a_{i2}\det\left(A_{i2}\right) + \cdots + \left(-1\right)^{i + n}a_{in}\det\left(A_{in}\right)
+\end{align*}
+
++ The above definition is recursive. 
++ That is, if $A_{ij}$ is not a $2\times 2$ matrix, we can use cofactor expansion to determine the determinant of $A_{ij}$. 
+
+## Comments on Cofactor Expansion
+
+**Definition (Determinant of an $n\times n$ Matrix):** Let $A$ be an $n\times n$ matrix. We can compute $\det\left(A\right)$ using cofactor expansion along any row, $i$. That is,
+
+\begin{align*}\det\left(A\right) &= \sum_{j = 1}^{n}{\left(-1\right)^{i+j}a_{ij}\det\left(A_{ij}\right)}\\
+&= \left(-1\right)^{i + 1}a_{i1}\det\left(A_{i1}\right) + \left(-1\right)^{i + 2}a_{i2}\det\left(A_{i2}\right) + \cdots + \left(-1\right)^{i + n}a_{in}\det\left(A_{in}\right)
+\end{align*}
+
++ Computing the determinant of a large matrix requires good organization and book-keeping. 
+
+    + We'll largely leave that process to computers. 
++ In order to get comfortable with the process of computing determinants, we'll compute determinants of $2\times 2$, $3\times 3$, and some $4\times 4$ matrices by hand. 
++ We'll also compute the determinants of larger matrices by hand if they have convenient structure.
+
+## Completed Example \#2
+
+. . .
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]$.
+
+. . .
+
+\begin{align*} \det\left(\left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]\right) 
+\end{align*}
+
+## Completed Example \#2
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]\right) &= 1\det\left(\left[\begin{array}{rr} 4 & 1\\ 2 & -1\end{array}\right]\right) - \left(-2\right)\det\left(\left[\begin{array}{rr} 0 & 1\\ 1 & -1\end{array}\right]\right) + 5\det\left(\left[\begin{array}{rr} 0 & 4\\ 1 & 2\end{array}\right]\right)
+\end{align*}
+
+## Completed Example \#2
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]\right) &= 1\det\left(\left[\begin{array}{rr} 4 & 1\\ 2 & -1\end{array}\right]\right) - \left(-2\right)\det\left(\left[\begin{array}{rr} 0 & 1\\ 1 & -1\end{array}\right]\right) + 5\det\left(\left[\begin{array}{rr} 0 & 4\\ 1 & 2\end{array}\right]\right)\\
+&= \left(4\left(-1\right) - 1\left(2\right)\right) + 2\left(0\left(-1\right) - 1\left(1\right)\right) + 5\left(0\left(2\right) - 4\left(1\right)\right)\\
+\end{align*}
+
+## Completed Example \#2
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]\right) &= 1\det\left(\left[\begin{array}{rr} 4 & 1\\ 2 & -1\end{array}\right]\right) - \left(-2\right)\det\left(\left[\begin{array}{rr} 0 & 1\\ 1 & -1\end{array}\right]\right) + 5\det\left(\left[\begin{array}{rr} 0 & 4\\ 1 & 2\end{array}\right]\right)\\
+&= \left(4\left(-1\right) - 1\left(2\right)\right) + 2\left(0\left(-1\right) - 1\left(1\right)\right) + 5\left(0\left(2\right) - 4\left(1\right)\right)\\
+&= -6 - 2 - 20\\
+\end{align*}
+
+## Completed Example \#2
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]$.
+
+\begin{align*} \det\left(\left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]\right) &= 1\det\left(\left[\begin{array}{rr} 4 & 1\\ 2 & -1\end{array}\right]\right) - \left(-2\right)\det\left(\left[\begin{array}{rr} 0 & 1\\ 1 & -1\end{array}\right]\right) + 5\det\left(\left[\begin{array}{rr} 0 & 4\\ 1 & 2\end{array}\right]\right)\\
+&= \left(4\left(-1\right) - 1\left(2\right)\right) + 2\left(0\left(-1\right) - 1\left(1\right)\right) + 5\left(0\left(2\right) - 4\left(1\right)\right)\\
+&= -6 - 2 - 20\\
+&= -28
+\end{align*}
+
+. . .
+
+**Note**. We could have saved a bit of work by expanding along the first column or the second row, taking advantage of the $0$ element in the matrix. We would end up with the same determinant -- we just need to take care in determining the signs on the terms in the cofactor expansion.
+
+## Example to Try \#2
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 5\\ 0 & 4 & 1\\ 1 & 2 & -1\end{array}\right]$ by using cofactor expansion along the second row instead of the first
+
+<br/>
+<br/>
+<br/>
+
+**Example** Compute the determinant of the matrix $A = \left[\begin{array}{rrr} 0 & 1 & 7\\ -2 & 1 & 8\\ 0 & -9 & -2\end{array}\right]$.
+
+## Limitations to Cofactor Expansion
+
+. . .
+
+**Note (Feasibility of Computing Determinants):** At the beginning of our semester, we discussed that linear systems modeling real-world systems could easily utilize hundreds or thousands of variables and have hundreds or thousands of constraint equations. 
+
+. . .
+
+Even considering a $25\times 25$ matrix, a computer performing a trillion multiplications per second would take half a million years to compute its determinant using cofactor expansion! 
+
+. . .
+
+**Algorithmic Complexity of Cofactor Expansion:** The complexity of cofactor expansion to compute a determinant is on the order of $n!$. Computer scientists would say that the algorithm is $O\left(n!\right)$ -- which is very bad!
+
+. . .
+
+Fortunately there are faster methods, some of which exploit the structure of a matrix. One of those methods appears below.
+
+## Determinants of Triangular Matrices
+
+. . .
+
+**Definition (Triangular Matrix):** A matrix $A$ having all entries either above or below its main diagonal as $0$'s is called a *triangular* matrix. If the $0$'s are below the main diagonal, $A$ is called *lower triangular* while a matrix having all $0$'s above the main diagonal is $upper triangular*.
+
+. . .
+
+$$A = \begin{bmatrix} 2 & 8 & -3\\ 0 & 7 & 9\\ 0 & 0 & -1\end{bmatrix}~~~~~~B = \begin{bmatrix} 6 & 0 & 0 & 0\\ -2 & 0 & 0 & 0\\ -1 & 3 & 1 & 0\\ 2 & 0 & -7 & 5\end{bmatrix}$$
+
+. . . 
+
+**Strategy (Determinants of Triangular Matrices):** If $A$ is a triangular matrix, then $\det\left(A\right)$ is the product of the entries along the main diagonal of $A$.
+
+. . .
+
+**Great News!** We can convert any square matrix into a triangular matrix using row-reduction, which only has complexity $O\left(n^3\right)$ -- an enormous improvement.
+
+## Completed Example \#3
+
+. . .
+
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rrrr} 2 & 1 & -4 & 8\\ 0 & -1 & 8 & 3\\ 0 & 0 & -3 & 0\\ 0 & 0 & 0 & 4\end{array}\right]$.
+
+. . .
+
+Since the matrix is an upper-triangular matrix, its determinant is the product of its diagonal elements. 
+
+. . .
+
+That is, $\det\left(A\right) = 2\left(-1\right)\left(-3\right)\left(4\right) = 24$.
+
+. . .
+
+**Interpretations:** The volume of the parallelepiped bounded by the column vectors of $A$ is $24$. Additionally, the matrix $A$ is invertible!
+
+## Example to Try \#3
+
+**Example:** Calculate the determinants of each of the following triangular matrices. Interpret the determinants in terms of areas or volumes and discuss what the determinant reveals about invertibility.
+
+$$A = \begin{bmatrix} 2 & 8 & -3\\ 0 & 7 & 9\\ 0 & 0 & -1\end{bmatrix}~~~~~~B = \begin{bmatrix} 6 & 0 & 0 & 0\\ -2 & 0 & 0 & 0\\ -1 & 3 & 1 & 0\\ 2 & 0 & -7 & 5\end{bmatrix}$$
+
+## Alternative Notation
+
+. . .
+
+Before we move forward, it is useful to mention some common notation. 
+
+. . .
+
+When stating that we are computing the determinant of a matrix, it is common to replace the brackets on either end of the matrix by vertical bars. 
+
+. . .
+
+For example, instead of writing $\det\left(\left[\begin{array}{rrr} a & b & c\\ d & e & f\\ g & h & i\end{array}\right]\right)$, it is common to write $\left|\begin{array}{rrr} a & b & c\\ d & e & f\\ g & h & i\end{array}\right|$ instead.  
+
+## Examples to Try (1 of 3)
+
+:::{.nonincremental}
+
+1. Use the fact that if $A = \left[\begin{array}{rr} a & b\\ c & d\end{array}\right]$, then $\det\left(A\right) = ad - bc$ to compute the determinants of the following $2\times 2$ matrices.
+
+$$A = \left[\begin{array}{rr} 2 & 6\\ -3 & 5\end{array}\right] ~~~~~~~ B = \left[\begin{array}{rr} -1 & 3\\ 8 & 2\end{array}\right]$$
+
+2. Use cofactor expansion to compute the determinants of the following $3\times 3$ matrices.
+
+$$A = \left[\begin{array}{rrr} 1 & 2 & -1\\ -3 & 0 & 5\\ 4 & 2 & -1\end{array}\right] ~~~~~ B = \left[\begin{array}{rrr} 2 & -5 & 4\\ 0 & 1 & 0\\ 1 & 1 & 1\end{array}\right] ~~~~~ C = \left[\begin{array}{rrr} 3 & -1 & -1\\ 1 & 2 & 4\\ -3 & -1 & -2\end{array}\right]$$
+
+:::
+
+## More Examples to Try (2 of 3)
+
+:::{.nonincremental}
+
+3. Compute the determinants of the following triangular matrices.
+
+<div style="font-size: 18pt">
+
+$$A = \left[\begin{array}{rr} 2 & 9\\ 0 & 3\end{array}\right] ~~~~~ B = \left[\begin{array}{rrr} -1 & 0 & 0 \\ 2 & 3 & 0\\ 3 & -3 & -5\end{array}\right] ~~~~~ C = \left[\begin{array}{rrrrr} 2 & 0 & 1 & 8 & 1\\ 0 & 1 & 0 & 0 & 0\\ 0 & 0 & 4 & 8 & -2\\ 0 & 0 & 0 & 3 & -1\\ 0 & 0 & 0 & 0 & 2\end{array}\right]$$
+
+</div>
+
+4. Use strategic choices about cofactor expansion to compute the determinants of the following matrices.
+
+<div style="font-size: 18pt">
+
+$$A = \left[\begin{array}{rrrr} 1 & 2 & -5 & 1\\ -3 & 1 & 8 & 1\\ 0 & 2 & 0 & 0\\ 0 & -1 & 0 & 1\end{array}\right] ~~~~~~ B = \left[\begin{array}{rrrrr} 2 & -1 & 3 & 6 & 2\\ 0 & 0 & 5 & 0 & 0\\ 0 & -3 & 1 & 4 & -2\\ 0 & 0 & 2 & 1 & 7\\ 0 & 0 & 3 & 0 & 2\end{array}\right]$$
+
+</div>
+
+:::
+
+## General Examples to Try (3 of 3)
+
+:::{.nonincremental}
+
+5. Determine the impact of a row-swap operation on a $2\times 2$ matrix by finding $\det\left(\left[\begin{array}{rr} a & b\\ c & d\end{array}\right]\right)$ and $\det\left(\left[\begin{array}{rr} c & d\\ a & b\end{array}\right]\right)$.
+
+6. Determine the impact of scaling a row of a $2\times 2$ matrix by a constant $k$ by comparing $\det\left(\left[\begin{array}{rr} a & b\\ kc & kd\end{array}\right]\right)$ to $\det\left(\left[\begin{array}{rr} a & b\\ c & d\end{array}\right]\right)$.
+
+7. Determine the impact on the determinant of a $2\times 2$ matrix if we add a scalar multiple of the second row to the first row by comparing $\det\left(\left[\begin{array}{rr} a + kc & b + kd\\ b & c\end{array}\right]\right)$ to $\det\left(\left[\begin{array}{rr} a & b\\ b & c\end{array}\right]\right)$.
+
+:::
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Complete Homework 9}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+Watch [3Blue1Brown video on Cramer's Rule](https://www.3blue1brown.com/lessons/cramers-rule)
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Subspaces}}$
+
+</center>
+
+
