@@ -398,7 +398,7 @@ Fortunately there are faster methods, some of which exploit the structure of a m
 
 . . .
 
-**Definition (Triangular Matrix):** A matrix $A$ having all entries either above or below its main diagonal as $0$'s is called a *triangular* matrix. If the $0$'s are below the main diagonal, $A$ is called *lower triangular* while a matrix having all $0$'s above the main diagonal is $upper triangular*.
+**Definition (Triangular Matrix):** A matrix $A$ having all entries either above or below its main diagonal as $0$'s is called a *triangular* matrix. If the $0$'s are below the main diagonal, $A$ is called *lower triangular* while a matrix having all $0$'s above the main diagonal is *upper triangular*.
 
 . . .
 
