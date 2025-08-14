@@ -87,7 +87,7 @@ a:visited {
 
 Complete the following warm-up problems to re-familiarize yourself with concepts we'll be leveraging today.
 
-Consider the standard basis vectors for $\mathbb{R}^2$, $\vec{v_1} = \begin{bmatrix} 1\\ 0\end{bmatrix}$ and $\vec[v_2} = \begin{bmatrix} 0\\ 1\end{bmatrix}$. 
+Consider the standard basis vectors for $\mathbb{R}^2$, $\vec{v_1} = \begin{bmatrix} 1\\ 0\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} 0\\ 1\end{bmatrix}$. 
 
 1. Draw the vectors $\vec{v_1}$, $\vec{v_2}$, and $\vec{v_1} + \vec{v_2}$.
 2. Calculate the area of the shape enclosed by these vectors.
