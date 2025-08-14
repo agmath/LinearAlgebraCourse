@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Determinants"
+title: "MAT 350: Subspaces"
 author: Dr. Gilbert
 format: 
   revealjs:
