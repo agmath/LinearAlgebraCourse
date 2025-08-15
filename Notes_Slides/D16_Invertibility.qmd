@@ -755,6 +755,118 @@ The property in the first bullet point above allows us a new straegy for solving
 
 So $\boxed{~\displaystyle{A^{-1} = \left[\begin{array}{rrr} 9/20 & -13/40 & 11/40\\ 1/10 & 3/20 & -1/20\\ -1/8 & 1/16 & 1/16\end{array}\right]}~}$. $_\blacktriangledown$
 
+## Constructing Matrix Inverses (Python)
+
+. . . 
+
+We can also use Python's `{sympy}` (or `{numpy}`) modules to calculate matrix inverses.
+
+. . . 
+
+As usual, don't jump to Python use until you are perfectly comfortable with the manual method for constructing the inverse of a matrix.
+
+. . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center>**Using `{sympy}`**</center>
+
+:::
+
+:::{.column width=50%}
+
+<center>**Using `{sympy}`**</center>
+
+:::
+
+::::
+
+## Constructing Matrix Inverses (Python)
+
+We can also use Python's `{sympy}` (or `{numpy}`) modules to calculate matrix inverses.
+
+As usual, don't jump to Python use until you are perfectly comfortable with the manual method for constructing the inverse of a matrix.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center>**Using `{sympy}`**</center>
+
+```{python}
+#| echo: true
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([[1, 3, -2], [0, 5, 4], [2, 1, 8]])
+```
+
+:::
+
+:::{.column width=50%}
+
+<center>**Using `{sympy}`**</center>
+
+```{python}
+#| echo: true
+#| eval: true
+
+import numpy as np
+
+A = np.array([[1.0, 3, -2], [0, 5, 4], [2, 1, 8]])
+```
+
+:::
+
+::::
+
+## Constructing Matrix Inverses (Python)
+
+We can also use Python's `{sympy}` (or `{numpy}`) modules to calculate matrix inverses.
+
+As usual, don't jump to Python use until you are perfectly comfortable with the manual method for constructing the inverse of a matrix.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center>**Using `{sympy}`**</center>
+
+```{python}
+#| echo: true
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([[1, 3, -2], [0, 5, 4], [2, 1, 8]])
+A.inv()
+```
+
+:::
+
+:::{.column width=50%}
+
+<center>**Using `{numpy}`**</center>
+
+```{python}
+#| echo: true
+#| eval: true
+
+import numpy as np
+
+A = np.array([[1.0, 3, -2], [0, 5, 4], [2, 1, 8]])
+np.linalg.inv(A)
+```
+
+:::
+
+::::
+
+***Note.*** When working with `{numpy}`, you'll need to ensure that your array/matrix contains elements stored as *floats* rather than *integers*. You can do this by including at least one element written as a float (ie. `1.0`) or by using the `dtype` argument.
+
 ## Examples to Try
 
 **Example 1:** Find the inverse of the matrix $\left[\begin{array}{rrr} 1 & 0 & 1\\ -2 & 2 & 4\\ 0 & 6 & -4\end{array}\right]$.
