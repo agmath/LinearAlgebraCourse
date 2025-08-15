@@ -1,0 +1,1165 @@
+---
+title: "MAT 350: Finding Eigenvectors and Eigenvalues"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+Complete the following warm-up problems to re-familiarize yourself with concepts we'll be leveraging today.
+
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & -2 & 3\\ -2 & 4 & 1\\ 0 & 2 & 5\end{array}\right]$.
+
+**Example:** Note that the matrix $U = \left[\begin{array}{rrr} 1 & -2 & 3\\ 0 & 2 & 5\\ 0 & 0 & 7\end{array}\right]$ is a row-echelon equivalent matrix to $A$. I obtained $U$ with the following two operations: (i) $R_2 \leftarrow R_2 + 2R_1$, and (ii) swap $R_2$ and $R_3$. Find the determinant of $U$.
+
+**Example:** Find all of the solutions to the polynomial equation $-\lambda\left(5 - \lambda\right)\left(2 - \lambda\right)\left(-6 - \lambda\right)^2 = 0$.
+
+:::
+
+## Reminders and Today's Goal
+
++ A scalar $\lambda$ is an *eigenvalue* of $A$ if $\left(A - I_n\right)\vec{x} = \vec{0}$ has a non-trivial solution.
++ A scalar $\lambda$ is an *eigenvalue* of $A$ if $\begin{bmatrix} A - \lambda I_n & | & \vec{0}\end{bmatrix}$ has a free variable.
++ $\bigstar$ A scalar $\lambda$ is an *eigenvalue* of $A$ if the matrix $\left(A - \lambda I_n\right)$ is not invertible.
++ A scalar $\lambda$ is an *eigenvalue* of $A$ if $\text{dim}\left(\text{Nul}\left(A - \lambda I_n\right)\right) > 0$.
++ If a scalar $\lambda$ is an *eigenvalue* of $A$, then $\text{Nul}\left(A - \lambda I_n\right)$ is a subspace of $\mathbb{R}^n$ corresponding to the eigenvalue $\lambda$. 
+
+    + This subspace is often referred to as the *eigenspace* of $A$ corresponding to $\lambda$.
+
+. . .
+
+$\bigstar$ A matrix $B$ is ***not** invertible* if $\text{det}\left(B\right) = 0$
+
+. . .
+
+Additionally worth remembering from PreCalculus, if $p\left(x\right)$ is a *polynomial*, we solve the equation $p\left(x\right) = 0$ by factoring.
+
+## Reminders and Today's Goal
+
+**Goals for Today:** After today's discussion, you should be able to
+
++ identify how to use the determinant to find *eigenvalues* for a matrix and execute that strategy.
++ define the *characteristic polynomial* corresponding to a matrix.
++ construct the basis for the *eigenspace* corresponding to the *eigenvalue* $\lambda$ of a matrix $A$.
+
+## Motivation for Today
+
+. . .
+
+In our *introduction* to eigenvectors and eigenvalues discussion, you saw how to check whether a vector was an *eigenvector* or a scalar was an *eigenvalue* of a matrix $A$.
+
+. . .
+
+What if we just have a matrix $A$ and wonder...
+
++ does $A$ have any *eigenvectors* or *eigenvalues*?
++ what are the *eigenvalues* associated with $A$?
++ does a *basis* for $\mathbb{R}^n$ consisting of *eigenvectors* of $A$ (an *eigenbasis*) exist?
+
+. . .
+
+For example, what if we wanted to find the eigenvalues corresponding to the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$. Find the bases for the eigenspaces corresponding to the eigenvectors.
+
+## Strategy for Finding Eigenvalues
+
+. . .
+
+Because $\lambda$ is an *eigenvalue* of the matrix $A$ if there exist non-trivial (not $\vec{0}$) solutions to the matrix equation $\left(A - \lambda I\right)\vec{x} = \vec{0}$, we need $\left(A - \lambda I\right) to be a non-invertible matrix.
+
+. . .
+
+**Definition (Characteristic Equation):** Given an $n\times n$ matrix $A$, the ***characteristic equation*** corresponding to $A$ is the equation $\text{det}\left(A - \lambda I\right) = 0$
+
++ The left hand side of the characteristic equation will always be an $n^{\text{th}}$-degree polynomial in $\lambda$.
+
+. . .
+
+Recall that, if a matrix has a determinant of $0$, then that matrix is not invertible.
+
+. . .
+
+**Strategy (Finding Eigenvalues):** Given an $n\times n$ matrix $A$, there are two steps for finding its eigenvalues.
+
+1. Construct the characteristic equation $\text{det}\left(A - \lambda I\right) = 0$.
+2. Solve it to obtain the eigenvalues.
+
+## Completed Example \#1
+
+**Example:** Find all of the eigenvalues of the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$.
+
+. . .
+
+We'll construct the characteristic equation and solve it to find the eigenvalues.
+
+. . .
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 1 - \lambda & 4\\ 3 & 2 - \lambda\end{array}\right]\right) &= 0
+\end{align*}
+
+## Completed Example \#1
+
+**Example:** Find all of the eigenvalues of the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$.
+
+We'll construct the characteristic equation and solve it to find the eigenvalues.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 1 - \lambda & 4\\ 3 & 2 - \lambda\end{array}\right]\right) &= 0\\
+\implies \left(1 - \lambda\right)\left(2 - \lambda\right) - 4\left(3\right) &= 0
+\end{align*}
+
+## Completed Example \#1
+
+**Example:** Find all of the eigenvalues of the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$.
+
+We'll construct the characteristic equation and solve it to find the eigenvalues.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 1 - \lambda & 4\\ 3 & 2 - \lambda\end{array}\right]\right) &= 0\\
+\implies \left(1 - \lambda\right)\left(2 - \lambda\right) - 4\left(3\right) &= 0\\
+\implies \lambda^2 - 3\lambda + 2 - 12 &= 0
+\end{align*}
+
+## Completed Example \#1
+
+**Example:** Find all of the eigenvalues of the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$.
+
+We'll construct the characteristic equation and solve it to find the eigenvalues.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 1 - \lambda & 4\\ 3 & 2 - \lambda\end{array}\right]\right) &= 0\\
+\implies \left(1 - \lambda\right)\left(2 - \lambda\right) - 4\left(3\right) &= 0\\
+\implies \lambda^2 - 3\lambda + 2 - 12 &= 0\\
+\implies \lambda^2 -3\lambda -10 &= 0
+\end{align*}
+
+## Completed Example \#1
+
+**Example:** Find all of the eigenvalues of the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$.
+
+We'll construct the characteristic equation and solve it to find the eigenvalues.
+
+\begin{align*} \det\left(\left[\begin{array}{rr} 1 - \lambda & 4\\ 3 & 2 - \lambda\end{array}\right]\right) &= 0\\
+\implies \left(1 - \lambda\right)\left(2 - \lambda\right) - 4\left(3\right) &= 0\\
+\implies \lambda^2 - 3\lambda + 2 - 12 &= 0\\
+\implies \lambda^2 -3\lambda -10 &= 0\\
+\implies \left(\lambda - 5\right)\left(\lambda + 2\right) &= 0
+\end{align*}
+
+. . .
+
+This means that $\lambda = 5$ and $\lambda = -2$ are the eigenvalues of the matrix $A$.
+
+## Finding Eigenvectors
+
+. . .
+
+Once we know the *eigenvalues* of a matrix, we are prepared to find the corresponding *eigenvectors*.
+
++ In general, there will be infinitely many *eigenvectors* corresponding to any *eigenvalue*, so we really seek a *basis* for the *eigenspace*!
+
+. . .
+
+We saw, and practiced, how to do this in our previous discussion.
+
+. . .
+
+**Strategy (Finding Eigenvalues):** Given an $n\times n$ matrix $A$ and an eigenvalue $\lambda$, we find a basis for the eigenspace corresponding to $\lambda$ by solving $\left(A - \lambda I\right)\vec{x} = \vec{0}$. That is, we find a basis for the *null space* of $\left(A - \lambda I\right)$.
+
+1. Construct the augmented matrix $\begin{array}{r|r} A - \lambda I & \vec{0}\end{array}$
+2. Find the solutions to the corresponding matrix equation by row-reducing
+3. Write the solution in parametric vector form
+4. Use the parametric vector form to construct a basis for the eigenspace, $E_{\lambda}$.
+
+## Completed Example \#2
+
+. . .
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+</div>
+
+. . .
+
+<div style="font-size: 20pt">
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+</div>
+
+. . .
+
+<div style="font-size: 20pt">
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftarrow R_2 + \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 0 & 0 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftarrow R_2 + \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 0 & 0 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+The top row of the matrix indicates $x_1 + x_2 = 0$, so $x_1 = -x_2$.
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftarrow R_2 + \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 0 & 0 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+The top row of the matrix indicates $x_1 + x_2 = 0$, so $x_1 = -x_2$.
+
+\begin{align} \vec{x} &= \begin{bmatrix} x_1\\ x_2\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftarrow R_2 + \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 0 & 0 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+The top row of the matrix indicates $x_1 + x_2 = 0$, so $x_1 = -x_2$.
+
+\begin{align} \vec{x} &= \begin{bmatrix} x_1\\ x_2\end{bmatrix}\\
+&= \begin{bmatrix} -x_2\\ x_2\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftarrow R_2 + \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 0 & 0 & 0\end{array}\right]
+\end{align}
+
+:::
+
+:::{.column width=40%}
+
+The top row of the matrix indicates $x_1 + x_2 = 0$, so $x_1 = -x_2$.
+
+\begin{align} \vec{x} &= \begin{bmatrix} x_1\\ x_2\end{bmatrix}\\
+&= \begin{bmatrix} -x_2\\ x_2\end{bmatrix}\\
+&= x_2\begin{bmatrix} -1\\ 1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+</div>
+
+## Completed Example \#2
+
+<div style="font-size: 20pt">
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_1 = 5$. Find a basis for $E_{\lambda = 5}$, the eigenspace corresponding to $\lambda = 5$.
+
+We need to solve matrix equation $\left(A - 5I\right)\vec{x} = \vec{0}$ by first setting up an augmented matrix.
+
+::::{.columns}
+
+:::{.column width=60%}
+
+\begin{align} \left[\begin{array}{rr|r} 1 - 5 & 4 & 0\\ 3 & 2 - 5 & 0\end{array}\right] &= \left[\begin{array}{rr|r} -4 & 4 & 0\\ 3 & -3 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-\frac{1}{4}\right)R_1\\ R_2\leftarrow \left(\frac{1}{3}\right)R_2\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftarrow R_2 + \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rr|r} 1 & 1 & 0\\ 0 & 0 & 0\end{array}\right]
+\end{align}
+
+So $\mathscr{B}_{E_{\lambda = 5}} = \left\{\begin{bmatrix} -1\\ 1\end{bmatrix}\right\}$
+
+:::
+
+:::{.column width=40%}
+
+The top row of the matrix indicates $x_1 + x_2 = 0$, so $x_1 = -x_2$.
+
+\begin{align} \vec{x} &= \begin{bmatrix} x_1\\ x_2\end{bmatrix}\\
+&= \begin{bmatrix} -x_2\\ x_2\end{bmatrix}\\
+&= x_2\begin{bmatrix} -1\\ 1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+</div>
+
+## Example to Try \#1
+
+. . .
+
+**Example:** Recall that the matrix $A = \begin{bmatrix} 1 & 4\\ 3 & 2\end{bmatrix}$ has eigenvalue $\lambda_2 = -2$. Find a basis for $E_{\lambda = -2}$, the eigenspace corresponding to $\lambda = -2$.
+
+## Comments on the Characteristic Equation
+
+. . .
+
+When we first discussed determinants, we mentioned that computing the determinant of a generic $n\times n$ matrix takes $O\left(n!\right)$ time.
+
+. . .
+
+The fact that our *characteristic equation* depends on calculating a determinant then, is not excellent news.
+
+. . .
+
+We did see, though, that taking the determinant of a *triangular* matrix was simple -- its the product of the elements along the diagonal.
+
+. . . 
+
+We can use row-reduction to turn a general $n\times n$ matrix into an $n\times n$ upper triangular matrix in just $O\left(n^3\right)$ time.
+
+. . .
+
+From there, we can easily compute the determinant.
+
+. . .
+
+Unfortunately, row reduction operations change the determinant...
+
+. . . 
+
+but they do so in small, predictable ways!
+
+## Aside: Row-Reduction and Determinants
+
+. . .
+
+**Effects of Row-Reduction on Determinants:** Given an $n\times n$ matrix $A$, 
+
+1. if $U$ is obtained from $A$ by *swapping* two rows, then $\text{det}\left(U\right) = -\text{det}\left(A\right)$
+2. if $U$ is obtained from $A$ by *scaling* a single row by the scalar $s$, then $\text{det}\left(U\right) = s\text{det}\left(A\right)$
+3. if $U$ is obtained from $A$ by a *replacement* operation, $R_i \leftarrow R_i + sR_j$, then $\text{det}\left(U\right) = \text{det}\left(A\right)$
+
+. . .
+
+**Remark (Determinants of Row-Equivalent Matrices):** If the operation of scaling rows is avoiding in transforming the matrix $A$ into the row-equivalent echelon-form matrix $U$, then we have
+
+. . .
+
+::::{.columns}
+
+:::{.column width=80%}
+
+$$\det\left(A\right) = \left\{\begin{array}{ll} \left(-1\right)^r\cdot\left(\substack{\text{product of pivots}\\ \text{in U}}\right), &\text{ when $A$ is invertible}\\
+0, & \text{ when $A$ is not invertible}
+\end{array}\right.$$
+
+:::
+
+:::{.column width=20%}
+
+
+:::
+
+::::
+
+## Aside: Row-Reduction and Determinants
+
+:::{.nonincremental}
+
+**Effects of Row-Reduction on Determinants:** Given an $n\times n$ matrix $A$, 
+
+1. if $U$ is obtained from $A$ by *swapping* two rows, then $\text{det}\left(U\right) = -\text{det}\left(A\right)$
+2. if $U$ is obtained from $A$ by *scaling* a single row by the scalar $s$, then $\text{det}\left(U\right) = s\text{det}\left(A\right)$
+3. if $U$ is obtained from $A$ by a *replacement* operation, $R_i \leftarrow R_i + sR_j$, then $\text{det}\left(U\right) = \text{det}\left(A\right)$
+
+:::
+
+**Remark (Determinants of Row-Equivalent Matrices):** If the operation of scaling rows is avoiding in transforming the matrix $A$ into the row-equivalent echelon-form matrix $U$, then we have
+
+::::{.columns}
+
+:::{.column width=80%}
+
+$$\det\left(A\right) = \left\{\begin{array}{ll} \left(-1\right)^r\cdot\left(\substack{\text{product of pivots}\\ \text{in U}}\right), &\text{ when $A$ is invertible}\\
+0, & \text{ when $A$ is not invertible}
+\end{array}\right.$$
+
+:::
+
+:::{.column width=20%}
+
+where $r$ is the number of row interchanges.
+
+:::
+
+::::
+
+## Feasibility of Obtaining the Characteristic Equation
+
+**Remark (Determinants of Row-Equivalent Matrices):** If the operation of scaling rows is avoiding in transforming the matrix $A$ into the row-equivalent echelon-form matrix $U$, then we have
+
+::::{.columns}
+
+:::{.column width=80%}
+
+$$\det\left(A\right) = \left\{\begin{array}{ll} \left(-1\right)^r\cdot\left(\substack{\text{product of pivots}\\ \text{in U}}\right), &\text{ when $A$ is invertible}\\
+0, & \text{ when $A$ is not invertible}
+\end{array}\right.$$
+
+:::
+
+:::{.column width=20%}
+
+where $r$ is the number of row interchanges.
+
+:::
+
+::::
+
+. . .
+
+This is great news, because row reduction will not change the solutions to the characteristic equation $\text{det}\left(A - \lambda I\right) = 0$
+
+. . .
+
+We can row-reduce $\left(A - \lambda I\right)$ quickly (in comparison) and then calculate the characteristic polynomial as the product of the pivots in the equivalent row-echelon form matrix.
+
+. . .
+
+**Comment:** The largest, non-triangular, matrices we'll work with in MAT350 are $3\times 3$.
+
+## Characteristic Equation and Eigenvalues/vectors with Python
+
+. . . 
+
+We can use Python to find and solve the characteristic polynomial, or even to directly compute the eigenvalues and eigenvectors of a given square matrix, $A$.
+
+1. Define the matrix `A` as a `Matrix()` using `{sympy}`
+2. Use the `.charpoly()` method on `A` to obtain the characteristic polynomial
+3. Use the `.as_expr()` method on the object containing the characteristic polynomial, to it into a symbolic expression
+4. Use the `.factor()` method on the object containing your symbolic expression, to obtain your factored characteristic polynomial
+
+. . .
+
+From here, you can identify the solutions by finding the roots of the characteristic polynomial (that is, setting it equal to $0$ and solving).
+
+## Quicker Method with Python
+
+. . .
+
+You can also compute the eigenvalues and eigenvectors directly from the matrix object by using the `.eigenvects()` method on the matrix object.
+
+. . .
+
+```{python}
+#| echo: true
+#| eval: false
+
+A = sp.Matrix([[row_1], [row_2], ..., [row_n]])
+A.eigenvects()
+```
+
+. . .
+
+The result is a *tuple* with a three item "compartment" for each eigenvalue.
+
+1. The first compartment contains the eigenvalue, $\lambda$
+2. The second compartment contains the *multiplicity* of $\lambda$
+3. The third compartment contains a set of basis vectors for the eigenspace, $E_{\lambda}$
+
+. . .
+
+**Note:** We'll show the code required for both the longer and shorter methods with an example next.
+
+## Completed Example \#3
+
+. . .
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+
+:::
+
+::::
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+We'll start by defining the matrix $A$ using `{sympy}`
+
+. . .
+
+```{python}
+#| echo: true
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, -17, -10]])
+```
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+Now we'll obtain the characteristic polynomial using the `.charpoly()` method.
+
+. . .
+
+```{python}
+#| echo: true
+#| eval: true
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_char_poly = A.charpoly()
+
+print(A_char_poly)
+```
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+Next we convert the charactristic polynomial into a variable expression and factor it.
+
+. . .
+
+```{python}
+#| echo: true
+#| eval: true
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_char_poly = A.charpoly()
+A_char_poly = A_char_poly.as_expr()
+A_char_poly_factored = sp.factor(A_char_poly)
+
+print(A_char_poly_factored)
+```
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+```{python}
+#| echo: true
+#| eval: true
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_char_poly = A.charpoly()
+A_char_poly = A_char_poly.as_expr()
+A_char_poly_factored = sp.factor(A_char_poly)
+
+print(A_char_poly_factored)
+```
+
+. . .
+
+The eigenvalues are $\lambda_1 = 1$ with multiplicity $1$, and $\lambda_2 = -1$ with a multiplicity of $2$.
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+```{python}
+#| echo: true
+#| eval: true
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_char_poly = A.charpoly()
+A_char_poly = A_char_poly.as_expr()
+A_char_poly_factored = sp.factor(A_char_poly)
+
+print(A_char_poly_factored)
+```
+
+From here, we could construct the individual $\left[\begin{array}{r|r} \left(A - \lambda I\right) & 0\end{array}\right]$ matrices, row-reduce, write the parametric solutions, and obtain the bases. Or...
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+we could just simply use the `.eigenvects()` method on the matrix to obtain the eigenvalues, multiplicities, and bases immediately from the matrix `A`.
+
+. . .
+
+::::{.columns}
+
+:::{.column width=75%}
+
+```{python}
+#| echo: true
+#| eval: false
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_eig = A.eigenvects()
+
+print(A_eig)
+```
+
+:::
+
+:::{.column width=25%}
+
+```{python}
+#| echo: false
+#| eval: true
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_eig = A.eigenvects()
+
+print(A_eig)
+```
+
+:::
+
+::::
+
+. . .
+
+Here, the result is a list of two tuples. Each entry containing (in order), the eigenvalue, its multiplicity, and an basis for the eigenspace.
+
+## Completed Example \#3
+
+:::::{.nonincremental}
+
+**Example:** Consider the matrix
+
+::::{.columns}
+
+:::{.column width=30%}
+
+$$A =
+\begin{bmatrix} 1 & -3 & 1\\
+-4 & 8 & -5\\
+-8 & 17 & -10
+\end{bmatrix}$$
+
+Complete the following:
+
+:::
+
+:::{.column width=70%}
+
+1. Construct the characteristic polynomial for the matrix $A$.
+2. Factor the characteristic polynomial to find the eigenvalues and their multiplicities.
+3. Find bases for the eigenspaces corresponding to the eigenvalues you found.
+
+:::
+
+::::
+
+:::::
+
+::::{.columns}
+
+:::{.column width=75%}
+
+We could also print the results more conveniently.
+
+```{python}
+#| echo: true
+#| eval: false
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_eig = A.eigenvects()
+
+for i in range(len(A_eig)):
+    print(f"Eigenvalue: {A_eig[i][0]}")
+    print(f"Multiplicity: {A_eig[i][1]}")
+    print(f"Dimension of eigenspace: {len(A_eig[i][2])}")
+    for j in range(len(A_eig[i][2])):
+        print(f"eigenbasis vector {j + 1} \n\t{A_eig[i][2][j]}")
+    print()
+```
+
+:::
+
+:::{.column width=25%}
+
+```{python}
+#| echo: false
+#| eval: true
+
+A = sp.Matrix([[1, -3, 1], [-4, 8, -5], [-8, 17, -10]])
+A_eig = A.eigenvects()
+
+for i in range(len(A_eig)):
+    print(f"Eigenvalue: {A_eig[i][0]}")
+    print(f"Multiplicity: {A_eig[i][1]}")
+    print(f"Dimension of eigenspace: {len(A_eig[i][2])}")
+    for j in range(len(A_eig[i][2])):
+        print(f"eigenbasis vector {j + 1} \n\t{A_eig[i][2][j]}")
+    print()
+```
+
+:::
+
+::::
+
+## Comment on Expectations
+
+<div style="font-size: 30pt">
+
+</br>
+</br>
+
+<center>
+
+Note that (as with many of the concepts from this course) you should be able to find eigenvalues and eigenvectors by hand but, once you are satisfied that you've mastered that skill, feel free to switch over to using python.
+
+</center>
+
+</div>
+
+## Examples to Try (1 of 3)
+
+**Example 1:** Find the characteristic polynomial and the real eigenvalues for the matrix $A = \left[\begin{array}{rr} 8 & 2\\ 3 & 3\end{array}\right]$
+
+<br/>
+
+**Example 2:** Find the characteristic polynomial and the real eigenvalues for the matrix $A = \left[\begin{array}{rr} 6 & 2\\ -4 & -2\end{array}\right]$.
+
+<br/>
+
+**Example 3:** Find the characteristic polynomial and the real eigenvalues of the matrix $A = \left[\begin{array}{rrr} -1 & 0 & 2\\ 3 & 1 & 0\\ 0 & 1 & 2\end{array}\right]$.
+
+## Examples to Try (2 of 3)
+
+**Example 4:** Find the characteristic polynomial and real eigenvalues of the matrix $A = \left[\begin{array}{rrr} 4 & 0 & -1\\ -1 & 0 & 4\\ 0 & 2 & 3\end{array}\right]$.
+
+<br/>
+<br/>
+
+**Example 5:** Find the real eigenvalues and their multiplicities for the matrix $A = \left[\begin{array}{rrrr} 3 & 0 & 0 & 0\\ 6 & 2 & 0 & 0\\ 0 & 3 & 6 & 0\\ 2 & 3 & 3 & -5\end{array}\right]$.
+
+## Examples to Try (3 of 3)
+
+**Application 1:** Consider the *transition matrix* $A = \left[\begin{array}{rr} 0.94 & 0.45\\ 0.06 & 0.55\end{array}\right]$ which describes transition probabilities between the states $\tt{Healthy}$ and $\tt{Sick}$ as in the state vector $\vec{x} = \left[\begin{array}{c} \tt{Healthy}\\ \tt{Sick}\end{array}\right]$ for a particular virus spreading in an elementary school classroom.
+
+Analyze the long-term behavior of the system $\vec{x_{k+1}} = A\vec{x_k}$ for a classroom where $\vec{x_0} = \left[\begin{array}{r} 0.87\\ 0.13\end{array}\right]$ by completing the following steps.
+
+:::{.nonincremental}
+
+1. Use the characteristic polynomial to find the eigenvalues for the matrix $A$.
+2. Find eigenvectors $\vec{v_1}$ and $\vec{v_2}$ for the corresponding to the eigenvalues you found.
+3. Rewrite $\vec{x_0}$ as a linear combination of the eigenvectors $\vec{v_1}$ and $\vec{v_2}$.
+4. Analyze the long-run behavior of the difference equation $\vec{x_{k+1}} = A\vec{x_k}$ making use of the decomposition of $\vec{x_0}$ you found in part (3) and the eigenvalues you found in part (1) and sending $k\to \infty$.
+
+:::
+
+## Homework
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$$\Huge{\text{Finish Homework 11}}$$ 
+$$\Huge{\text{on MyOpenMath}}$$
+
+
+
+</center>
+
+## Next Time...
+
+<br/>
+<br/>
+<br/>
+
+. . .
+
+<center>
+
+$\Huge{\text{Exam Week}}$
+
+</center>
+
+
