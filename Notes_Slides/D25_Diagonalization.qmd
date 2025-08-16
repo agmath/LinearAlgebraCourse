@@ -1,5 +1,5 @@
 ---
-title: "MAT 350: Finding Eigenvectors and Eigenvalues"
+title: "MAT 350: Diagonalization"
 author: Dr. Gilbert
 format: 
   revealjs:
