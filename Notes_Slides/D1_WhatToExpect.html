@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-08-17">
+  <meta name="dcterms.date" content="2025-08-19">
   <title>MAT 350: Introduction and What to Expect</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -337,7 +337,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">August 17, 2025</p>
+  <p class="date">August 19, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -534,8 +534,12 @@ a:visited {
 <h2>Required Resources</h2>
 <p>First and foremost…everything is free!</p>
 <ul>
-<li class="fragment"><strong>Main Textbook:</strong> We are following <em>Understanding Linear Algebra</em> by David Austin, but myself and Dr.&nbsp;Spaulding have adapted a <a href="https://agmath.github.io/Austin_ULA_Python/ula.html">custom Python version</a></li>
-<li class="fragment"><a href="https://colab.research.google.com/">Python via Google Colab</a> or a local Python installation is recommended but not required</li>
+<li class="fragment"><p><strong>Main Textbook:</strong> We are following <em>Understanding Linear Algebra</em> by David Austin, but myself and Dr.&nbsp;Spaulding have adapted a <a href="https://agmath.github.io/Austin_ULA_Python/ula.html">custom Python version</a></p></li>
+<li class="fragment"><p><a href="https://colab.research.google.com/">Python via Google Colab</a> or a local Python installation is recommended but not required</p></li>
+<li class="fragment"><p><a href="https://www.myopenmath.com/">Online Homework at MyOpenMath</a> is a required component of this course</p>
+<ul>
+<li class="fragment">The CourseID and Enrollment Key are available in the <em>Welcome!</em> announcement on BrightSpace.</li>
+</ul></li>
 </ul>
 </section>
 <section id="grading-scheme" class="slide level2">
@@ -577,7 +581,7 @@ a:visited {
 <li class="fragment"><em>Late Passes</em>: You get three free (no penalty) late passes to open up assignments again until the end of the semester. No additional late passes will be provided though.</li>
 </ul></li>
 <li class="fragment"><p><strong>Row-Reduction Gateway:</strong> Row-reduction is a procedure that we’ll utilize over and over again in linear algebra. This gateway can be taken many times and is an “all or nothing” component of the grading scheme.</p></li>
-<li class="fragment"><p><strong>Exams:</strong> We’ll have two exams during the semester – each will include a <em>group exam</em> (20%) and an <em>individual exam</em> (80%).</p></li>
+<li class="fragment"><p><strong>Exams:</strong> We’ll have two exams during the semester – each will include a <em>group exam</em> (20%) and an <em>individual exam</em> (80%), where the group exam only counts if your group score exceeds your individual score.</p></li>
 <li class="fragment"><p><strong>Final Exam:</strong> The final exam will occur in two parts during the last week of the semester. The first part is required and the second part is optional. The final exam can be used to improve earlier exam grades.</p></li>
 </ul>
 </section>
@@ -597,6 +601,7 @@ a:visited {
 <li class="fragment"><p>Tentative timeline</p>
 <ul>
 <li class="fragment">Links to full <em>notes</em> (in Jupyter/Colab notebook format)</li>
+<li class="fragment">Links to the <em>discussion slide</em> versions of those notes</li>
 <li class="fragment">Assignment reminders</li>
 <li class="fragment">Optional, but recommended, <a href="https://www.3blue1brown.com/">3Blue1Brown</a> high-level overview videos</li>
 </ul></li>
@@ -705,6 +710,93 @@ a:visited {
 <div class="fragment">
 <div class="columns">
 <div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} 2x_1 + 5x_2 &amp;= 13
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</div>
+</section>
+<section id="solving-our-first-system-1" class="slide level2">
+<h2>Solving Our First System</h2>
+<div>
+<p><strong>Example 1:</strong> Solve the <em>linear system</em> <span class="math inline">\(\left\{\begin{array}{rcr} 2x_1 + 5x_2 &amp; = &amp; 13\\
+-2x_1 + 3x_2 &amp; = &amp; 11\end{array}\right.\)</span></p>
+<ol type="1">
+<li>Add the first and second equations together to get a new equation <span class="math inline">\(0x_1 + 8x_2 = 24\)</span>, or more simply <span class="math inline">\(8x_2 = 24\)</span>.</li>
+<li>Solve this new equation for <span class="math inline">\(x_2\)</span> to find that <span class="math inline">\(x_2 = 3\)</span>.</li>
+<li>Plug your newly discovered value of <span class="math inline">\(x_2\)</span> into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.</li>
+</ol>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} 2x_1 + 5x_2 &amp;= 13\\
+\implies 2x_1 + 5\left(3\right) &amp;= 13
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="solving-our-first-system-2" class="slide level2">
+<h2>Solving Our First System</h2>
+<div>
+<p><strong>Example 1:</strong> Solve the <em>linear system</em> <span class="math inline">\(\left\{\begin{array}{rcr} 2x_1 + 5x_2 &amp; = &amp; 13\\
+-2x_1 + 3x_2 &amp; = &amp; 11\end{array}\right.\)</span></p>
+<ol type="1">
+<li>Add the first and second equations together to get a new equation <span class="math inline">\(0x_1 + 8x_2 = 24\)</span>, or more simply <span class="math inline">\(8x_2 = 24\)</span>.</li>
+<li>Solve this new equation for <span class="math inline">\(x_2\)</span> to find that <span class="math inline">\(x_2 = 3\)</span>.</li>
+<li>Plug your newly discovered value of <span class="math inline">\(x_2\)</span> into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.</li>
+</ol>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} 2x_1 + 5x_2 &amp;= 13\\
+\implies 2x_1 + 5\left(3\right) &amp;= 13\\
+\implies 2x_1 + 15 &amp;= 13
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="solving-our-first-system-3" class="slide level2">
+<h2>Solving Our First System</h2>
+<div>
+<p><strong>Example 1:</strong> Solve the <em>linear system</em> <span class="math inline">\(\left\{\begin{array}{rcr} 2x_1 + 5x_2 &amp; = &amp; 13\\
+-2x_1 + 3x_2 &amp; = &amp; 11\end{array}\right.\)</span></p>
+<ol type="1">
+<li>Add the first and second equations together to get a new equation <span class="math inline">\(0x_1 + 8x_2 = 24\)</span>, or more simply <span class="math inline">\(8x_2 = 24\)</span>.</li>
+<li>Solve this new equation for <span class="math inline">\(x_2\)</span> to find that <span class="math inline">\(x_2 = 3\)</span>.</li>
+<li>Plug your newly discovered value of <span class="math inline">\(x_2\)</span> into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.</li>
+</ol>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} 2x_1 + 5x_2 &amp;= 13\\
+\implies 2x_1 + 5\left(3\right) &amp;= 13\\
+\implies 2x_1 + 15 &amp;= 13\\
+\implies 2x_1 &amp;= -2
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="solving-our-first-system-4" class="slide level2">
+<h2>Solving Our First System</h2>
+<div>
+<p><strong>Example 1:</strong> Solve the <em>linear system</em> <span class="math inline">\(\left\{\begin{array}{rcr} 2x_1 + 5x_2 &amp; = &amp; 13\\
+-2x_1 + 3x_2 &amp; = &amp; 11\end{array}\right.\)</span></p>
+<ol type="1">
+<li>Add the first and second equations together to get a new equation <span class="math inline">\(0x_1 + 8x_2 = 24\)</span>, or more simply <span class="math inline">\(8x_2 = 24\)</span>.</li>
+<li>Solve this new equation for <span class="math inline">\(x_2\)</span> to find that <span class="math inline">\(x_2 = 3\)</span>.</li>
+<li>Plug your newly discovered value of <span class="math inline">\(x_2\)</span> into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.</li>
+</ol>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><span class="math display">\[\begin{align} 2x_1 + 5x_2 &amp;= 13\\
 \implies 2x_1 + 5\left(3\right) &amp;= 13\\
 \implies 2x_1 + 15 &amp;= 13\\
@@ -715,7 +807,6 @@ a:visited {
 <ol start="4" type="1">
 <li class="fragment">Identify and describe the solutions we’ve discovered. From the work above, we see that a solution to the system exists and that solution is <span class="math inline">\(\boxed{~\displaystyle{x_1 = -1} \text{ and } \displaystyle{x_2 = 3}~}\)</span>.</li>
 </ol>
-</div>
 </div>
 </div>
 </section>

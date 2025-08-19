@@ -652,6 +652,9 @@ First and foremost...everything is free!
 
   + **Main Textbook:** We are following *Understanding Linear Algebra* by David Austin, but myself and Dr. Spaulding have adapted a [custom Python version](https://agmath.github.io/Austin_ULA_Python/ula.html)
   + [Python via Google Colab](https://colab.research.google.com/) or a local Python installation is recommended but not required
+  + [Online Homework at MyOpenMath](https://www.myopenmath.com/) is a required component of this course
+  
+    + The CourseID and Enrollment Key are available in the *Welcome!* announcement on BrightSpace.
 
 ## Grading Scheme
 
@@ -670,7 +673,7 @@ First and foremost...everything is free!
 
   + *Late Passes*: You get three free (no penalty) late passes to open up assignments again until the end of the semester. No additional late passes will be provided though.
 + **Row-Reduction Gateway:** Row-reduction is a procedure that we'll utilize over and over again in linear algebra. This gateway can be taken many times and is an "all or nothing" component of the grading scheme.
-+ **Exams:** We'll have two exams during the semester -- each will include a *group exam* (20%) and an *individual exam* (80%).
++ **Exams:** We'll have two exams during the semester -- each will include a *group exam* (20%) and an *individual exam* (80%), where the group exam only counts if your group score exceeds your individual score.
 + **Final Exam:** The final exam will occur in two parts during the last week of the semester. The first part is required and the second part is optional. The final exam can be used to improve earlier exam grades.
 
 ## Brightspace
@@ -687,6 +690,7 @@ I've built a [webpage to organize our course content](https://agmath.github.io/L
 + Tentative timeline
   
   + Links to full *notes* (in Jupyter/Colab notebook format)
+  + Links to the *discussion slide* versions of those notes
   + Assignment reminders
   + Optional, but recommended, [3Blue1Brown](https://www.3blue1brown.com/) high-level overview videos
 
@@ -784,6 +788,124 @@ We'll be discussing a lot of material in MAT 350. Here is a very generic road ma
 3. Plug your newly discovered value of $x_2$ into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.
 
 . . .
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} 2x_1 + 5x_2 &= 13
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Solving Our First System
+
+:::{.nonincremental}
+
+**Example 1:** Solve the *linear system* $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$
+
+1. Add the first and second equations together to get a new equation $0x_1 + 8x_2 = 24$, or more simply $8x_2 = 24$.
+2. Solve this new equation for $x_2$ to find that $x_2 = 3$.
+3. Plug your newly discovered value of $x_2$ into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} 2x_1 + 5x_2 &= 13\\
+\implies 2x_1 + 5\left(3\right) &= 13
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Solving Our First System
+
+:::{.nonincremental}
+
+**Example 1:** Solve the *linear system* $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$
+
+1. Add the first and second equations together to get a new equation $0x_1 + 8x_2 = 24$, or more simply $8x_2 = 24$.
+2. Solve this new equation for $x_2$ to find that $x_2 = 3$.
+3. Plug your newly discovered value of $x_2$ into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} 2x_1 + 5x_2 &= 13\\
+\implies 2x_1 + 5\left(3\right) &= 13\\
+\implies 2x_1 + 15 &= 13
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Solving Our First System
+
+:::{.nonincremental}
+
+**Example 1:** Solve the *linear system* $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$
+
+1. Add the first and second equations together to get a new equation $0x_1 + 8x_2 = 24$, or more simply $8x_2 = 24$.
+2. Solve this new equation for $x_2$ to find that $x_2 = 3$.
+3. Plug your newly discovered value of $x_2$ into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.
+
+:::
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} 2x_1 + 5x_2 &= 13\\
+\implies 2x_1 + 5\left(3\right) &= 13\\
+\implies 2x_1 + 15 &= 13\\
+\implies 2x_1 &= -2
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+:::
+
+::::
+
+## Solving Our First System
+
+:::{.nonincremental}
+
+**Example 1:** Solve the *linear system* $\left\{\begin{array}{rcr} 2x_1 + 5x_2 & = & 13\\
+-2x_1 + 3x_2 & = & 11\end{array}\right.$
+
+1. Add the first and second equations together to get a new equation $0x_1 + 8x_2 = 24$, or more simply $8x_2 = 24$.
+2. Solve this new equation for $x_2$ to find that $x_2 = 3$.
+3. Plug your newly discovered value of $x_2$ into either equation to eliminate one of the unknowns, resulting in a single equation with one unknown that can be solved for.
+
+:::
 
 ::::{.columns}
 
