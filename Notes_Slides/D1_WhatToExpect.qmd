@@ -756,6 +756,35 @@ We'll be discussing a lot of material in MAT 350. Here is a very generic road ma
 
 ::::
 
+## Advice for Success
+
+. . .
+
+<div style="font-size: 16pt">
+
+Linear Algebra is a much different type of math class than Calculus. Please consider the following pieces of advice.
+
++ We'll be doing a lot of arithmetic (addition, subtraction, multiplication, and division) -- it is easy to make mistakes, so keeping really organized work is key.
+
+    + Do "future you" some favors...
+        
+        + Don't skip steps
+        + Keep very organized work -- don't try to keep everything condensed and tiny
+        + Document what is happening at each step
+
++ Linear algebra is likely the first math class you are encountering where definitions are extremely important.
+
+    + Study and practice with definitions
+    + If you don't remember what something means, ask a question
+
++ Keep yourself grounded -- while it may seem like we are covering lots of material, procedures and ideas are very often recycled and repurposed.
+
++ As with any math class -- if you're having difficulty with concepts or procedures, come visit office hours or the walk-in tutoring center. 
+
+    + Misunderstandings tend to snowball and compound, causing you to fall further behind if they are left unaddressed.
+
+</div>
+
 ## Conventions and Definitions Before We Continue
 
 1. **Convention for Writing linear Equations:** We'll write all of our linear equations to include all variable terms on the left side of the equation and pushing the constant term to the right. That is, we'll write $x_1 + 8x_2 = -7$ rather than $x_1 = -8x_2 -7$
