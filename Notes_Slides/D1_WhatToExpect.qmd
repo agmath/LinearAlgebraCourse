@@ -650,7 +650,7 @@ $$\text{...and more...}$$
 
 First and foremost...everything is free!
 
-  + **Main Textbook:** We are following *Understanding Linear Algebra* by David Austin, but myself and Dr. Spaulding have adapted a [custom Python version](https://agmath.github.io/Austin_ULA_Python/ula.html)
+  + **Main Textbook:** We are following *Understanding Linear Algebra* by David Austin, but myself and Professor Spaulding have adapted a [custom Python version](https://agmath.github.io/Austin_ULA_Python/ula.html)
   + [Python via Google Colab](https://colab.research.google.com/) or a local Python installation is recommended but not required
   + [Online Homework at MyOpenMath](https://www.myopenmath.com/) is a required component of this course
   
