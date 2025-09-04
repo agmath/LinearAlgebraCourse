@@ -768,8 +768,8 @@ Linear Algebra is a much different type of math class than Calculus. Please cons
 
     + Do "future you" some favors...
         
-        + Don't skip steps
         + Keep very organized work -- don't try to keep everything condensed and tiny
+        + Don't skip steps
         + Document what is happening at each step
 
 + Linear algebra is likely the first math class you are encountering where definitions are extremely important.
