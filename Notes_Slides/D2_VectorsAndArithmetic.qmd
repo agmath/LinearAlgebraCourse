@@ -531,7 +531,7 @@ $$\vec{u_w} = \frac{\vec{w}}{||\vec{w}||}$$
 
 ## Special Vectors
 
-With the vector operations defined above, we can define a few special classes of vector that we'll encounter later in our course (but that you may have already encountered elsewhere).
+With the vector operations defined so far, we can define a few special classes of vector that we'll encounter later in our course (but that you may have already encountered elsewhere).
 
 . . .
 
