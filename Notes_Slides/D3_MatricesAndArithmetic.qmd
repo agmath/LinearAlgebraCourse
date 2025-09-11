@@ -146,7 +146,7 @@ $$A^T = \begin{bmatrix} 1 & 4\\ 2 & 5\\ 3 & 6\end{bmatrix}$$
 
 Consider the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
 a_{21} & a_{22} & \cdots & a_{2n}\\
-\vdots &  &  \ddots & \vdots\\
+\vdots & \vdots &  \ddots & \vdots\\
 a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ and a scalar $c$. 
 
 </div>
@@ -177,6 +177,62 @@ The product $cA$ is obtained by multiplying every element of $A$ by the scalar $
 
 Consider the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
 a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots &  \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ and a scalar $c$. 
+
+</div>
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<div style="font-size:16pt">
+
+The product $cA$ is obtained by multiplying every element of $A$ by the scalar $c$. That is,
+
+</div>
+
+:::
+
+:::{.column width=50%}
+
+<div style="font-size:16pt">
+
+$$cA = \begin{bmatrix} ca_{11} & ca_{12} & \cdots & ca_{1n}\\
+ca_{21} & ca_{22} & \cdots & ca_{2n}\\
+\vdots & \vdots &  \ddots & \vdots\\
+ca_{m1} & ca_{m2} & \cdots & ca_{mn}\end{bmatrix}$$
+
+</div>
+
+:::
+
+::::
+
+. . .
+
+<div style="font-size:16pt">
+
+**Example:** Consider the matrix $A = \begin{bmatrix} 5 & -2 & 0 & 11 & 7\\
+-3 & 1 & 1 & 4 & 0\\
+0 & 0 & 2 & 1 & -5\end{bmatrix}$. Compute the product $-2A$.
+
+</div>
+
+. . . 
+
+<div style="font-size:16pt">
+
+$$\color{red}{-2}A = \begin{bmatrix} \color{red}{-2}\left(5\right) & \color{red}{-2}\left(-2\right) & \color{red}{-2}\left(0\right) & \color{red}{-2}\left(11\right) & \color{red}{-2}\left(7\right)\\ \color{red}{-2}\left(-3\right) & \color{red}{-2}\left(1\right) & \color{red}{-2}\left(1\right) & \color{red}{-2}\left(4\right) & \color{red}{-2}\left(0\right)\\ \color{red}{-2}\left(0\right) & \color{red}{-2}\left(0\right) & \color{red}{-2}\left(2\right) & \color{red}{-2}\left(1\right) & \color{red}{-2}\left(-5\right)\end{bmatrix}$$
+
+</div>
+
+## Scalar Multiplication
+
+<div style="font-size:16pt">
+
+Consider the matrix $A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
 \vdots &  &  \ddots & \vdots\\
 a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}$ and a scalar $c$. 
 
@@ -200,7 +256,7 @@ The product $cA$ is obtained by multiplying every element of $A$ by the scalar $
 
 $$cA = \begin{bmatrix} ca_{11} & ca_{12} & \cdots & ca_{1n}\\
 ca_{21} & ca_{22} & \cdots & ca_{2n}\\
-\vdots &  &  \ddots & \vdots\\
+\vdots & \vdots &  \ddots & \vdots\\
 ca_{m1} & ca_{m2} & \cdots & ca_{mn}\end{bmatrix}$$
 
 </div>
@@ -208,8 +264,6 @@ ca_{m1} & ca_{m2} & \cdots & ca_{mn}\end{bmatrix}$$
 :::
 
 ::::
-
-. . .
 
 <div style="font-size:16pt">
 
@@ -219,11 +273,9 @@ ca_{m1} & ca_{m2} & \cdots & ca_{mn}\end{bmatrix}$$
 
 </div>
 
-. . . 
-
 <div style="font-size:16pt">
 
-$$-2A = \begin{bmatrix} -2\left(5\right) & -2\left(-2\right) & -2\left(0\right) & -2\left(11\right) & -2\left(7\right)\\ -2\left(-3\right) & -2\left(1\right) & -2\left(1\right) & -2\left(4\right) & -2\left(0\right)\\ -2\left(0\right) & -2\left(0\right) & -2\left(2\right) & -2\left(1\right) & -2\left(-5\right)\end{bmatrix} = \begin{bmatrix} -10 & 4 & 0 & -22 & -14\\ 6 & -2 & -2 & -8 & 0\\ 0 & 0 & -4 & -2 & 10\end{bmatrix}$$
+$$-2A = \begin{bmatrix} -10 & 4 & 0 & -22 & -14\\ 6 & -2 & -2 & -8 & 0\\ 0 & 0 & -4 & -2 & 10\end{bmatrix}$$
 
 </div>
 
@@ -241,10 +293,10 @@ Addition and subtraction are performed element-wise. That is, if
 
 $$A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\
 a_{21} & a_{22} & \cdots & a_{2n}\\
-\vdots &  &  \ddots & \vdots\\
+\vdots & \vdots &  \ddots & \vdots\\
 a_{m1} & a_{m2} & \cdots & a_{mn}\end{bmatrix}~~~~~\text{and}~~~~~B = \begin{bmatrix} b_{11} & b_{12} & \cdots & b_{1n}\\
 b_{21} & b_{22} & \cdots & b_{2n}\\
-\vdots &  &  \ddots & \vdots\\
+\vdots & \vdots &  \ddots & \vdots\\
 b_{m1} & b_{m2} & \cdots & b_{mn}\end{bmatrix}$$
 
 . . .
@@ -253,14 +305,14 @@ then
 
 $$A + B = \begin{bmatrix} a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n}\\
 a_{21} + b_{21} & a_{22} + B_{22} & \cdots & a_{2n} + b_{2n}\\
-\vdots &  &  \ddots & \vdots\\
+\vdots & \vdots &  \ddots & \vdots\\
 a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}\end{bmatrix}$$
 
 ## Matrix Addition and Subtraction
 
 $$A + B = \begin{bmatrix} a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n}\\
 a_{21} + b_{21} & a_{22} + B_{22} & \cdots & a_{2n} + b_{2n}\\
-\vdots &  &  \ddots & \vdots\\
+\vdots & \vdots &  \ddots & \vdots\\
 a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}\end{bmatrix}$$
 
 . . .
@@ -386,7 +438,7 @@ $$AB = \begin{bmatrix} -5 & 4 \\ 6 & 10 \end{bmatrix}$$
 
 . . .
 
-We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors is also possible (and often very useful!).
+We can treat vectors as $n\times 1$ matrices, so multiplying vecrors by matrices is also possible (and often very useful!).
 
 . . .
 
@@ -394,7 +446,7 @@ We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors
 
 ## Matrix-Vector Multiplication
 
-We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors is also possible (and often very useful!).
+We can treat vectors as $n\times 1$ matrices, so multiplying vectors by matrices is also possible (and often very useful!).
 
 **Example:** Compute the product $A\vec{v}$ where $A = \begin{bmatrix} \color{red}{1} & \color{red}{0} & \color{red}{-1}\\ 0 & 2 & 3\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} \color{red}{2}\\ \color{red}{-1}\\ \color{red}{3}\end{bmatrix}$
 
@@ -404,7 +456,7 @@ $$A\vec{v} = \begin{bmatrix} \color{red}{1\left(2\right) + 0\left(-1\right) + \l
 
 ## Matrix-Vector Multiplication
 
-We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors is also possible (and often very useful!).
+We can treat vectors as $n\times 1$ matrices, so multiplying vectors by matrices is also possible (and often very useful!).
 
 **Example:** Compute the product $A\vec{v}$ where $A = \begin{bmatrix} 1 & 0 & -1\\ \color{red}{0} & \color{red}{2} & \color{red}{3}\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} \color{red}{2}\\ \color{red}{-1}\\ \color{red}{3}\end{bmatrix}$
 
@@ -412,7 +464,7 @@ $$A\vec{v} = \begin{bmatrix} -1\\ ~~~~~~~ \end{bmatrix}$$
 
 ## Matrix-Vector Multiplication
 
-We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors is also possible (and often very useful!).
+We can treat vectors as $n\times 1$ matrices, so multiplying vectors by matrices is also possible (and often very useful!).
 
 **Example:** Compute the product $A\vec{v}$ where $A = \begin{bmatrix} 1 & 0 & -1\\ \color{red}{0} & \color{red}{2} & \color{red}{3}\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} \color{red}{2}\\ \color{red}{-1}\\ \color{red}{3}\end{bmatrix}$
 
@@ -420,7 +472,7 @@ $$A\vec{v} = \begin{bmatrix} -1\\ \color{red}{0\left(2\right) + 2\left(-1\right)
 
 ## Matrix-Vector Multiplication
 
-We can treat vectors as $n\times 1$ matrices, so multiplying matrices by vectors is also possible (and often very useful!).
+We can treat vectors as $n\times 1$ matrices, so multiplying vectors by matrices is also possible (and often very useful!).
 
 **Example:** Compute the product $A\vec{v}$ where $A = \begin{bmatrix} 1 & 0 & -1\\ 0 & 2 & 3\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 2\\ -1\\ 3\end{bmatrix}$
 
@@ -437,7 +489,7 @@ Notice that the matrix $A$ transformed the vector $\vec{v}$ from $\mathbb{R}^3$ 
 
 . . .
 
-We saw vector products in the last notebook but, with our knowledge of matrix multiplication, we can define the *dot product* (or *inner product*) and the *outer product* just as special cases of matrix multiplication.
+We saw vector products in the last discussion but, with our knowledge of matrix multiplication, we can define the *dot product* (or *inner product*) and the *outer product* just as special cases of matrix multiplication.
 
 . . .
 
@@ -1051,7 +1103,7 @@ Consider the product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2
 
 + The result is a sum of scalar multiples of the columns of $A$ 
 
-    + This is a *linear combination* of $A$'s columns
+    + This is what we'll eventually call a *linear combination* of $A$'s columns
     + Linear combinations play a very large role in linear algebra
     
 :::
@@ -1090,14 +1142,61 @@ There are several special matrices that we'll encounter throughout linear algebr
 
 The form of the $n\times n$ **identity matrix** is
 
+<div style="font-size:18pt">
+
 $$I_n = \begin{bmatrix} 1 & 0 & \cdots & 0\\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & 1\end{bmatrix}$$
+
+</div>
 
 . . .
 
 **Example:** Consider the matrix $A = \begin{bmatrix} 1 & 0 & -2\\ 0 & 3 & 8\\ 3 & 0 & -1\end{bmatrix}$. Compute the following products.
 
-+ $I_nA$
-+ $AI_n$
+::::{.columns}
+
+:::{.column width=20%}
+
++ $I_3A$
++ $AI_3$
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+The form of the $n\times n$ **identity matrix** is
+
+<div style="font-size:18pt">
+
+$$I_n = \begin{bmatrix} 1 & 0 & \cdots & 0\\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & 1\end{bmatrix}$$
+
+</div>
+
+**Example:** Consider the matrix $A = \begin{bmatrix} 1 & 0 & -2\\ 0 & 3 & 8\\ 3 & 0 & -1\end{bmatrix}$. Compute the following products.
+
+::::{.columns}
+
+:::{.column width=20%}
+
+:::{.nonincremental}
+
++ $I_3A$
++ $AI_3$
+
+:::
+
+:::
+
+:::{.column width=80%}
+
+$$I_3A = \begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1\end{bmatrix}\begin{bmatrix} 1 & 0 & -2\\ 0 & 3 & 8\\ 3 & 0  & -1\end{bmatrix} = \begin{bmatrix} 1 & 0 & 2\\ 0 & 3 & 8\\ 3 & 0 & -1\end{bmatrix}$$
+
+:::
+
+::::
 
 ## Special Matrices
 
@@ -1110,19 +1209,399 @@ There are several special matrices that we'll encounter throughout linear algebr
 
 **Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
 
+. . .
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
 ## Special Matrices
 
 There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
 
 **Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
 
-. . .
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+$$AB = \begin{bmatrix}7 & -3\\ -2 & 1\end{bmatrix}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$$
+
+:::
+
+:::{.column width=50%}
+
+$$BA = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\begin{bmatrix}7 & -3\\ -2 & 1\end{bmatrix}$$
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
 
 **Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
 
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix}\color{red}{7} & \color{red}{-3}\\ -2 & 1\end{bmatrix}\begin{bmatrix} \color{red}{1} & 3\\ \color{red}{2} & 7\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} \color{red}{1} & \color{red}{3}\\ 2 & 7\end{bmatrix}\begin{bmatrix}\color{red}{7} & -3\\ \color{red}{-2} & 1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix}\color{red}{7} & \color{red}{-3}\\ -2 & 1\end{bmatrix}\begin{bmatrix} \color{red}{1} & 3\\ \color{red}{2} & 7\end{bmatrix}\\ 
+&= \begin{bmatrix} \color{red}{7\left(1\right) + \left(-3\right)\left(2\right)} & ~~~~~~~~~~~~\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} \color{red}{1} & \color{red}{3}\\ 2 & 7\end{bmatrix}\begin{bmatrix}\color{red}{7} & -3\\ \color{red}{-2} & 1\end{bmatrix}\\
+&= \begin{bmatrix} \color{red}{1\left(7\right) + 3\left(-2\right)} & ~~~~~~~~~~~~~~~\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix}\color{red}{7} & \color{red}{-3}\\ -2 & 1\end{bmatrix}\begin{bmatrix} 1 & \color{red}{3}\\ 2 & \color{red}{7}\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & ~~~~~~~~~~~~\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} \color{red}{1} & \color{red}{3}\\ 2 & 7\end{bmatrix}\begin{bmatrix} 7 & \color{red}{-3}\\ -2 & \color{red}{1}\end{bmatrix}\\
+&= \begin{bmatrix} 1 & ~~~~~~~~~~~~~~~\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix}\color{red}{7} & \color{red}{-3}\\ -2 & 1\end{bmatrix}\begin{bmatrix} 1 & \color{red}{3}\\ 2 & \color{red}{7}\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & \color{red}{7\left(3\right) + \left(-3\right)\left(7\right)}\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} \color{red}{1} & \color{red}{3}\\ 2 & 7\end{bmatrix}\begin{bmatrix} 7 & \color{red}{-3}\\ -2 & \color{red}{1}\end{bmatrix}\\
+&= \begin{bmatrix} 1 & \color{red}{1\left(-3\right) + 3\left(1\right)}\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix} 7 & -3\\ \color{red}{-2} & \color{red}{1}\end{bmatrix}\begin{bmatrix} \color{red}{1} & 3\\ \color{red}{2} & 7\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & 0\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} 1 & 3\\ \color{red}{2} & \color{red}{7}\end{bmatrix}\begin{bmatrix} \color{red}{7} & -3\\ \color{red}{-2} & 1\end{bmatrix}\\
+&= \begin{bmatrix} 1 & 0\\
+ & \end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix} 7 & -3\\ \color{red}{-2} & \color{red}{1}\end{bmatrix}\begin{bmatrix} \color{red}{1} & 3\\ \color{red}{2} & 7\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & 0\\
+\color{red}{-2\left(1\right) + 1\left(2\right)} & \end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} 1 & 3\\ \color{red}{2} & \color{red}{7}\end{bmatrix}\begin{bmatrix} \color{red}{7} & -3\\ \color{red}{-2} & 1\end{bmatrix}\\
+&= \begin{bmatrix} 1 & 0\\
+\color{red}{2\left(7\right) + 7\left(-2\right)} & \end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix} 7 & -3\\ \color{red}{-2} & \color{red}{1}\end{bmatrix}\begin{bmatrix} 1 & \color{red}{3}\\ 2 & \color{red}{7}\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & 0\\
+0 & \end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} 1 & 3\\ \color{red}{2} & \color{red}{7}\end{bmatrix}\begin{bmatrix} 7 & \color{red}{-3}\\ -2 & \color{red}{1}\end{bmatrix}\\
+&= \begin{bmatrix} 1 & 0\\
+0 & \end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix} 7 & -3\\ \color{red}{-2} & \color{red}{1}\end{bmatrix}\begin{bmatrix} 1 & \color{red}{3}\\ 2 & \color{red}{7}\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & 0\\
+0 & \color{red}{-2\left(3\right) + 1\left(7\right)}\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} 1 & 3\\ \color{red}{2} & \color{red}{7}\end{bmatrix}\begin{bmatrix} 7 & \color{red}{-3}\\ -2 & \color{red}{1}\end{bmatrix}\\
+&= \begin{bmatrix} 1 & 0\\
+0 & \color{red}{2\left(-3\right) + 7\left(1\right)}\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & 0\\
+0 & 1\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}\\
+&= \begin{bmatrix} 1 & 0\\
+0 & 1\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+There are several special matrices that we'll encounter throughout linear algebra. We'll introduce two of those now.
+
+**Inverse Matrices:** For an $n\times n$ matrix $A$, there *may* exist an $n\times n$ matrix $B$ such that $AB = BA = I_n$. In this case, we call $B$ the *inverse* of $A$ and write $B = A^{-1}$.
+
+**Example:** Show that the matrix $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$ by computing $AB$ and $BA$.
+
+::::{.columns}
+
+:::{.column width=50%}
+
+\begin{align} AB &= \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\\ 
+&= \begin{bmatrix} 1 & 0\\
+0 & 1\end{bmatrix} ~~~~\checkmark\end{align}
+
+:::
+
+:::{.column width=50%}
+
+\begin{align} BA &= \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}\\
+&= \begin{bmatrix} 1 & 0\\
+0 & 1\end{bmatrix} ~~~~\checkmark
+\end{align}
+
+:::
+
+::::
+
+## Special Matrices
+
+<div style="font-size:18pt">
+
+**Example:** Knowing that $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$, use multiplication by $B$ to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+
+</div>
+
 . . .
 
-**Example:** Use the matrix $B$ above to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+<div style="font-size:18pt">
+
+\begin{align} \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \begin{bmatrix} 5\\ -8\end{bmatrix}
+\end{align}
+
+</div>
+
+## Special Matrices
+
+<div style="font-size:18pt">
+
+**Example:** Knowing that $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$, use multiplication by $B$ to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+
+\begin{align} \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+ \implies \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}
+\end{align}
+
+</div>
+
+## Special Matrices
+
+<div style="font-size:18pt">
+
+**Example:** Knowing that $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$, use multiplication by $B$ to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+
+\begin{align} \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+ \implies \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{I}\vec{x} &= \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\begin{bmatrix} 5\\ -8\end{bmatrix}
+\end{align}
+
+</div>
+
+## Special Matrices
+
+<div style="font-size:18pt">
+
+**Example:** Knowing that $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$, use multiplication by $B$ to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+
+\begin{align} \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+ \implies \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{I}\vec{x} &= \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \vec{x} &= \begin{bmatrix} 1\left(5\right) + 3\left(-8\right)\\ 2\left(5\right) + 7\left(-8\right)\end{bmatrix}
+\end{align}
+
+</div>
+
+## Special Matrices
+
+<div style="font-size:18pt">
+
+**Example:** Knowing that $B = \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}$ is the inverse of the matrix $A = \begin{bmatrix} 7 & -3\\ -2 & 1\end{bmatrix}$, use multiplication by $B$ to solve the matrix equation $\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}$
+
+\begin{align} \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+ \implies \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\vec{x} &= \color{red}{\begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{I}\vec{x} &= \begin{bmatrix} 1 & 3\\ 2 & 7\end{bmatrix}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \vec{x} &= \begin{bmatrix} 1\left(5\right) + 3\left(-8\right)\\ 2\left(5\right) + 7\left(-8\right)\end{bmatrix}\\
+\implies \vec{x} &= \begin{bmatrix} -19\\ -46\end{bmatrix}
+\end{align}
+
+</div>
 
 ## Summary
 

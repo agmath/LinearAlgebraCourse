@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-09-10">
+  <meta name="dcterms.date" content="2025-09-11">
   <title>MAT 350: Matrices, Matrix Arithmetic, and Operations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -337,7 +337,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">September 10, 2025</p>
+  <p class="date">September 11, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -449,7 +449,7 @@ a:visited {
 <div style="font-size:16pt">
 <p>Consider the matrix <span class="math inline">\(A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> and a scalar <span class="math inline">\(c\)</span>.</p>
 </div>
 </div>
@@ -470,7 +470,7 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> and a scalar
 <div style="font-size:16pt">
 <p>Consider the matrix <span class="math inline">\(A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> and a scalar <span class="math inline">\(c\)</span>.</p>
 </div>
 <div class="columns">
@@ -482,7 +482,7 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> and a scalar
 <div style="font-size:16pt">
 <p><span class="math display">\[cA = \begin{bmatrix} ca_{11} &amp; ca_{12} &amp; \cdots &amp; ca_{1n}\\
 ca_{21} &amp; ca_{22} &amp; \cdots &amp; ca_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 ca_{m1} &amp; ca_{m2} &amp; \cdots &amp; ca_{mn}\end{bmatrix}\]</span></p>
 </div>
 </div>
@@ -496,8 +496,39 @@ ca_{m1} &amp; ca_{m2} &amp; \cdots &amp; ca_{mn}\end{bmatrix}\]</span></p>
 </div>
 <div class="fragment">
 <div style="font-size:16pt">
-<p><span class="math display">\[-2A = \begin{bmatrix} -2\left(5\right) &amp; -2\left(-2\right) &amp; -2\left(0\right) &amp; -2\left(11\right) &amp; -2\left(7\right)\\ -2\left(-3\right) &amp; -2\left(1\right) &amp; -2\left(1\right) &amp; -2\left(4\right) &amp; -2\left(0\right)\\ -2\left(0\right) &amp; -2\left(0\right) &amp; -2\left(2\right) &amp; -2\left(1\right) &amp; -2\left(-5\right)\end{bmatrix} = \begin{bmatrix} -10 &amp; 4 &amp; 0 &amp; -22 &amp; -14\\ 6 &amp; -2 &amp; -2 &amp; -8 &amp; 0\\ 0 &amp; 0 &amp; -4 &amp; -2 &amp; 10\end{bmatrix}\]</span></p>
+<p><span class="math display">\[\color{red}{-2}A = \begin{bmatrix} \color{red}{-2}\left(5\right) &amp; \color{red}{-2}\left(-2\right) &amp; \color{red}{-2}\left(0\right) &amp; \color{red}{-2}\left(11\right) &amp; \color{red}{-2}\left(7\right)\\ \color{red}{-2}\left(-3\right) &amp; \color{red}{-2}\left(1\right) &amp; \color{red}{-2}\left(1\right) &amp; \color{red}{-2}\left(4\right) &amp; \color{red}{-2}\left(0\right)\\ \color{red}{-2}\left(0\right) &amp; \color{red}{-2}\left(0\right) &amp; \color{red}{-2}\left(2\right) &amp; \color{red}{-2}\left(1\right) &amp; \color{red}{-2}\left(-5\right)\end{bmatrix}\]</span></p>
 </div>
+</div>
+</section>
+<section id="scalar-multiplication-2" class="slide level2">
+<h2>Scalar Multiplication</h2>
+<div style="font-size:16pt">
+<p>Consider the matrix <span class="math inline">\(A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> and a scalar <span class="math inline">\(c\)</span>.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="font-size:16pt">
+<p>The product <span class="math inline">\(cA\)</span> is obtained by multiplying every element of <span class="math inline">\(A\)</span> by the scalar <span class="math inline">\(c\)</span>. That is,</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div style="font-size:16pt">
+<p><span class="math display">\[cA = \begin{bmatrix} ca_{11} &amp; ca_{12} &amp; \cdots &amp; ca_{1n}\\
+ca_{21} &amp; ca_{22} &amp; \cdots &amp; ca_{2n}\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
+ca_{m1} &amp; ca_{m2} &amp; \cdots &amp; ca_{mn}\end{bmatrix}\]</span></p>
+</div>
+</div>
+</div>
+<div style="font-size:16pt">
+<p><strong>Example:</strong> Consider the matrix <span class="math inline">\(A = \begin{bmatrix} 5 &amp; -2 &amp; 0 &amp; 11 &amp; 7\\
+-3 &amp; 1 &amp; 1 &amp; 4 &amp; 0\\
+0 &amp; 0 &amp; 2 &amp; 1 &amp; -5\end{bmatrix}\)</span>. Compute the product <span class="math inline">\(-2A\)</span>.</p>
+</div>
+<div style="font-size:16pt">
+<p><span class="math display">\[-2A = \begin{bmatrix} -10 &amp; 4 &amp; 0 &amp; -22 &amp; -14\\ 6 &amp; -2 &amp; -2 &amp; -8 &amp; 0\\ 0 &amp; 0 &amp; -4 &amp; -2 &amp; 10\end{bmatrix}\]</span></p>
 </div>
 </section>
 <section id="matrix-addition-and-subtraction" class="slide level2">
@@ -511,17 +542,17 @@ ca_{m1} &amp; ca_{m2} &amp; \cdots &amp; ca_{mn}\end{bmatrix}\]</span></p>
 <div class="fragment">
 <p><span class="math display">\[A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}~~~~~\text{and}~~~~~B = \begin{bmatrix} b_{11} &amp; b_{12} &amp; \cdots &amp; b_{1n}\\
 b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 b_{m1} &amp; b_{m2} &amp; \cdots &amp; b_{mn}\end{bmatrix}\]</span></p>
 </div>
 <div class="fragment">
 <p>then</p>
 <p><span class="math display">\[A + B = \begin{bmatrix} a_{11} + b_{11} &amp; a_{12} + b_{12} &amp; \cdots &amp; a_{1n} + b_{1n}\\
 a_{21} + b_{21} &amp; a_{22} + B_{22} &amp; \cdots &amp; a_{2n} + b_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bmatrix}\]</span></p>
 </div>
 </section>
@@ -529,7 +560,7 @@ a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bma
 <h2>Matrix Addition and Subtraction</h2>
 <p><span class="math display">\[A + B = \begin{bmatrix} a_{11} + b_{11} &amp; a_{12} + b_{12} &amp; \cdots &amp; a_{1n} + b_{1n}\\
 a_{21} + b_{21} &amp; a_{22} + B_{22} &amp; \cdots &amp; a_{2n} + b_{2n}\\
-\vdots &amp;  &amp;  \ddots &amp; \vdots\\
+\vdots &amp; \vdots &amp;  \ddots &amp; \vdots\\
 a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bmatrix}\]</span></p>
 <div class="fragment">
 <p><strong>Example:</strong> Let <span class="math inline">\(A = \begin{bmatrix}
@@ -635,7 +666,7 @@ a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bma
 <section id="matrix-vector-multiplication" class="slide level2">
 <h2>Matrix-Vector Multiplication</h2>
 <div class="fragment">
-<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying matrices by vectors is also possible (and often very useful!).</p>
+<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying vecrors by matrices is also possible (and often very useful!).</p>
 </div>
 <div class="fragment">
 <p><strong>Example:</strong> Compute the product <span class="math inline">\(A\vec{v}\)</span> where <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0 &amp; -1\\ 0 &amp; 2 &amp; 3\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} 2\\ -1\\ 3\end{bmatrix}\)</span></p>
@@ -643,7 +674,7 @@ a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bma
 </section>
 <section id="matrix-vector-multiplication-1" class="slide level2">
 <h2>Matrix-Vector Multiplication</h2>
-<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying matrices by vectors is also possible (and often very useful!).</p>
+<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying vectors by matrices is also possible (and often very useful!).</p>
 <p><strong>Example:</strong> Compute the product <span class="math inline">\(A\vec{v}\)</span> where <span class="math inline">\(A = \begin{bmatrix} \color{red}{1} &amp; \color{red}{0} &amp; \color{red}{-1}\\ 0 &amp; 2 &amp; 3\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} \color{red}{2}\\ \color{red}{-1}\\ \color{red}{3}\end{bmatrix}\)</span></p>
 <div class="fragment">
 <p><span class="math display">\[A\vec{v} = \begin{bmatrix} \color{red}{1\left(2\right) + 0\left(-1\right) + \left(-1\right)\left(3\right)}\\ ~~~~~~~ \end{bmatrix}\]</span></p>
@@ -651,19 +682,19 @@ a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bma
 </section>
 <section id="matrix-vector-multiplication-2" class="slide level2">
 <h2>Matrix-Vector Multiplication</h2>
-<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying matrices by vectors is also possible (and often very useful!).</p>
+<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying vectors by matrices is also possible (and often very useful!).</p>
 <p><strong>Example:</strong> Compute the product <span class="math inline">\(A\vec{v}\)</span> where <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0 &amp; -1\\ \color{red}{0} &amp; \color{red}{2} &amp; \color{red}{3}\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} \color{red}{2}\\ \color{red}{-1}\\ \color{red}{3}\end{bmatrix}\)</span></p>
 <p><span class="math display">\[A\vec{v} = \begin{bmatrix} -1\\ ~~~~~~~ \end{bmatrix}\]</span></p>
 </section>
 <section id="matrix-vector-multiplication-3" class="slide level2">
 <h2>Matrix-Vector Multiplication</h2>
-<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying matrices by vectors is also possible (and often very useful!).</p>
+<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying vectors by matrices is also possible (and often very useful!).</p>
 <p><strong>Example:</strong> Compute the product <span class="math inline">\(A\vec{v}\)</span> where <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0 &amp; -1\\ \color{red}{0} &amp; \color{red}{2} &amp; \color{red}{3}\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} \color{red}{2}\\ \color{red}{-1}\\ \color{red}{3}\end{bmatrix}\)</span></p>
 <p><span class="math display">\[A\vec{v} = \begin{bmatrix} -1\\ \color{red}{0\left(2\right) + 2\left(-1\right) + 3\left(3\right)} \end{bmatrix}\]</span></p>
 </section>
 <section id="matrix-vector-multiplication-4" class="slide level2">
 <h2>Matrix-Vector Multiplication</h2>
-<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying matrices by vectors is also possible (and often very useful!).</p>
+<p>We can treat vectors as <span class="math inline">\(n\times 1\)</span> matrices, so multiplying vectors by matrices is also possible (and often very useful!).</p>
 <p><strong>Example:</strong> Compute the product <span class="math inline">\(A\vec{v}\)</span> where <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0 &amp; -1\\ 0 &amp; 2 &amp; 3\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} 2\\ -1\\ 3\end{bmatrix}\)</span></p>
 <p><span class="math display">\[A\vec{v} = \begin{bmatrix} -1\\ 7 \end{bmatrix}\]</span></p>
 <div class="fragment">
@@ -674,7 +705,7 @@ a_{m1} + b_{m1} &amp; a_{m2} + b_{m2} &amp; \cdots &amp; a_{mn} + b_{mn}\end{bma
 <section id="vector-products-revisited" class="slide level2">
 <h2>Vector Products Revisited</h2>
 <div class="fragment">
-<p>We saw vector products in the last notebook but, with our knowledge of matrix multiplication, we can define the <em>dot product</em> (or <em>inner product</em>) and the <em>outer product</em> just as special cases of matrix multiplication.</p>
+<p>We saw vector products in the last discussion but, with our knowledge of matrix multiplication, we can define the <em>dot product</em> (or <em>inner product</em>) and the <em>outer product</em> just as special cases of matrix multiplication.</p>
 </div>
 <div class="fragment">
 <p>Consider two <span class="math inline">\(n\times 1\)</span> vectors <span class="math inline">\(\vec{u} = \begin{bmatrix} u_1\\ u_2\\ \vdots\\ u_n\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} v_1\\ v_2\\ \vdots\\ v_n\end{bmatrix}\)</span>.</p>
@@ -1094,7 +1125,7 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> as <span cla
 <ul>
 <li class="fragment"><p>The result is a sum of scalar multiples of the columns of <span class="math inline">\(A\)</span></p>
 <ul>
-<li class="fragment">This is a <em>linear combination</em> of <span class="math inline">\(A\)</span>’s columns</li>
+<li class="fragment">This is what we’ll eventually call a <em>linear combination</em> of <span class="math inline">\(A\)</span>’s columns</li>
 <li class="fragment">Linear combinations play a very large role in linear algebra</li>
 </ul></li>
 </ul>
@@ -1129,16 +1160,43 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> as <span cla
 <h2>Special Matrices</h2>
 <p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
 <p>The form of the <span class="math inline">\(n\times n\)</span> <strong>identity matrix</strong> is</p>
+<div style="font-size:18pt">
 <p><span class="math display">\[I_n = \begin{bmatrix} 1 &amp; 0 &amp; \cdots &amp; 0\\ 0 &amp; 1 &amp; \cdots &amp; 0\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\ 0 &amp; 0 &amp; \cdots &amp; 1\end{bmatrix}\]</span></p>
+</div>
 <div class="fragment">
 <p><strong>Example:</strong> Consider the matrix <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0 &amp; -2\\ 0 &amp; 3 &amp; 8\\ 3 &amp; 0 &amp; -1\end{bmatrix}\)</span>. Compute the following products.</p>
+<div class="columns">
+<div class="column" style="width:20%;">
 <ul>
-<li class="fragment"><span class="math inline">\(I_nA\)</span></li>
-<li class="fragment"><span class="math inline">\(AI_n\)</span></li>
+<li class="fragment"><span class="math inline">\(I_3A\)</span></li>
+<li class="fragment"><span class="math inline">\(AI_3\)</span></li>
 </ul>
+</div>
+</div>
 </div>
 </section>
 <section id="special-matrices-2" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p>The form of the <span class="math inline">\(n\times n\)</span> <strong>identity matrix</strong> is</p>
+<div style="font-size:18pt">
+<p><span class="math display">\[I_n = \begin{bmatrix} 1 &amp; 0 &amp; \cdots &amp; 0\\ 0 &amp; 1 &amp; \cdots &amp; 0\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\ 0 &amp; 0 &amp; \cdots &amp; 1\end{bmatrix}\]</span></p>
+</div>
+<p><strong>Example:</strong> Consider the matrix <span class="math inline">\(A = \begin{bmatrix} 1 &amp; 0 &amp; -2\\ 0 &amp; 3 &amp; 8\\ 3 &amp; 0 &amp; -1\end{bmatrix}\)</span>. Compute the following products.</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div>
+<ul>
+<li><span class="math inline">\(I_3A\)</span></li>
+<li><span class="math inline">\(AI_3\)</span></li>
+</ul>
+</div>
+</div><div class="column" style="width:80%;">
+<p><span class="math display">\[I_3A = \begin{bmatrix} 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1\end{bmatrix}\begin{bmatrix} 1 &amp; 0 &amp; -2\\ 0 &amp; 3 &amp; 8\\ 3 &amp; 0  &amp; -1\end{bmatrix} = \begin{bmatrix} 1 &amp; 0 &amp; 2\\ 0 &amp; 3 &amp; 8\\ 3 &amp; 0 &amp; -1\end{bmatrix}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-3" class="slide level2">
 <h2>Special Matrices</h2>
 <p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
 <ul>
@@ -1148,16 +1206,260 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}\end{bmatrix}\)</span> as <span cla
 <div class="fragment">
 <p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
 </div>
-</section>
-<section id="special-matrices-3" class="slide level2">
-<h2>Special Matrices</h2>
-<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
-<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
 <div class="fragment">
 <p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
 </div>
+</section>
+<section id="special-matrices-4" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[AB = \begin{bmatrix}7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[BA = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix}7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-5" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix}\color{red}{7} &amp; \color{red}{-3}\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} \color{red}{1} &amp; 3\\ \color{red}{2} &amp; 7\end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} \color{red}{1} &amp; \color{red}{3}\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix}\color{red}{7} &amp; -3\\ \color{red}{-2} &amp; 1\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-6" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix}\color{red}{7} &amp; \color{red}{-3}\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} \color{red}{1} &amp; 3\\ \color{red}{2} &amp; 7\end{bmatrix}\\
+&amp;= \begin{bmatrix} \color{red}{7\left(1\right) + \left(-3\right)\left(2\right)} &amp; ~~~~~~~~~~~~\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} \color{red}{1} &amp; \color{red}{3}\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix}\color{red}{7} &amp; -3\\ \color{red}{-2} &amp; 1\end{bmatrix}\\
+&amp;= \begin{bmatrix} \color{red}{1\left(7\right) + 3\left(-2\right)} &amp; ~~~~~~~~~~~~~~~\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-7" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix}\color{red}{7} &amp; \color{red}{-3}\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} 1 &amp; \color{red}{3}\\ 2 &amp; \color{red}{7}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; ~~~~~~~~~~~~\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} \color{red}{1} &amp; \color{red}{3}\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 7 &amp; \color{red}{-3}\\ -2 &amp; \color{red}{1}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; ~~~~~~~~~~~~~~~\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-8" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix}\color{red}{7} &amp; \color{red}{-3}\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} 1 &amp; \color{red}{3}\\ 2 &amp; \color{red}{7}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; \color{red}{7\left(3\right) + \left(-3\right)\left(7\right)}\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} \color{red}{1} &amp; \color{red}{3}\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 7 &amp; \color{red}{-3}\\ -2 &amp; \color{red}{1}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; \color{red}{1\left(-3\right) + 3\left(1\right)}\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-9" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix} 7 &amp; -3\\ \color{red}{-2} &amp; \color{red}{1}\end{bmatrix}\begin{bmatrix} \color{red}{1} &amp; 3\\ \color{red}{2} &amp; 7\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} 1 &amp; 3\\ \color{red}{2} &amp; \color{red}{7}\end{bmatrix}\begin{bmatrix} \color{red}{7} &amp; -3\\ \color{red}{-2} &amp; 1\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+&amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-10" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix} 7 &amp; -3\\ \color{red}{-2} &amp; \color{red}{1}\end{bmatrix}\begin{bmatrix} \color{red}{1} &amp; 3\\ \color{red}{2} &amp; 7\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+\color{red}{-2\left(1\right) + 1\left(2\right)} &amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} 1 &amp; 3\\ \color{red}{2} &amp; \color{red}{7}\end{bmatrix}\begin{bmatrix} \color{red}{7} &amp; -3\\ \color{red}{-2} &amp; 1\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+\color{red}{2\left(7\right) + 7\left(-2\right)} &amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-11" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix} 7 &amp; -3\\ \color{red}{-2} &amp; \color{red}{1}\end{bmatrix}\begin{bmatrix} 1 &amp; \color{red}{3}\\ 2 &amp; \color{red}{7}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} 1 &amp; 3\\ \color{red}{2} &amp; \color{red}{7}\end{bmatrix}\begin{bmatrix} 7 &amp; \color{red}{-3}\\ -2 &amp; \color{red}{1}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; \end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-12" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix} 7 &amp; -3\\ \color{red}{-2} &amp; \color{red}{1}\end{bmatrix}\begin{bmatrix} 1 &amp; \color{red}{3}\\ 2 &amp; \color{red}{7}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; \color{red}{-2\left(3\right) + 1\left(7\right)}\end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} 1 &amp; 3\\ \color{red}{2} &amp; \color{red}{7}\end{bmatrix}\begin{bmatrix} 7 &amp; \color{red}{-3}\\ -2 &amp; \color{red}{1}\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; \color{red}{2\left(-3\right) + 7\left(1\right)}\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-13" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; 1\end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; 1\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-14" class="slide level2">
+<h2>Special Matrices</h2>
+<p>There are several special matrices that we’ll encounter throughout linear algebra. We’ll introduce two of those now.</p>
+<p><strong>Inverse Matrices:</strong> For an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, there <em>may</em> exist an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(AB = BA = I_n\)</span>. In this case, we call <span class="math inline">\(B\)</span> the <em>inverse</em> of <span class="math inline">\(A\)</span> and write <span class="math inline">\(B = A^{-1}\)</span>.</p>
+<p><strong>Example:</strong> Show that the matrix <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span> by computing <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} AB &amp;= \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; 1\end{bmatrix} ~~~~\checkmark\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{align} BA &amp;= \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 &amp; 0\\
+0 &amp; 1\end{bmatrix} ~~~~\checkmark
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-15" class="slide level2">
+<h2>Special Matrices</h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Knowing that <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span>, use multiplication by <span class="math inline">\(B\)</span> to solve the matrix equation <span class="math inline">\(\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}\)</span></p>
+</div>
 <div class="fragment">
-<p><strong>Example:</strong> Use the matrix <span class="math inline">\(B\)</span> above to solve the matrix equation <span class="math inline">\(\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}\)</span></p>
+<div style="font-size:18pt">
+<p><span class="math display">\[\begin{align} \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \begin{bmatrix} 5\\ -8\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="special-matrices-16" class="slide level2">
+<h2>Special Matrices</h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Knowing that <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span>, use multiplication by <span class="math inline">\(B\)</span> to solve the matrix equation <span class="math inline">\(\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\begin{align} \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</section>
+<section id="special-matrices-17" class="slide level2">
+<h2>Special Matrices</h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Knowing that <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span>, use multiplication by <span class="math inline">\(B\)</span> to solve the matrix equation <span class="math inline">\(\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\begin{align} \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{I}\vec{x} &amp;= \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 5\\ -8\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</section>
+<section id="special-matrices-18" class="slide level2">
+<h2>Special Matrices</h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Knowing that <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span>, use multiplication by <span class="math inline">\(B\)</span> to solve the matrix equation <span class="math inline">\(\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\begin{align} \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{I}\vec{x} &amp;= \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \vec{x} &amp;= \begin{bmatrix} 1\left(5\right) + 3\left(-8\right)\\ 2\left(5\right) + 7\left(-8\right)\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</section>
+<section id="special-matrices-19" class="slide level2">
+<h2>Special Matrices</h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Knowing that <span class="math inline">\(B = \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\)</span> is the inverse of the matrix <span class="math inline">\(A = \begin{bmatrix} 7 &amp; -3\\ -2 &amp; 1\end{bmatrix}\)</span>, use multiplication by <span class="math inline">\(B\)</span> to solve the matrix equation <span class="math inline">\(\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} = \begin{bmatrix} 5\\ -8\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\begin{align} \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\vec{x} &amp;= \color{red}{\begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \color{red}{I}\vec{x} &amp;= \begin{bmatrix} 1 &amp; 3\\ 2 &amp; 7\end{bmatrix}\begin{bmatrix} 5\\ -8\end{bmatrix}\\
+\implies \vec{x} &amp;= \begin{bmatrix} 1\left(5\right) + 3\left(-8\right)\\ 2\left(5\right) + 7\left(-8\right)\end{bmatrix}\\
+\implies \vec{x} &amp;= \begin{bmatrix} -19\\ -46\end{bmatrix}
+\end{align}\]</span></p>
 </div>
 </section>
 <section id="summary" class="slide level2">
