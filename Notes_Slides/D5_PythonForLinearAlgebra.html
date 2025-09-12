@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-08-15">
+  <meta name="dcterms.date" content="2025-09-12">
   <title>MAT 350: Python for Linear Algebra</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -402,7 +402,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">August 15, 2025</p>
+  <p class="date">September 12, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -543,11 +543,11 @@ a:visited {
 <ul>
 <li class="fragment"><p>We can use python for all basic mathematical operations – addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>), and exponentiation (<code>**</code>).</p>
 <ul>
-<li class="fragment"><strong>Warning:</strong> When you want to multiply, you’ll need to explicitly use the <code>*</code> operator. While writing <code>5(8 - 6)</code> makes perfect sense mathematically, python will think you are trying to “<em>plug <span class="math inline">\(6 - 8\)</span> into a function named <span class="math inline">\(5\)</span></em>”.</li>
+<li class="fragment"><strong>Warning:</strong> When you want to multiply, you’ll need to explicitly use the <code>*</code> operator. While writing <code>5(8 - 6)</code> makes perfect sense mathematically, python will think you are trying to “<em>plug <span class="math inline">\(8 - 6\)</span> into a function named <span class="math inline">\(5\)</span></em>”.</li>
 </ul></li>
 </ul>
 <div class="fragment">
-<p><strong>Example:</strong> Try evaluating each of the following expressions using the code cell below.</p>
+<p><strong>Example:</strong> Try evaluating each of the following expressions using a code cell in your Colab notebook.</p>
 </div>
 <div class="fragment">
 <div>
@@ -691,7 +691,7 @@ a:visited {
 2 &amp; 1/2 &amp; 5/8\\
 1/2 &amp; -4 &amp; 6\end{bmatrix}\)</span></p>
 </div><div class="column" style="width:50%;">
-<p><strong>Example:</strong> Recall that we can think of a vector as a matrix with a single column. Use the code cell below to define the vector <span class="math inline">\(\vec{v} = \begin{bmatrix} -2\\ 1\\ 3/2\end{bmatrix}\)</span></p>
+<p><strong>Example:</strong> Recall that we can think of a vector as a matrix with a single column. Use a code cell in your Colab notebook to define the vector <span class="math inline">\(\vec{v} = \begin{bmatrix} -2\\ 1\\ 3/2\end{bmatrix}\)</span></p>
 </div>
 </div>
 </section>
@@ -729,7 +729,8 @@ a:visited {
 <section id="matrix-multiplication" class="slide level2">
 <h2>Matrix Multiplication</h2>
 <ul>
-<li class="fragment"><p>Matrix multiplication is <em>not</em> an elementwise operation. +Instead, to compute the product <span class="math inline">\(AB\)</span>, we take the dot products between rows of <span class="math inline">\(A\)</span> and columns of <span class="math inline">\(B\)</span> to construct the corresponding entries of <span class="math inline">\(AB\)</span>.</p>
+<li class="fragment"><p>Matrix multiplication is <em>not</em> an elementwise operation.</p></li>
+<li class="fragment"><p>Instead, to compute the product <span class="math inline">\(AB\)</span>, we take the dot products between rows of <span class="math inline">\(A\)</span> and columns of <span class="math inline">\(B\)</span> to construct the corresponding entries of <span class="math inline">\(AB\)</span>.</p>
 <ul>
 <li class="fragment">This requires that the number of columns of the matrix <span class="math inline">\(A\)</span> match the number of rows of the matrix <span class="math inline">\(B\)</span>.</li>
 </ul></li>
@@ -763,7 +764,7 @@ a:visited {
 <li class="fragment">we can calculate the <em>cross product</em> (<span class="math inline">\(\vec{u}\times \vec{v}\)</span>) using <code>u.cross(v)</code>.</li>
 </ul>
 <div class="fragment">
-<p><strong>Example:</strong> Consider the vectors <span class="math inline">\(\vec{u} = \begin{bmatrix} -3\\ 1\\ 1\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} 0\\ -2\\ -1\end{bmatrix}\)</span>. Use the code cell below to</p>
+<p><strong>Example:</strong> Consider the vectors <span class="math inline">\(\vec{u} = \begin{bmatrix} -3\\ 1\\ 1\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} 0\\ -2\\ -1\end{bmatrix}\)</span>. Open a code cell to</p>
 <ol type="i">
 <li class="fragment">compute the <em>dot product</em> <span class="math inline">\(\vec{u}\cdot\vec{v}\)</span></li>
 <li class="fragment">compute the <em>cross product</em> <span class="math inline">\(\vec{u}\times \vec{v}\)</span></li>
