@@ -730,7 +730,7 @@ $$\left[\begin{array}{rrrrr|r}
 \color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
 \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
 \color{blue}{0} & \color{blue}{0} & \color{red}{-25} & -15 & 19 & 64\\
-\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right] \substack{R_4 \leftarrow -25R_3 + 13R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right] \substack{R_4 \leftarrow \left(-25\right)R_3 + 13R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
 \color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
 \color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
 \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
