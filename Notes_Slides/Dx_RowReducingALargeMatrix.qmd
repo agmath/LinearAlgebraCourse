@@ -125,7 +125,7 @@ From here, we'll start the row reduction procedure.
 We'll start with the leftmost column, where we want 
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 ## Row Reduction -- An Example
 
@@ -142,7 +142,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -166,7 +166,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -186,7 +186,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -210,7 +210,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -236,7 +236,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -265,7 +265,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -289,7 +289,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -318,7 +318,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -342,7 +342,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
@@ -371,7 +371,7 @@ We'll start with the leftmost column, where we want
 :::{.nonincremental}
 
 i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that $1$ to be $0$
+ii) Every entry below that *pivot* to be $0$
 
 :::
 
