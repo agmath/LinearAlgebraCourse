@@ -1,0 +1,1824 @@
+---
+title: "MAT 350: The Row Reduction Procedure via an Example"
+author: Dr. Gilbert
+format: 
+  revealjs:
+    smaller: true
+date: today
+date-format: long
+theme: serif
+incremental: true
+---
+
+```{r global-options, include=FALSE}
+library(tidyverse)
+library(reticulate)
+
+theme_set(theme_bw(base_size = 20))
+```
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.3em;
+  /* or try font-size: xx-large; */
+}
+
+a {
+  color: purple;
+}
+
+a:link {
+  color: purple;
+}
+
+a:visited {
+  color: purple;
+}
+```
+
+## Warm-Up Problems
+
+:::{.nonincremental}
+
+**Examples:** Do your best to describe all of the solutions to the linear systems corresponding to the augmented coefficient matrices below.
+
+1. 
+
+:::
+
+## Purpose
+
+. . . 
+
+This slide deck just contains a walkthrough of a single example 
+of solving a system via row reduction.
+
+. . .
+
+As we work through the example...
+
++ focus on the strategy we are utilizing
++ identify how, and why, we choose particular scalars involved in our row-replacement operations
++ build comfort with that row replacement operation
+
+. . . 
+
+**Note:** Recall that we stated our row replacement operation as $R_i \leftarrow R_i + cR_j$ -- replacing a row with the sum of that row and a scaled copy of another row. 
+
+. . . 
+
+At times, we use an altered version of the replacement operation, $R_i \leftarrow c_1R_i + c_2R_j$ which does row *scaling* and *replacement* all at once to save time.
+
+## Row Reduction -- An Example
+
+**Example:** Find all solutions to the linear system
+
+$$\left\{\begin{array}{rcrcrcrcrcr} 2x_2 & - & x_2 & + & 3x_3 &  &  & + & 4x_5 & = & 10\\
+x_1 & + & 2x_2 & - & 2x_3 & + & 3x_4 & - & x_5 & = & -1\\
+ &  & x_2 & - & 4x_3 & - & x_4 & + & 2x_5 & = & 7\\
+3x_1 & - & 2x_2 & + & x_3 & + & 2x_4 &  &  & = & 5\\
+-x_1 & + & 3x_2 &  &  & + & x_4 & + & 2x_5 & = & 3\end{array}\right.$$
+
+. . . 
+
+We start by constructing the corresponding augmented coefficient matrix...
+
+. . . 
+
+$$\left[\begin{array}{rrrrr|r} 2 & -1 & 3 & 0 & 4 & 10\\
+1 & 2 & -2 & 3 & -1 & -1\\
+0 & 1 & -4 & -1 & 2 & 7\\
+3 & -2 & 1 & 2 & 0 & 5\\
+-1 & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 2 & -1 & 3 & 0 & 4 & 10\\
+1 & 2 & -2 & 3 & -1 & -1\\
+0 & 1 & -4 & -1 & 2 & 7\\
+3 & -2 & 1 & 2 & 0 & 5\\
+-1 & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+. . . 
+
+From here, we'll start the row reduction procedure. 
+
+. . . 
+
+We'll start with the leftmost column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} \color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{red}{1} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} \color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{red}{1} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} \color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{red}{1} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right] \substack{R_1 \leftrightarrow R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{red}{1} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{1} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+. . . 
+
+We've got our *pivot* in column 1
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+. . . 
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{2} & -1 & 3 & 0 & 4 & 10\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right] \substack{R_2 \leftarrow R_2 + \left(-2\right)R_1\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{red}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]\substack{R_4 \leftarrow R_4 + \left(-3\right)R_1\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{red}{0} & -8 & 7 & -7 & 3 & 8\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{blue}{0} & -8 & 7 & -7 & 3 & 8\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{blue}{0} & -8 & 7 & -7 & 3 & 8\\
+\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right] \substack{R_5 \leftarrow R_5 + R_1\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{blue}{0} & -8 & 7 & -7 & 3 & 8\\
+\color{red}{0} & 5 & -1 & 4 & 1 & 2\end{array}\right]$$
+
+From here, we'll start the row reduction procedure. 
+
+We'll start with the leftmost column, where we want 
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below that $1$ to be $0$
+
+:::
+
+We've got our *pivot* in column 1
+
+We'll use it to "zero-out" all the entries underneath it!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
+\color{blue}{0} & -5 & 7 & -6 & 6 & 12\\
+\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
+\color{blue}{0} & -8 & 7 & -7 & 3 & 8\\
+\color{blue}{0} & 5 & -1 & 4 & 1 & 2\end{array}\right]$$
+
+. . . 
+
+Now, we'll move to the second column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{red}{-5} & 7 & -6 & 6 & 12\\
+\color{blue}{0} & \color{red}{1} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+. . .
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{red}{-5} & 7 & -6 & 6 & 12\\
+\color{blue}{0} & \color{red}{1} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right] \substack{R_2\leftrightarrow R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{red}{1} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{-5} & 7 & -6 & 6 & 12\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{1} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{-5} & 7 & -6 & 6 & 12\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{-5} & 7 & -6 & 6 & 12\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+. . .
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{-5} & 7 & -6 & 6 & 12\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right] \substack{R_3 \leftarrow R_3 + 5R_2\\ \longrightarrow}\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{red}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{red}{-8} & 7 & -7 & 3 & 8\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right] \substack{R_4\leftarrow R_4 + 8R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{red}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{red}{5} & -1 & 4 & 1 & 2\end{array}\right] \substack{R_5 \leftarrow R_5 + \left(-5\right)R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{red}{0} & 18 & 9 & -9 & -33\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{red}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & 18 & 9 & -9 & -33\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & 18 & 9 & -9 & -33\end{array}\right]$$
+
+Now, we'll move to the second column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot* position (if possible, without fractions)
+ii) Every entry below that *pivot* to be $0$
+
+:::
+
+**Note:** We worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the pivot position, we'll use it to "zero-out" all the entries below it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & -2 & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & -4 & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & -13 & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & -25 & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & 18 & 9 & -9 & -33\end{array}\right]$$
+
+Next, we'll move on to the third column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{-13} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{-25} & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+. . .
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{-25} & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+. . . 
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{-25} & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{-25} & -15 & 19 & 64\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right] \substack{R_4 \leftarrow -25R_3 + 13R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right] \substack{R_5 \leftarrow 13R_5 + 18R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{0} & -81 & 171 & 417\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right] \substack{R_5 \leftarrow 13R_5 + 18R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{red}{0} & -81 & 171 & 417\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -81 & 171 & 417\end{array}\right]$$
+
+Next, we'll move on to the third column, where we'll want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
+
+We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -81 & 171 & 417\end{array}\right]$$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -81 & 171 & 417\end{array}\right]$$
+
+. . .
+
+These numbers are getting kind of big -- let's shrink some back down a bit...
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -81 & 171 & 417\end{array}\right] \substack{R_5 \leftarrow R_5 + R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -1 & 18 & 74\end{array}\right]$$
+
+These numbers are getting kind of big -- let's shrink some back down a bit...
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -1 & 18 & 74\end{array}\right]$$
+
+Now we'll move to the fourth column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -1 & 18 & 74\end{array}\right]$$
+
+Now we'll move to the fourth column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{-1} & 18 & 74\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+. . .
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{-1} & 18 & 74\end{array}\right] \substack{R_4\leftrightarrow R_5} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{-1} & 18 & 74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{-1} & 18 & 74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{-1} & 18 & 74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right] \substack{R_4 \leftarrow \left(-1\right)R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{1} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{1} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the *pivot position*, we'll use it to "zero out" the entry below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{80} & -153 & -343
+\end{array}\right] \substack{R_5 \leftarrow R_5 + \left(-80\right)R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{red}{0} & 1287 & 5577
+\end{array}\right]$$
+
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the *pivot position*, we'll use it to "zero out" the entry below it.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{red}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{red}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{red}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 1287 & 5577
+\end{array}\right]$$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 1287 & 5577
+\end{array}\right]$$
+
+. . .
+
+Those numbers in the bottom row have gotten quite large again -- we'll scale them down
+
+. . . 
+
+Both non-zero entries are divisible by $429$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 1287 & 5577
+\end{array}\right] \substack{R_5 \leftarrow \frac{1}{429}R_5} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 3 & 13
+\end{array}\right]$$
+
+Those numbers in the bottom row have gotten quite large again -- we'll scale them down
+
+Both non-zero entries are divisible by $429$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{3} & 13
+\end{array}\right]$$
+
+Those numbers in the bottom row have gotten quite large again -- we'll scale them down
+
+Both non-zero entries are divisible by $429$
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+. . .
+
+We've made it to *Row Echelon Form*. From here, we see that
+
+1. There are solutions to the system, since the rightmost column is not a *pivot* column.
+2. There is a unique solution to the system, since every column to the left of the augmenting line is a *pivot* column.
+
+. . . 
+
+Unfortunately, we can't read the solutions off from this matrix -- we need *Reduced Row Echelon Form* for that.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
++ To get to ***Row Echelon Form***, we worked from the top-left down towards the bottom-right, "zeroing-out" entries below pivots as we went.
++ To get to ***Reduced Row Echelon Form***, we do the opposite -- work from bottom-right up towards the top-left, "zeroing-out" entries above pivots as we go.
+
+. . . 
+
+We're still going to try to put off fractions until we are forced into them.
+
+. . . 
+
+This might require changing the values of our pivot entries, but none of our zeroes should be changed.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & -1 & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & 2 & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & 16 & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & -18 & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & \color{red}{16} & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-18} & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+i) use the *pivot* to "zero-out" the entries above it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & \color{red}{16} & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-18} & -74\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_4 \leftarrow R_4 + 6R_5\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & \color{red}{16} & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & \color{red}{16} & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & \color{darkorange}{-11} & \color{red}{16} & 47\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_3 \leftarrow 3R_3 + \left(-16\right)R_5\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{red}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & \color{darkorange}{-1} & \color{red}{2} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_2 \leftarrow 3R_2 + \left(-2\right)R_5\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{darkorange}{-3} & \color{red}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{darkorange}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & \color{darkorange}{3} & \color{red}{-1} & -1\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{darkorange}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_1 \leftarrow 3R_1 + R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{darkorange}{9} & \color{red}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{darkorange}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Let's begin from the column just to the left of the augmenting line, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{darkorange}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{darkorange}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+. . .
+
+Now we'll move back to the fourth column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{red}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{red}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll move back to the fourth column, where we'll
+
+i) use the *pivot* to "zero-out" the entries above it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{darkorange}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{darkorange}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{darkorange}{-33} & \color{blue}{0} & -67\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_3 \leftarrow R_3 + 33R_4} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{red}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{red}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll move back to the fourth column, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{red}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll move back to the fourth column, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{red}{-3} & \color{blue}{0} & -5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_2 \leftarrow R_2 + 3R_1\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{red}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll move back to the fourth column, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll move back to the fourth column, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{9} & \color{blue}{0} & 10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_1\leftarrow R_1 + \left(-9\right)R_4\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{red}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll move back to the fourth column, where we'll
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{darkorange}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{darkorange}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+. . . 
+
+Next, we move back again to the third column
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{red}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Next, we move back again to the third column, where we 
+
+i) use the *pivot* to "zero-out" the entries above it
+
+. . . 
+
+Before we do that, the non-zero entries in the third row are large but they're both divisible by $13$, so let's scale that row.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{red}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-39}} & \color{blue}{0} & \color{blue}{0} & 65\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_3 \leftarrow \frac{1}{13}R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{red}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Next, we move back again to the third column, where we 
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+Before we do that, the non-zero entries in the third row are large but they're both divisible by $13$, so let's scale that row.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{red}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Next, we move back again to the third column, where we 
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+Before we do that, the non-zero entries in the third row are large but they're both divisible by $13$, so let's scale that row.
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{red}{-12} & \color{blue}{0} & \color{blue}{0} & 7\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_2\leftarrow R_2 + \left(-4\right)R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{red}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Next, we move back again to the third column, where we 
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Next, we move back again to the third column, where we 
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{-6} & \color{blue}{0} & \color{blue}{0} & -26\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_1 \leftarrow R_1 + \left(-2\right)R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{red}{0} & \color{blue}{0} & \color{blue}{0} & -36\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Next, we move back again to the third column, where we 
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entries above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{darkorange}{6} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -36\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Continuing on, we move back to the second column, 
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{red}{6} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -36\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Continuing on, we move back to the second column, where we 
+
+i) use the *pivot* to "zero-out" the entry above it
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{red}{6} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -36\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_1 \leftarrow R_1 + \left(-2\right)R_2} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{red}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Continuing on, we move back to the second column, where we 
+
+:::{.nonincremental}
+
+i) use the *pivot* to "zero-out" the entry above it
+
+:::
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+. . .
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_1\leftarrow \frac{1}{3}R_1\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{3}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_2 \leftarrow \frac{1}{3}R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-3}} & \color{blue}{0} & \color{blue}{0} & 5\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_3 \leftarrow \left(\frac{-1}{3}\right)R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & -5/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & -5/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & -5/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{3}} & 13
+\end{array}\right] \substack{R_5\leftarrow \frac{1}{3}R_5\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & -5/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & 13/3
+\end{array}\right]$$
+
+Now we'll scale each row to obtain a *pivot entry* of $1$ and solve the system
+
+## Row Reduction -- An Example
+
+$$\left[\begin{array}{rrrrr|r} 
+\color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -10/3\\
+\color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -13/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & \color{blue}{0} & -5/3\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & \color{blue}{0} & 4\\
+\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{1}} & 13/3
+\end{array}\right]$$
+
+. . . 
+
+Finally, after all of that, we've discovered the solution to the system...
+
+. . . 
+
+$$x_1 = \frac{-10}{3},~~~x_2 = \frac{-13}{3},~~~x_3 = \frac{-5}{3},~~~x_4 = 4,~~~x_5 = \frac{13}{3}$$
