@@ -63,12 +63,15 @@ of solving a system via row reduction.
 As we work through the example...
 
 + focus on the strategy we are utilizing
-+ identify how, and why, we choose particular scalars involved in our row-replacement operations
-+ build comfort with that row replacement operation
+
+  + see how we strategically work through the matrix entries
+  + identify how, and why, we choose particular scalars involved in our row *replacement* operations ($R_i \leftarrow R_i + cR_j$)
+
++ build comfort with that row *replacement* operation
 
 . . . 
 
-**Note:** Recall that we stated our row replacement operation as $R_i \leftarrow R_i + cR_j$ -- replacing a row with the sum of that row and a scaled copy of another row. 
+**Note:** Recall that we stated our row replacement operation as $R_i \leftarrow R_i + cR_j$, where we replace a row with the sum of that row and a scaled copy of another row. 
 
 . . . 
 
@@ -78,7 +81,7 @@ At times, we use an altered version of the replacement operation, $R_i \leftarro
 
 **Example:** Find all solutions to the linear system
 
-$$\left\{\begin{array}{rcrcrcrcrcr} 2x_2 & - & x_2 & + & 3x_3 &  &  & + & 4x_5 & = & 10\\
+$$\left\{\begin{array}{rcrcrcrcrcr} 2x_1 & - & x_2 & + & 3x_3 &  &  & + & 4x_5 & = & 10\\
 x_1 & + & 2x_2 & - & 2x_3 & + & 3x_4 & - & x_5 & = & -1\\
  &  & x_2 & - & 4x_3 & - & x_4 & + & 2x_5 & = & 7\\
 3x_1 & - & 2x_2 & + & x_3 & + & 2x_4 &  &  & = & 5\\
@@ -217,30 +220,6 @@ ii) Every entry below that *pivot* to be $0$
 We've got our *pivot* in column 1
 
 . . . 
-
-We'll use it to "zero-out" all the entries underneath it!
-
-## Row Reduction -- An Example
-
-$$\left[\begin{array}{rrrrr|r} 
-\color{blue}{\boxed{1}} & 2 & -2 & 3 & -1 & -1\\
-\color{red}{2} & -1 & 3 & 0 & 4 & 10\\
-\color{blue}{0} & 1 & -4 & -1 & 2 & 7\\
-\color{red}{3} & -2 & 1 & 2 & 0 & 5\\
-\color{red}{-1} & 3 & 0 & 1 & 2 & 3\end{array}\right]$$
-
-From here, we'll start the row reduction procedure. 
-
-We'll start with the leftmost column, where we want 
-
-:::{.nonincremental}
-
-i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below that *pivot* to be $0$
-
-:::
-
-We've got our *pivot* in column 1
 
 We'll use it to "zero-out" all the entries underneath it!
 
@@ -701,27 +680,7 @@ ii) Every entry below the *pivot* to be $0$
 
 We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
 
-## Row Reduction -- An Example
 
-$$\left[\begin{array}{rrrrr|r} 
-\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
-\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
-\color{blue}{0} & \color{blue}{0} & \color{red}{-25} & -15 & 19 & 64\\
-\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right]$$
-
-Next, we'll move on to the third column, where we'll want
-
-:::{.nonincremental}
-
-i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below the *pivot* to be $0$
-
-:::
-
-**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
-
-We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
 
 ## Row Reduction -- An Example
 
@@ -799,32 +758,7 @@ ii) Every entry below the *pivot* to be $0$
 
 We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
 
-## Row Reduction -- An Example
 
-$$\left[\begin{array}{rrrrr|r} 
-\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
-\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
-\color{blue}{0} & \color{blue}{0} & \color{red}{18} & 9 & -9 & -33\end{array}\right] \substack{R_5 \leftarrow 13R_5 + 18R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r} 
-\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{red}{-2} & 3 & -1 & -1\\
-\color{blue}{0} & \color{blue}{\boxed{1}} & \color{red}{-4} & -1 & 2 & 7\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
-\color{blue}{0} & \color{blue}{0} & \color{red}{0} & -81 & 171 & 417\end{array}\right]$$
-
-Next, we'll move on to the third column, where we'll want
-
-:::{.nonincremental}
-
-i) A $1$ in the *pivot position* (if possible, without fractions)
-ii) Every entry below the *pivot* to be $0$
-
-:::
-
-**Note:** Again, we've worked hard on those blue entries -- their values should not change at any point!
-
-We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
 
 ## Row Reduction -- An Example
 
@@ -848,14 +782,7 @@ ii) Every entry below the *pivot* to be $0$
 
 We have *a* pivot in row three, so we'll use it to "zero-out" all the entries below it.
 
-## Row Reduction -- An Example
 
-$$\left[\begin{array}{rrrrr|r} 
-\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
-\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -81 & 171 & 417\end{array}\right]$$
 
 ## Row Reduction -- An Example
 
@@ -886,16 +813,7 @@ $$\left[\begin{array}{rrrrr|r}
 
 These numbers are getting kind of big -- let's shrink some back down a bit...
 
-## Row Reduction -- An Example
 
-$$\left[\begin{array}{rrrrr|r} 
-\color{blue}{\boxed{1}} & \color{darkorange}{2} & \color{darkorange}{-2} & 3 & -1 & -1\\
-\color{blue}{0} & \color{blue}{\boxed{1}} & \color{darkorange}{-4} & -1 & 2 & 7\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{\boxed{-13}} & -11 & 16 & 47\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 80 & -153 & -343\\
-\color{blue}{0} & \color{blue}{0} & \color{blue}{0} & -1 & 18 & 74\end{array}\right]$$
-
-Now we'll move to the fourth column
 
 ## Row Reduction -- An Example
 
@@ -1083,6 +1001,19 @@ $$\left[\begin{array}{rrrrr|r}
 \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & \color{blue}{0} & 1287 & 5577
 \end{array}\right]$$
 
+Now we'll move to the fourth column, where we'll again want
+
+:::{.nonincremental}
+
+i) A $1$ in the *pivot position* (if possible, without fractions)
+ii) Every entry below the *pivot* to be $0$
+
+:::
+
+**Note:** Remember that, we've worked hard on those blue entries -- their values should not change at any point!
+
+Now that we have a $1$ in the *pivot position*, we'll use it to "zero out" the entry below it.
+
 ## Row Reduction -- An Example
 
 $$\left[\begin{array}{rrrrr|r} 
@@ -1149,8 +1080,8 @@ $$\left[\begin{array}{rrrrr|r}
 
 We've made it to *Row Echelon Form*. From here, we see that
 
-1. There are solutions to the system, since the rightmost column is not a *pivot* column.
-2. There is a unique solution to the system, since every column to the left of the augmenting line is a *pivot* column.
+1. There <u>are solutions to the system</u>, since the rightmost column is not a *pivot* column.
+2. There is <u>a unique solution to the system</u>, since every column to the left of the augmenting line is a *pivot* column.
 
 . . . 
 
@@ -1822,3 +1753,36 @@ Finally, after all of that, we've discovered the solution to the system...
 . . . 
 
 $$x_1 = \frac{-10}{3},~~~x_2 = \frac{-13}{3},~~~x_3 = \frac{-5}{3},~~~x_4 = 4,~~~x_5 = \frac{13}{3}$$
+
+## Comments
+
+1. Row reduction is a tedious procedure that requires lots of care and attention to detail.
+2. *Row Echelon Form* tells us about the *number* of solutions to a linear system.
+3. If we want to know what those solutions are, then we'll need to obtain *Reduced Row Echelon Form*
+
+. . .
+
+<div style="font-size:18pt">
+
+**Obtaining *Row Echelon Form*:** Start from the leftmost column, use the pivot in the top-left position to "zero-out" the entries below the pivot, move to the second column and do the same, keep working from the top-left to bottom-right of the augmented coefficient matrix.
+
+</div>
+
+. . .
+
+<div style="font-size:18pt">
+
+$\bigstar$ The best *pivots* are $1$'s because they are easy to use -- scale or swap rows to put a $1$ in the pivot position if possible, but it's probably not worth doing if it forces you to deal with fractions.
+
+</div>
+
+. . .
+
+<div style="font-size:18pt">
+
+**Obtaining *Reduced Row Echelon Form*:** Start with the rightmost pivot and use it to "zero-out" the entries above it, move to the next pivot towards the "northwest" and do the same, continue moving from the bottom-right to top-left of the augmented coefficient matrix.
+
++ Only try to reach RREF in cases where solutions to the system exist.
+
+</div>
+

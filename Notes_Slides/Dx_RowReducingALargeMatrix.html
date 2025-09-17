@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-09-15">
+  <meta name="dcterms.date" content="2025-09-17">
   <title>MAT 350: The Row Reduction Procedure via an Example</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -337,7 +337,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">September 15, 2025</p>
+  <p class="date">September 17, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -379,13 +379,16 @@ a:visited {
 <div class="fragment">
 <p>As we work through the example…</p>
 <ul>
-<li class="fragment">focus on the strategy we are utilizing</li>
-<li class="fragment">identify how, and why, we choose particular scalars involved in our row-replacement operations</li>
-<li class="fragment">build comfort with that row replacement operation</li>
+<li class="fragment"><p>focus on the strategy we are utilizing</p>
+<ul>
+<li class="fragment">see how we strategically work through the matrix entries</li>
+<li class="fragment">identify how, and why, we choose particular scalars involved in our row <em>replacement</em> operations (<span class="math inline">\(R_i \leftarrow R_i + cR_j\)</span>)</li>
+</ul></li>
+<li class="fragment"><p>build comfort with that row <em>replacement</em> operation</p></li>
 </ul>
 </div>
 <div class="fragment">
-<p><strong>Note:</strong> Recall that we stated our row replacement operation as <span class="math inline">\(R_i \leftarrow R_i + cR_j\)</span> – replacing a row with the sum of that row and a scaled copy of another row.</p>
+<p><strong>Note:</strong> Recall that we stated our row replacement operation as <span class="math inline">\(R_i \leftarrow R_i + cR_j\)</span>, where we replace a row with the sum of that row and a scaled copy of another row.</p>
 </div>
 <div class="fragment">
 <p>At times, we use an altered version of the replacement operation, <span class="math inline">\(R_i \leftarrow c_1R_i + c_2R_j\)</span> which does row <em>scaling</em> and <em>replacement</em> all at once to save time.</p>
@@ -394,7 +397,7 @@ a:visited {
 <section id="row-reduction-an-example" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><strong>Example:</strong> Find all solutions to the linear system</p>
-<p><span class="math display">\[\left\{\begin{array}{rcrcrcrcrcr} 2x_2 &amp; - &amp; x_2 &amp; + &amp; 3x_3 &amp;  &amp;  &amp; + &amp; 4x_5 &amp; = &amp; 10\\
+<p><span class="math display">\[\left\{\begin{array}{rcrcrcrcrcr} 2x_1 &amp; - &amp; x_2 &amp; + &amp; 3x_3 &amp;  &amp;  &amp; + &amp; 4x_5 &amp; = &amp; 10\\
 x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &amp; = &amp; -1\\
 &amp;  &amp; x_2 &amp; - &amp; 4x_3 &amp; - &amp; x_4 &amp; + &amp; 2x_5 &amp; = &amp; 7\\
 3x_1 &amp; - &amp; 2x_2 &amp; + &amp; x_3 &amp; + &amp; 2x_4 &amp;  &amp;  &amp; = &amp; 5\\
@@ -523,25 +526,6 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{red}{2} &amp; -1 &amp; 3 &amp; 0 &amp; 4 &amp; 10\\
 \color{blue}{0} &amp; 1 &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{red}{3} &amp; -2 &amp; 1 &amp; 2 &amp; 0 &amp; 5\\
-\color{red}{-1} &amp; 3 &amp; 0 &amp; 1 &amp; 2 &amp; 3\end{array}\right]\]</span></p>
-<p>From here, we’ll start the row reduction procedure.</p>
-<p>We’ll start with the leftmost column, where we want</p>
-<div>
-<ol type="i">
-<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
-<li>Every entry below that <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
-</ol>
-</div>
-<p>We’ve got our <em>pivot</em> in column 1</p>
-<p>We’ll use it to “zero-out” all the entries underneath it!</p>
-</section>
-<section id="row-reduction-an-example-8" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
-\color{red}{2} &amp; -1 &amp; 3 &amp; 0 &amp; 4 &amp; 10\\
-\color{blue}{0} &amp; 1 &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
-\color{red}{3} &amp; -2 &amp; 1 &amp; 2 &amp; 0 &amp; 5\\
 \color{red}{-1} &amp; 3 &amp; 0 &amp; 1 &amp; 2 &amp; 3\end{array}\right] \substack{R_2 \leftarrow R_2 + \left(-2\right)R_1\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
 \color{red}{0} &amp; -5 &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
@@ -559,7 +543,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>We’ve got our <em>pivot</em> in column 1</p>
 <p>We’ll use it to “zero-out” all the entries underneath it!</p>
 </section>
-<section id="row-reduction-an-example-9" class="slide level2">
+<section id="row-reduction-an-example-8" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -578,7 +562,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>We’ve got our <em>pivot</em> in column 1</p>
 <p>We’ll use it to “zero-out” all the entries underneath it!</p>
 </section>
-<section id="row-reduction-an-example-10" class="slide level2">
+<section id="row-reduction-an-example-9" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -602,7 +586,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>We’ve got our <em>pivot</em> in column 1</p>
 <p>We’ll use it to “zero-out” all the entries underneath it!</p>
 </section>
-<section id="row-reduction-an-example-11" class="slide level2">
+<section id="row-reduction-an-example-10" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -621,7 +605,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>We’ve got our <em>pivot</em> in column 1</p>
 <p>We’ll use it to “zero-out” all the entries underneath it!</p>
 </section>
-<section id="row-reduction-an-example-12" class="slide level2">
+<section id="row-reduction-an-example-11" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -645,7 +629,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>We’ve got our <em>pivot</em> in column 1</p>
 <p>We’ll use it to “zero-out” all the entries underneath it!</p>
 </section>
-<section id="row-reduction-an-example-13" class="slide level2">
+<section id="row-reduction-an-example-12" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; 2 &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -657,7 +641,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Now, we’ll move to the second column</p>
 </div>
 </section>
-<section id="row-reduction-an-example-14" class="slide level2">
+<section id="row-reduction-an-example-13" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -674,7 +658,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 </div>
 </section>
-<section id="row-reduction-an-example-15" class="slide level2">
+<section id="row-reduction-an-example-14" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -696,7 +680,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 </section>
-<section id="row-reduction-an-example-16" class="slide level2">
+<section id="row-reduction-an-example-15" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -713,7 +697,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 </section>
-<section id="row-reduction-an-example-17" class="slide level2">
+<section id="row-reduction-an-example-16" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -733,7 +717,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
 </div>
 </section>
-<section id="row-reduction-an-example-18" class="slide level2">
+<section id="row-reduction-an-example-17" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -756,7 +740,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
 </section>
-<section id="row-reduction-an-example-19" class="slide level2">
+<section id="row-reduction-an-example-18" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -774,7 +758,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
 </section>
-<section id="row-reduction-an-example-20" class="slide level2">
+<section id="row-reduction-an-example-19" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -797,7 +781,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
 </section>
-<section id="row-reduction-an-example-21" class="slide level2">
+<section id="row-reduction-an-example-20" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -815,7 +799,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
 </section>
-<section id="row-reduction-an-example-22" class="slide level2">
+<section id="row-reduction-an-example-21" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
@@ -838,10 +822,28 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
 </section>
-<section id="row-reduction-an-example-23" class="slide level2">
+<section id="row-reduction-an-example-22" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
+\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; 18 &amp; 9 &amp; -9 &amp; -33\end{array}\right]\]</span></p>
+<p>Now, we’ll move to the second column, where we’ll want</p>
+<div>
+<ol type="i">
+<li>A <span class="math inline">\(1\)</span> in the <em>pivot</em> position (if possible, without fractions)</li>
+<li>Every entry below that <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
+</ol>
+</div>
+<p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
+<p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
+</section>
+<section id="row-reduction-an-example-23" class="slide level2">
+<h2>Row Reduction – An Example</h2>
+<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
+\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
@@ -864,27 +866,9 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; 18 &amp; 9 &amp; -9 &amp; -33\end{array}\right]\]</span></p>
-<p>Now, we’ll move to the second column, where we’ll want</p>
-<div>
-<ol type="i">
-<li>A <span class="math inline">\(1\)</span> in the <em>pivot</em> position (if possible, without fractions)</li>
-<li>Every entry below that <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
-</ol>
-</div>
-<p><strong>Note:</strong> We worked hard on those blue entries – their values should not change at any point!</p>
-<p>Now that we have a <span class="math inline">\(1\)</span> in the pivot position, we’ll use it to “zero-out” all the entries below it</p>
-</section>
-<section id="row-reduction-an-example-25" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; 18 &amp; 9 &amp; -9 &amp; -33\end{array}\right]\]</span></p>
 <p>Next, we’ll move on to the third column</p>
 </section>
-<section id="row-reduction-an-example-26" class="slide level2">
+<section id="row-reduction-an-example-25" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -901,7 +885,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 </div>
 </section>
-<section id="row-reduction-an-example-27" class="slide level2">
+<section id="row-reduction-an-example-26" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -921,25 +905,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
 </div>
 </section>
-<section id="row-reduction-an-example-28" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{-25} &amp; -15 &amp; 19 &amp; 64\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{18} &amp; 9 &amp; -9 &amp; -33\end{array}\right]\]</span></p>
-<p>Next, we’ll move on to the third column, where we’ll want</p>
-<div>
-<ol type="i">
-<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
-<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
-</ol>
-</div>
-<p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
-<p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
-</section>
-<section id="row-reduction-an-example-29" class="slide level2">
+<section id="row-reduction-an-example-27" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -962,7 +928,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 <p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
 </section>
-<section id="row-reduction-an-example-30" class="slide level2">
+<section id="row-reduction-an-example-28" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -980,80 +946,48 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 <p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
 </section>
+<section id="row-reduction-an-example-29" class="slide level2">
+<h2>Row Reduction – An Example</h2>
+<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
+\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
+\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{18} &amp; 9 &amp; -9 &amp; -33\end{array}\right] \substack{R_5 \leftarrow 13R_5 + 18R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
+\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
+\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{0} &amp; -81 &amp; 171 &amp; 417\end{array}\right]\]</span></p>
+<p>Next, we’ll move on to the third column, where we’ll want</p>
+<div>
+<ol type="i">
+<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
+<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
+</ol>
+</div>
+<p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
+<p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
+</section>
+<section id="row-reduction-an-example-30" class="slide level2">
+<h2>Row Reduction – An Example</h2>
+<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
+\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
+\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
+\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -81 &amp; 171 &amp; 417\end{array}\right]\]</span></p>
+<p>Next, we’ll move on to the third column, where we’ll want</p>
+<div>
+<ol type="i">
+<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
+<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
+</ol>
+</div>
+<p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
+<p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
+</section>
 <section id="row-reduction-an-example-31" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{18} &amp; 9 &amp; -9 &amp; -33\end{array}\right] \substack{R_5 \leftarrow 13R_5 + 18R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{0} &amp; -81 &amp; 171 &amp; 417\end{array}\right]\]</span></p>
-<p>Next, we’ll move on to the third column, where we’ll want</p>
-<div>
-<ol type="i">
-<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
-<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
-</ol>
-</div>
-<p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
-<p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
-</section>
-<section id="row-reduction-an-example-32" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{18} &amp; 9 &amp; -9 &amp; -33\end{array}\right] \substack{R_5 \leftarrow 13R_5 + 18R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{red}{0} &amp; -81 &amp; 171 &amp; 417\end{array}\right]\]</span></p>
-<p>Next, we’ll move on to the third column, where we’ll want</p>
-<div>
-<ol type="i">
-<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
-<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
-</ol>
-</div>
-<p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
-<p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
-</section>
-<section id="row-reduction-an-example-33" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{red}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{red}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -81 &amp; 171 &amp; 417\end{array}\right]\]</span></p>
-<p>Next, we’ll move on to the third column, where we’ll want</p>
-<div>
-<ol type="i">
-<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
-<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
-</ol>
-</div>
-<p><strong>Note:</strong> Again, we’ve worked hard on those blue entries – their values should not change at any point!</p>
-<p>We have <em>a</em> pivot in row three, so we’ll use it to “zero-out” all the entries below it.</p>
-</section>
-<section id="row-reduction-an-example-34" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{darkorange}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -81 &amp; 171 &amp; 417\end{array}\right]\]</span></p>
-</section>
-<section id="row-reduction-an-example-35" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -1065,7 +999,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>These numbers are getting kind of big – let’s shrink some back down a bit…</p>
 </div>
 </section>
-<section id="row-reduction-an-example-36" class="slide level2">
+<section id="row-reduction-an-example-32" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -1080,7 +1014,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -1 &amp; 18 &amp; 74\end{array}\right]\]</span></p>
 <p>These numbers are getting kind of big – let’s shrink some back down a bit…</p>
 </section>
-<section id="row-reduction-an-example-37" class="slide level2">
+<section id="row-reduction-an-example-33" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; 3 &amp; -1 &amp; -1\\
@@ -1090,17 +1024,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -1 &amp; 18 &amp; 74\end{array}\right]\]</span></p>
 <p>Now we’ll move to the fourth column</p>
 </section>
-<section id="row-reduction-an-example-38" class="slide level2">
-<h2>Row Reduction – An Example</h2>
-<p><span class="math display">\[\left[\begin{array}{rrrrr|r}
-\color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; 3 &amp; -1 &amp; -1\\
-\color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; \color{darkorange}{-4} &amp; -1 &amp; 2 &amp; 7\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{-13}} &amp; -11 &amp; 16 &amp; 47\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 80 &amp; -153 &amp; -343\\
-\color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -1 &amp; 18 &amp; 74\end{array}\right]\]</span></p>
-<p>Now we’ll move to the fourth column</p>
-</section>
-<section id="row-reduction-an-example-39" class="slide level2">
+<section id="row-reduction-an-example-34" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1117,7 +1041,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 </div>
 </section>
-<section id="row-reduction-an-example-40" class="slide level2">
+<section id="row-reduction-an-example-35" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1140,7 +1064,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 </section>
-<section id="row-reduction-an-example-41" class="slide level2">
+<section id="row-reduction-an-example-36" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1158,7 +1082,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 </section>
-<section id="row-reduction-an-example-42" class="slide level2">
+<section id="row-reduction-an-example-37" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1182,7 +1106,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 </section>
-<section id="row-reduction-an-example-43" class="slide level2">
+<section id="row-reduction-an-example-38" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1200,7 +1124,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 </section>
-<section id="row-reduction-an-example-44" class="slide level2">
+<section id="row-reduction-an-example-39" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1219,7 +1143,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the <em>pivot position</em>, we’ll use it to “zero out” the entry below it.</p>
 </section>
-<section id="row-reduction-an-example-45" class="slide level2">
+<section id="row-reduction-an-example-40" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1244,7 +1168,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
 <p>Now that we have a <span class="math inline">\(1\)</span> in the <em>pivot position</em>, we’ll use it to “zero out” the entry below it.</p>
 </section>
-<section id="row-reduction-an-example-46" class="slide level2">
+<section id="row-reduction-an-example-41" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{red}{3} &amp; -1 &amp; -1\\
@@ -1253,8 +1177,17 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -18 &amp; -74\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; 1287 &amp; 5577
 \end{array}\right]\]</span></p>
+<p>Now we’ll move to the fourth column, where we’ll again want</p>
+<div>
+<ol type="i">
+<li>A <span class="math inline">\(1\)</span> in the <em>pivot position</em> (if possible, without fractions)</li>
+<li>Every entry below the <em>pivot</em> to be <span class="math inline">\(0\)</span></li>
+</ol>
+</div>
+<p><strong>Note:</strong> Remember that, we’ve worked hard on those blue entries – their values should not change at any point!</p>
+<p>Now that we have a <span class="math inline">\(1\)</span> in the <em>pivot position</em>, we’ll use it to “zero out” the entry below it.</p>
 </section>
-<section id="row-reduction-an-example-47" class="slide level2">
+<section id="row-reduction-an-example-42" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; -1 &amp; -1\\
@@ -1270,7 +1203,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Both non-zero entries are divisible by <span class="math inline">\(429\)</span></p>
 </div>
 </section>
-<section id="row-reduction-an-example-48" class="slide level2">
+<section id="row-reduction-an-example-43" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; -1 &amp; -1\\
@@ -1288,7 +1221,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Those numbers in the bottom row have gotten quite large again – we’ll scale them down</p>
 <p>Both non-zero entries are divisible by <span class="math inline">\(429\)</span></p>
 </section>
-<section id="row-reduction-an-example-49" class="slide level2">
+<section id="row-reduction-an-example-44" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; -1 &amp; -1\\
@@ -1300,7 +1233,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Those numbers in the bottom row have gotten quite large again – we’ll scale them down</p>
 <p>Both non-zero entries are divisible by <span class="math inline">\(429\)</span></p>
 </section>
-<section id="row-reduction-an-example-50" class="slide level2">
+<section id="row-reduction-an-example-45" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; -1 &amp; -1\\
@@ -1312,15 +1245,15 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <div class="fragment">
 <p>We’ve made it to <em>Row Echelon Form</em>. From here, we see that</p>
 <ol type="1">
-<li class="fragment">There are solutions to the system, since the rightmost column is not a <em>pivot</em> column.</li>
-<li class="fragment">There is a unique solution to the system, since every column to the left of the augmenting line is a <em>pivot</em> column.</li>
+<li class="fragment">There <u>are solutions to the system</u>, since the rightmost column is not a <em>pivot</em> column.</li>
+<li class="fragment">There is <u>a unique solution to the system</u>, since every column to the left of the augmenting line is a <em>pivot</em> column.</li>
 </ol>
 </div>
 <div class="fragment">
 <p>Unfortunately, we can’t read the solutions off from this matrix – we need <em>Reduced Row Echelon Form</em> for that.</p>
 </div>
 </section>
-<section id="row-reduction-an-example-51" class="slide level2">
+<section id="row-reduction-an-example-46" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; -1 &amp; -1\\
@@ -1340,7 +1273,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>This might require changing the values of our pivot entries, but none of our zeroes should be changed.</p>
 </div>
 </section>
-<section id="row-reduction-an-example-52" class="slide level2">
+<section id="row-reduction-an-example-47" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; -1 &amp; -1\\
@@ -1351,7 +1284,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Let’s begin from the column just to the left of the augmenting line</p>
 </section>
-<section id="row-reduction-an-example-53" class="slide level2">
+<section id="row-reduction-an-example-48" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1365,7 +1298,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <li class="fragment">use the <em>pivot</em> to “zero-out” the entries above it</li>
 </ol>
 </section>
-<section id="row-reduction-an-example-54" class="slide level2">
+<section id="row-reduction-an-example-49" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1387,7 +1320,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-55" class="slide level2">
+<section id="row-reduction-an-example-50" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1403,7 +1336,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-56" class="slide level2">
+<section id="row-reduction-an-example-51" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1425,7 +1358,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-57" class="slide level2">
+<section id="row-reduction-an-example-52" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1441,7 +1374,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-58" class="slide level2">
+<section id="row-reduction-an-example-53" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1463,7 +1396,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-59" class="slide level2">
+<section id="row-reduction-an-example-54" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1479,7 +1412,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-60" class="slide level2">
+<section id="row-reduction-an-example-55" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{darkorange}{2} &amp; \color{darkorange}{-2} &amp; \color{darkorange}{3} &amp; \color{red}{-1} &amp; -1\\
@@ -1501,7 +1434,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-61" class="slide level2">
+<section id="row-reduction-an-example-56" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{darkorange}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1514,7 +1447,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Now we’ll move back to the fourth column</p>
 </div>
 </section>
-<section id="row-reduction-an-example-62" class="slide level2">
+<section id="row-reduction-an-example-57" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{red}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1528,7 +1461,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <li class="fragment">use the <em>pivot</em> to “zero-out” the entries above it</li>
 </ol>
 </section>
-<section id="row-reduction-an-example-63" class="slide level2">
+<section id="row-reduction-an-example-58" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{darkorange}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1550,7 +1483,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-64" class="slide level2">
+<section id="row-reduction-an-example-59" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{red}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1566,7 +1499,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-65" class="slide level2">
+<section id="row-reduction-an-example-60" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{red}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1588,7 +1521,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-66" class="slide level2">
+<section id="row-reduction-an-example-61" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{red}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1604,7 +1537,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-67" class="slide level2">
+<section id="row-reduction-an-example-62" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{red}{9} &amp; \color{blue}{0} &amp; 10\\
@@ -1626,7 +1559,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-68" class="slide level2">
+<section id="row-reduction-an-example-63" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{darkorange}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1639,7 +1572,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Next, we move back again to the third column</p>
 </div>
 </section>
-<section id="row-reduction-an-example-69" class="slide level2">
+<section id="row-reduction-an-example-64" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{red}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1656,7 +1589,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Before we do that, the non-zero entries in the third row are large but they’re both divisible by <span class="math inline">\(13\)</span>, so let’s scale that row.</p>
 </div>
 </section>
-<section id="row-reduction-an-example-70" class="slide level2">
+<section id="row-reduction-an-example-65" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{red}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1679,7 +1612,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p>Before we do that, the non-zero entries in the third row are large but they’re both divisible by <span class="math inline">\(13\)</span>, so let’s scale that row.</p>
 </section>
-<section id="row-reduction-an-example-71" class="slide level2">
+<section id="row-reduction-an-example-66" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{red}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1696,7 +1629,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <p>Before we do that, the non-zero entries in the third row are large but they’re both divisible by <span class="math inline">\(13\)</span>, so let’s scale that row.</p>
 </section>
-<section id="row-reduction-an-example-72" class="slide level2">
+<section id="row-reduction-an-example-67" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{red}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1718,7 +1651,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-73" class="slide level2">
+<section id="row-reduction-an-example-68" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{red}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1734,7 +1667,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-74" class="slide level2">
+<section id="row-reduction-an-example-69" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{red}{-6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -26\\
@@ -1756,7 +1689,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-75" class="slide level2">
+<section id="row-reduction-an-example-70" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{darkorange}{6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -36\\
@@ -1767,7 +1700,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Continuing on, we move back to the second column,</p>
 </section>
-<section id="row-reduction-an-example-76" class="slide level2">
+<section id="row-reduction-an-example-71" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{red}{6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -36\\
@@ -1781,7 +1714,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <li class="fragment">use the <em>pivot</em> to “zero-out” the entry above it</li>
 </ol>
 </section>
-<section id="row-reduction-an-example-77" class="slide level2">
+<section id="row-reduction-an-example-72" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{red}{6} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -36\\
@@ -1803,7 +1736,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </ol>
 </div>
 </section>
-<section id="row-reduction-an-example-78" class="slide level2">
+<section id="row-reduction-an-example-73" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10\\
@@ -1816,7 +1749,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </div>
 </section>
-<section id="row-reduction-an-example-79" class="slide level2">
+<section id="row-reduction-an-example-74" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{3}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10\\
@@ -1833,7 +1766,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-80" class="slide level2">
+<section id="row-reduction-an-example-75" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1844,7 +1777,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-81" class="slide level2">
+<section id="row-reduction-an-example-76" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1861,7 +1794,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-82" class="slide level2">
+<section id="row-reduction-an-example-77" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1872,7 +1805,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-83" class="slide level2">
+<section id="row-reduction-an-example-78" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1889,7 +1822,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-84" class="slide level2">
+<section id="row-reduction-an-example-79" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1900,7 +1833,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-85" class="slide level2">
+<section id="row-reduction-an-example-80" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1917,7 +1850,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \end{array}\right]\]</span></p>
 <p>Now we’ll scale each row to obtain a <em>pivot entry</em> of <span class="math inline">\(1\)</span> and solve the system</p>
 </section>
-<section id="row-reduction-an-example-86" class="slide level2">
+<section id="row-reduction-an-example-81" class="slide level2">
 <h2>Row Reduction – An Example</h2>
 <p><span class="math display">\[\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; \color{blue}{0} &amp; -10/3\\
@@ -1931,6 +1864,32 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 </div>
 <div class="fragment">
 <p><span class="math display">\[x_1 = \frac{-10}{3},~~~x_2 = \frac{-13}{3},~~~x_3 = \frac{-5}{3},~~~x_4 = 4,~~~x_5 = \frac{13}{3}\]</span></p>
+</div>
+</section>
+<section id="comments" class="slide level2">
+<h2>Comments</h2>
+<ol type="1">
+<li class="fragment">Row reduction is a tedious procedure that requires lots of care and attention to detail.</li>
+<li class="fragment"><em>Row Echelon Form</em> tells us about the <em>number</em> of solutions to a linear system.</li>
+<li class="fragment">If we want to know what those solutions are, then we’ll need to obtain <em>Reduced Row Echelon Form</em></li>
+</ol>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><strong>Obtaining <em>Row Echelon Form</em>:</strong> Start from the leftmost column, use the pivot in the top-left position to “zero-out” the entries below the pivot, move to the second column and do the same, keep working from the top-left to bottom-right of the augmented coefficient matrix.</p>
+</div>
+</div>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><span class="math inline">\(\bigstar\)</span> The best <em>pivots</em> are <span class="math inline">\(1\)</span>’s because they are easy to use – scale or swap rows to put a <span class="math inline">\(1\)</span> in the pivot position if possible, but it’s probably not worth doing if it forces you to deal with fractions.</p>
+</div>
+</div>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><strong>Obtaining <em>Reduced Row Echelon Form</em>:</strong> Start with the rightmost pivot and use it to “zero-out” the entries above it, move to the next pivot towards the “northwest” and do the same, continue moving from the bottom-right to top-left of the augmented coefficient matrix.</p>
+<ul>
+<li class="fragment">Only try to reach RREF in cases where solutions to the system exist.</li>
+</ul>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
