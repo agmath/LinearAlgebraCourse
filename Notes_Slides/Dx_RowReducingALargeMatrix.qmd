@@ -1756,9 +1756,13 @@ $$x_1 = \frac{-10}{3},~~~x_2 = \frac{-13}{3},~~~x_3 = \frac{-5}{3},~~~x_4 = 4,~~
 
 ## Comments
 
+<div style="font-size:18pt">
+
 1. Row reduction is a tedious procedure that requires lots of care and attention to detail.
 2. *Row Echelon Form* tells us about the *number* of solutions to a linear system.
 3. If we want to know what those solutions are, then we'll need to obtain *Reduced Row Echelon Form*
+
+</div>
 
 . . .
 
@@ -1785,4 +1789,16 @@ $\bigstar$ The best *pivots* are $1$'s because they are easy to use -- scale or 
 + Only try to reach RREF in cases where solutions to the system exist.
 
 </div>
+
+. . .
+
+<center> 
+
+<div style="font-size:18pt">
+
+Unfortunately, the only path to comfort here is with practice.
+
+</div>
+
+</center>
 
