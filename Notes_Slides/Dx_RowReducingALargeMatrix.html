@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-09-17">
+  <meta name="dcterms.date" content="2025-09-18">
   <title>MAT 350: The Row Reduction Procedure via an Example</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -337,7 +337,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">September 17, 2025</p>
+  <p class="date">September 18, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -627,7 +627,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; -5 &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; 1 &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; -8 &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{red}{0} &amp; 5 &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{red}{0} &amp; 5 &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>From here, we’ll start the row reduction procedure.</p>
 <p>We’ll start with the leftmost column, where we want</p>
 <div>
@@ -646,7 +646,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; -5 &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; 1 &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; -8 &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; 5 &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; 5 &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <div class="fragment">
 <p>Now, we’ll move to the second column</p>
 </div>
@@ -658,7 +658,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{red}{-5} &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; \color{red}{1} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <ol type="i">
 <li class="fragment">A <span class="math inline">\(1\)</span> in the <em>pivot</em> position (if possible, without fractions)</li>
@@ -675,12 +675,12 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{red}{-5} &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; \color{red}{1} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_2\leftrightarrow R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_2\leftrightarrow R_3\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
 \color{blue}{0} &amp; \color{red}{1} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{-5} &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -697,7 +697,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{1} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{-5} &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -714,7 +714,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{-5} &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -734,12 +734,12 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{-5} &amp; 7 &amp; -6 &amp; 6 &amp; 12\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_3 \leftarrow R_3 + 5R_2\\ \longrightarrow}\left[\begin{array}{rrrrr|r}
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_3 \leftarrow R_3 + 5R_2\\ \longrightarrow}\left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{red}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -757,7 +757,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -775,12 +775,12 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{red}{-8} &amp; 7 &amp; -7 &amp; 3 &amp; 8\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_4\leftarrow R_4 + 8R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_4\leftarrow R_4 + 8R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{red}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -798,7 +798,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right]\]</span></p>
 <p>Now, we’ll move to the second column, where we’ll want</p>
 <div>
 <ol type="i">
@@ -816,7 +816,7 @@ x_1 &amp; + &amp; 2x_2 &amp; - &amp; 2x_3 &amp; + &amp; 3x_4 &amp; - &amp; x_5 &
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -25 &amp; -15 &amp; 19 &amp; 64\\
-\color{blue}{0} &amp; \color{red}{5} &amp; -1 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_5 \leftarrow R_5 + \left(-5\right)R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
+\color{blue}{0} &amp; \color{red}{5} &amp; -2 &amp; 4 &amp; 1 &amp; 2\end{array}\right] \substack{R_5 \leftarrow R_5 + \left(-5\right)R_2\\ \longrightarrow} \left[\begin{array}{rrrrr|r}
 \color{blue}{\boxed{1}} &amp; \color{red}{2} &amp; -2 &amp; 3 &amp; -1 &amp; -1\\
 \color{blue}{0} &amp; \color{blue}{\boxed{1}} &amp; -4 &amp; -1 &amp; 2 &amp; 7\\
 \color{blue}{0} &amp; \color{blue}{0} &amp; -13 &amp; -11 &amp; 16 &amp; 47\\
