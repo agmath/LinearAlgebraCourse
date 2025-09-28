@@ -128,15 +128,15 @@ $$x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n} = \vec{b}$$
 
 . . .
 
-The vector equation is equivalent to the matrix equation
+The vector equation is equivalent to the linear system
 
 . . .
 
-$$\begin{bmatrix} 1 & -3\\ 3 & 2\\ 1 & 1\end{bmatrix}\begin{bmatrix} x_1\\ x_1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$$
+$$\left\{\begin{array}{rcr} x_1 - 3x_2 & = & -15\\ 3x_1 + 2x_2 & = & -1\\ x_1 + x_2 & = & -7\end{array}\right.$$
 
 . . . 
 
-Because of this, we can solve the vector equation in the same way that we solve the matrix equation...
+Because of this, we can solve the vector equation in the same way that we solve the linear system...
 
 . . . 
 
@@ -299,12 +299,12 @@ This means that vector equations are not new.
 For any given vector equation, there is a corresponding...
 
 + augmented coefficient matrix
++ linear system
 + matrix equation
-+ linear system 
 
 . . .
 
-The tools we've used to investigate and find solutions in those scenarios remain directly applicable again here.
+The tools we've used to investigate and find solutions to linear systems remain directly applicable again here.
 
 ## Equivalencies (Cont'd)
 
@@ -525,7 +525,7 @@ $$x_1\begin{bmatrix}1\\ 0\\ 1\\ 0\end{bmatrix} + x_2\begin{bmatrix} 0\\ 1\\ 0\\ 
 
 ## Examples to Try: Example \#4
 
-**Example:** Given the vectors $\vec{u_1} = \begin{bmatrix} 1\\ 1\\ 0\\ 0\\ 0\end{bmatrix}$, $\vec{u_2} - \begin{bmatrix} 0\\ 0\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{u_3} = \begin{bmatrix} 0\\ 0\\ 0\\ 1\\ 1\end{bmatrix}$, and $\vec{y} = \begin{bmatrix} 2\\ 2\\ 3\\ 5\\ 2\end{bmatrix}$, find weights that allow you to write $\vec{y}$ as a linear combination of the vectors $\vec{u_1}$ , $\vec{u_2}$, and $\vec{u_3}$. If such weights do not exist, provide justification for why they do not.
+**Example:** Given the vectors $\vec{u_1} = \begin{bmatrix} 1\\ 1\\ 0\\ 0\\ 0\end{bmatrix}$, $\vec{u_2} = \begin{bmatrix} 0\\ 0\\ 1\\ 1\\ 0\end{bmatrix}$, $\vec{u_3} = \begin{bmatrix} 0\\ 0\\ 0\\ 1\\ 1\end{bmatrix}$, and $\vec{y} = \begin{bmatrix} 2\\ 2\\ 3\\ 5\\ 2\end{bmatrix}$, find weights that allow you to write $\vec{y}$ as a linear combination of the vectors $\vec{u_1}$ , $\vec{u_2}$, and $\vec{u_3}$. If such weights do not exist, provide justification for why they do not.
 
 ## Examples to Try: Example \#5
 
