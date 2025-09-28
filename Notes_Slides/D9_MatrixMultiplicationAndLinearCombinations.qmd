@@ -183,6 +183,35 @@ Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \
 Consider the matrix-vector product 
 
 \begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
+&= \begin{bmatrix} 1\left(3\right)\\ 8\left(3\right)\\ -2\left(3\right)\\ 0\left(3\right)\end{bmatrix} + \begin{bmatrix} 5\left(2\right)\\ 4\left(2\right)\\ 2\left(2\right)\\ 0\left(2\right)\end{bmatrix} + \begin{bmatrix} -3\left(-4\right)\\ 0\left(-4\right)\\ 1\left(-4\right)\\ -1\left(-4\right)\end{bmatrix}
+\end{align}
+
+:::
+
+::::
+
+## Matrix Multiplication as a Linear Combination of Column Vectors
+
+::::{.columns}
+
+:::{.column width=50%}
+
+<center> **General** </center>
+
+Consider the matrix product $A\vec{x}$, where $A = \begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}$
+
+\begin{align}\begin{bmatrix} \vec{a_1} & \vec{a_2} & \cdots & \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}
+\end{align}
+
+:::
+
+:::{.column width=50%}
+
+<center> **Example** </center>
+
+Consider the matrix-vector product 
+
+\begin{align} &\begin{bmatrix} 1 & 5 & -3\\ 8 & 4 & 0\\ -2 & 2 & 1\\ 0 & 0 & -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
 &= 3\begin{bmatrix} 1\\ 8\\ -2\\ 0\end{bmatrix} + 2\begin{bmatrix} 5\\ 4\\ 2\\ 0\end{bmatrix} + \left(-4\right)\begin{bmatrix} -3\\ 0\\ 1\\ -1\end{bmatrix}
 \end{align}
 

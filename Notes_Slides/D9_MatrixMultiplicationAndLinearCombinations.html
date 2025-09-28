@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-08-08">
+  <meta name="dcterms.date" content="2025-09-28">
   <title>MAT 350: Matrix Multiplication and Linear Combinations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -337,7 +337,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">August 8, 2025</p>
+  <p class="date">September 28, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -473,12 +473,33 @@ a:visited {
 </center>
 <p>Consider the matrix-vector product</p>
 <p><span class="math display">\[\begin{align} &amp;\begin{bmatrix} 1 &amp; 5 &amp; -3\\ 8 &amp; 4 &amp; 0\\ -2 &amp; 2 &amp; 1\\ 0 &amp; 0 &amp; -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
-&amp;= 3\begin{bmatrix} 1\\ 8\\ -2\\ 0\end{bmatrix} + 2\begin{bmatrix} 5\\ 4\\ 2\\ 0\end{bmatrix} + \left(-4\right)\begin{bmatrix} -3\\ 0\\ 1\\ -1\end{bmatrix}
+&amp;= \begin{bmatrix} 1\left(3\right)\\ 8\left(3\right)\\ -2\left(3\right)\\ 0\left(3\right)\end{bmatrix} + \begin{bmatrix} 5\left(2\right)\\ 4\left(2\right)\\ 2\left(2\right)\\ 0\left(2\right)\end{bmatrix} + \begin{bmatrix} -3\left(-4\right)\\ 0\left(-4\right)\\ 1\left(-4\right)\\ -1\left(-4\right)\end{bmatrix}
 \end{align}\]</span></p>
 </div>
 </div>
 </section>
 <section id="matrix-multiplication-as-a-linear-combination-of-column-vectors-4" class="slide level2">
+<h2>Matrix Multiplication as a Linear Combination of Column Vectors</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<strong>General</strong>
+</center>
+<p>Consider the matrix product <span class="math inline">\(A\vec{x}\)</span>, where <span class="math inline">\(A = \begin{bmatrix} \vec{a_1} &amp; \vec{a_2} &amp; \cdots &amp; \vec{a_n}\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\begin{align}\begin{bmatrix} \vec{a_1} &amp; \vec{a_2} &amp; \cdots &amp; \vec{a_n}\end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\end{bmatrix}
+\end{align}\]</span></p>
+</div><div class="column" style="width:50%;">
+<center>
+<strong>Example</strong>
+</center>
+<p>Consider the matrix-vector product</p>
+<p><span class="math display">\[\begin{align} &amp;\begin{bmatrix} 1 &amp; 5 &amp; -3\\ 8 &amp; 4 &amp; 0\\ -2 &amp; 2 &amp; 1\\ 0 &amp; 0 &amp; -1\end{bmatrix}\begin{bmatrix} 3\\ 2\\ -4\end{bmatrix}\\
+&amp;= 3\begin{bmatrix} 1\\ 8\\ -2\\ 0\end{bmatrix} + 2\begin{bmatrix} 5\\ 4\\ 2\\ 0\end{bmatrix} + \left(-4\right)\begin{bmatrix} -3\\ 0\\ 1\\ -1\end{bmatrix}
+\end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section id="matrix-multiplication-as-a-linear-combination-of-column-vectors-5" class="slide level2">
 <h2>Matrix Multiplication as a Linear Combination of Column Vectors</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -500,7 +521,7 @@ a:visited {
 </div>
 </div>
 </section>
-<section id="matrix-multiplication-as-a-linear-combination-of-column-vectors-5" class="slide level2">
+<section id="matrix-multiplication-as-a-linear-combination-of-column-vectors-6" class="slide level2">
 <h2>Matrix Multiplication as a Linear Combination of Column Vectors</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
