@@ -120,11 +120,11 @@ $$x_1\vec{a_1} + x_2\vec{a_2} + \cdots + x_n\vec{a_n} = \vec{b}$$
 
 . . . 
 
-**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 3\\ 1\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} -3\\ 2\\ 1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$. Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Consider the vectors $\vec{a_1} = \begin{bmatrix} 1\\ 3\\ 1\end{bmatrix}$, $\vec{a_2} = \begin{bmatrix} -3\\ 2\\ -1\end{bmatrix}$, and $\vec{b} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$. Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 . . .
 
@@ -132,7 +132,7 @@ The vector equation is equivalent to the linear system
 
 . . .
 
-$$\left\{\begin{array}{rcr} x_1 - 3x_2 & = & -15\\ 3x_1 + 2x_2 & = & -1\\ x_1 + x_2 & = & -7\end{array}\right.$$
+$$\left\{\begin{array}{rcr} x_1 - 3x_2 & = & -15\\ 3x_1 + 2x_2 & = & -1\\ x_1 - x_2 & = & -7\end{array}\right.$$
 
 . . . 
 
@@ -144,7 +144,7 @@ Because of this, we can solve the vector equation in the same way that we solve 
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 . . . 
 
@@ -176,7 +176,7 @@ Because of this, we can solve the vector equation in the same way that we solve 
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 ::::{.columns}
 
@@ -192,7 +192,7 @@ Because of this, we can solve the vector equation in the same way that we solve 
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 ::::{.columns}
 
@@ -209,7 +209,7 @@ Because of this, we can solve the vector equation in the same way that we solve 
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 ::::{.columns}
 
@@ -224,7 +224,7 @@ Because of this, we can solve the vector equation in the same way that we solve 
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 ::::{.columns}
 
@@ -245,7 +245,7 @@ Because of this, we can solve the vector equation in the same way that we solve 
 
 ## Solving a Vector Equation
 
-**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ 1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
+**Example:** Determine whether the vector equation $x_1\begin{bmatrix} 1\\ 3\\ 1\end{bmatrix} + x_2\begin{bmatrix} -3\\ 2\\ -1\end{bmatrix} = \begin{bmatrix} -15\\ -1\\ -7\end{bmatrix}$ has solutions (and, if so, what those solutions are).
 
 ::::{.columns}
 
