@@ -1,0 +1,21 @@
+---
+title: "MAT350 Exit Ticket: Spans of Vectors"
+format: pdf
+---
+
+**Name:** $\underline{\hspace{4in}}$
+
+1. Rate your confidence on today's content
+$$\text{(Very uncomfortable)}~~~~~1~~~~~2~~~~~3~~~~~4~~~~~5~~~~~\text{(Very comfortable)}$$
+
+2. What's one concept from today that you feel you understand well or are getting better at?
+
+\vspace{0.5in}
+
+3. What's one question you still have about today's discussion?
+
+\vspace{0.75in}
+
+<br/>
+
+**Task:** Consider the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 3\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ -2\\ 2\end{bmatrix}$, and $\vec{v_3} = \begin{bmatrix} 1\\ 4\\ -1\end{bmatrix}$. Is the vector $\vec{b} = \begin{bmatrix} 3\\ 3\\ -1\end{bmatrix}$ in $\text{Span}\left(\vec{v_1}, \vec{v_2}, \vec{v_3}\right)$?
