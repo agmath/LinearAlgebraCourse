@@ -88,7 +88,7 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 . . .
 
-**New Question:** Given the collection of vectors $\vec{v_1},~\vec{v_2},~\vdots,~\vec{v_p}$, "*what types of vectors can be written as linear combinations of the vectors in my collection?*"
+**New Question:** Given the collection of vectors $\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}$, "*what types of vectors can be written as linear combinations of the vectors in my collection?*"
 
 + This is similar to what was asked in the third warm-up problem in this notebook. 
 + That is the question we'll focus on in this notebook.
