@@ -445,6 +445,18 @@ There is an easier way, but it requires a bit more background than we currently 
 
 **Example:** Determine the span of the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 1\end{bmatrix}$ and $\vec{v_2} = \begin{bmatrix} -1\\ 2\end{bmatrix}$. Would the span change if we included a third vector $\vec{v_3} = \begin{bmatrix} 2\\ 3\end{bmatrix}$? Why or why not?
 
+## Exit Ticket Task
+
+Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header), answer the questions, and complete the *task* below.
+
+<br/>
+
+*Note.* Today's discussion is listed as `10. The Span of a Set of Vectors`
+
+<br/>
+
+**Task:** Consider the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 3\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ -2\\ 2\end{bmatrix}$, and $\vec{v_3} = \begin{bmatrix} 1\\ 4\\ -1\end{bmatrix}$. Is the vector $\vec{b} = \begin{bmatrix} 3\\ 3\\ -1\end{bmatrix}$ in $\text{Span}\left(\vec{v_1}, \vec{v_2}, \vec{v_3}\right)$?
+
 ## Summary
 
 To be added...
