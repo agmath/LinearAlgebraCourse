@@ -221,7 +221,120 @@ Any column of the coefficient matrix which is not a *pivot column* corresponds t
 
 ## Completed Example \#1
 
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+. . .
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\substack{R_1 \leftrightarrow R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} -1 & 1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 2 & -1 & 1 & 0\end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\substack{R_1 \leftrightarrow R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} -1 & 1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 2 & -1 & 1 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 2 & -1 & 1 & 0\end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\substack{R_1 \leftrightarrow R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} -1 & 1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 2 & -1 & 1 & 0\end{array}\right]\\
+&\substack{R_1 \leftarrow \left(-1\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 2 & -1 & 1 & 0\end{array}\right]\\
+&\substack{R_3 \leftarrow R_3 + \left(-2\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 0 & 1 & 1 & 0\end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\sim \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 0 & 1 & 1 & 0\end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\sim \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 0 & 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftrightarrow R_3\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 1 & 1 & 0\\ 0 & 3 & 2 & 0 \end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\sim \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 0 & 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftrightarrow R_3\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 1 & 1 & 0\\ 0 & 3 & 2 & 0 \end{array}\right]\\
+&\substack{R_3\leftarrow R_3 + \left(-3\right)R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 1 & 1 & 0\\ 0 & 0 & -1 & 0 \end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\sim \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 3 & 2 & 0\\ 0 & 1 & 1 & 0\end{array}\right]\\
+&\substack{R_2\leftrightarrow R_3\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & -1 & 0 & 0\\ 0 & 1 & 1 & 0\\ 0 & 3 & 2 & 0 \end{array}\right]\\
+&\substack{R_3\leftarrow R_3 + \left(-3\right)R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} \boxed{~1~} & -1 & 0 & 0\\ 0 & \boxed{~1~} & 1 & 0\\ 0 & 0 & \boxed{~-1~} & 0 \end{array}\right]\end{align}
+
+## Completed Example \#1
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 0\\ -1\\ 2\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 3\\ 1\\ -1\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ 0\\ 1\end{bmatrix}$ are linearly independent.
+
+\begin{align}\left[\begin{array}{rrr|r} 0 & 3 & 2 & 0\\ -1 & 1 & 0 & 0\\ 2 & -1 & 1 & 0\end{array}\right] &\sim \left[\begin{array}{rrr|r} \boxed{~1~} & -1 & 0 & 0\\ 0 & \boxed{~1~} & 1 & 0\\ 0 & 0 & \boxed{~-1~} & 0 \end{array}\right]\end{align}
+
++ There is a pivot in every column corresponding to a variable in the REF augmented matrix.
++ There are no free variables.
++ There is a unique solution to the homogeneous equation.
++ The vectors $\vec{v_1}$, $\vec{v_2}$, and $\vec{v_3}$ are linearly independent!
+
 ## Completed Example \#2
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 2\\ 0\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ 1\\ 1\\ -2\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ -5\\ -1\\ 10\end{bmatrix}$ are linearly independent.
+
+. . .
+
+\begin{align} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 2 & 1 & -1 & 0\\ 0 & -2 & 10 & 0\end{array}\right]
+\end{align}
+
+## Completed Example \#2
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 2\\ 0\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ 1\\ 1\\ -2\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ -5\\ -1\\ 10\end{bmatrix}$ are linearly independent.
+
+\begin{align} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 2 & 1 & -1 & 0\\ 0 & -2 & 10 & 0\end{array}\right] &\substack{R_3\leftarrow R_3 + \left(-2\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 0 & 1 & -5 & 0\\ 0 & -2 & 10 & 0\end{array}\right]
+\end{align}
+
+## Completed Example \#2
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 2\\ 0\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ 1\\ 1\\ -2\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ -5\\ -1\\ 10\end{bmatrix}$ are linearly independent.
+
+\begin{align} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 2 & 1 & -1 & 0\\ 0 & -2 & 10 & 0\end{array}\right] &\substack{R_3\leftarrow R_3 + \left(-2\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 0 & 1 & -5 & 0\\ 0 & -2 & 10 & 0\end{array}\right]\\
+&\substack{R_3 \leftarrow R_3 + \left(-1\right)R_2\\ R_4 \leftarrow R_4 + 2R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\end{array}\right]
+\end{align}
+
+## Completed Example \#2
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 2\\ 0\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ 1\\ 1\\ -2\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ -5\\ -1\\ 10\end{bmatrix}$ are linearly independent.
+
+\begin{align} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 2 & 1 & -1 & 0\\ 0 & -2 & 10 & 0\end{array}\right] &\substack{R_3\leftarrow R_3 + \left(-2\right)R_1\\ \longrightarrow} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 0 & 1 & -5 & 0\\ 0 & -2 & 10 & 0\end{array}\right]\\
+&\substack{R_3 \leftarrow R_3 + \left(-1\right)R_2\\ R_4 \leftarrow R_4 + 2R_2\\ \longrightarrow} \left[\begin{array}{rrr|r} \boxed{~1~} & 0 & 2 & 0\\ 0 & \boxed{~1~} & -5 & 0\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\end{array}\right]
+\end{align}
+
+## Completed Example \#2
+
+**Example:** Determine whether the vectors $\vec{v_1} = \begin{bmatrix} 1\\ 0\\ 2\\ 0\end{bmatrix}$, $\vec{v_2} = \begin{bmatrix} 0\\ 1\\ 1\\ -2\end{bmatrix}$, and $\vec{v_1} = \begin{bmatrix} 2\\ -5\\ -1\\ 10\end{bmatrix}$ are linearly independent.
+
+<div style="font-size:18pt">
+
+\begin{align} \left[\begin{array}{rrr|r} 1 & 0 & 2 & 0\\ 0 & 1 & -5 & 0\\ 2 & 1 & -1 & 0\\ 0 & -2 & 10 & 0\end{array}\right] &\sim \left[\begin{array}{rrr|r} \boxed{~1~} & 0 & 2 & 0\\ 0 & \boxed{~1~} & -5 & 0\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\end{array}\right]
+\end{align}
+
+</div>
+
++ The third column has no pivot.
++ The variable $x_3$ is a free variable.
++ There are infinitely many solutions to the homogeneous equation.
++ The vectors $\vec{v_1}$, $\vec{v_2}$, and $\vec{v_3}$ are ***not*** linearly independent!
 
 ## Linear Independence / Dependence: Special Cases
 
