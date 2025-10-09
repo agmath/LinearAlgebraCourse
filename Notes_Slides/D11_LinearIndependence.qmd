@@ -71,7 +71,7 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 + In our discussion on spans, we considered whether a collection of $m$-component vectors spanned all of $\mathbb{R}^m$ 
 
-    + For example, does a set of three vectors from $\mathbb{R}^3$ span all of $\mathbb{R}^3$?) and, when not, we tried to determine the geometry of the space spanned by the vectors.
+    + For example, does a set of three vectors from $\mathbb{R}^3$ span all of $\mathbb{R}^3$? When not, we tried to determine the geometry of the space spanned by the vectors.
 
 + It is natural now to start considering whether we can remove any vectors from a collection without changing its span. 
 
