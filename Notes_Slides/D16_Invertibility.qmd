@@ -777,7 +777,7 @@ As usual, don't jump to Python use until you are perfectly comfortable with the 
 
 :::{.column width=50%}
 
-<center>**Using `{sympy}`**</center>
+<center>**Using `{numpy}`**</center>
 
 :::
 
@@ -808,7 +808,7 @@ A = sp.Matrix([[1, 3, -2], [0, 5, 4], [2, 1, 8]])
 
 :::{.column width=50%}
 
-<center>**Using `{sympy}`**</center>
+<center>**Using `{numpy}`**</center>
 
 ```{python}
 #| echo: true
