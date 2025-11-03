@@ -904,10 +904,16 @@ Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAI
 
 :::
 
-
-
 ## Summary
 
++ Some matrices are invertible -- that is, for some matrices $A$, there exist a corresponding matrix $A^{-1}$ so that $AA^{-1} = A^{-1}A = I$.
++ Only square matrices can have inverses, but not every square matrix is invertible.
++ A matrix $A$ is invertible if and only if the REF form of $A$ has a pivot in every row and every column.
++ Given a square matrix $A$, to find $A^{-1}$ construct the augmented matrix $\left[\begin{array}{c|c} A & I\end{array}\right]$ and use row reduction to obtain the *identity matrix* to the left of the augmenting line -- if possible, the result will be $\left[\begin{array}{c|c} I & A^{-1}\end{array}\right]$.
+
+  + There are shortcut formulas for some small matrices, but the strategy above will work every time.
+
++ If the matrix $A$ is invertible, then the solution to the matrix equation $A\vec{x} = \vec{b}$ is $\vec{x} = A^{-1}\vec{b}$.
 
 ## Homework
 

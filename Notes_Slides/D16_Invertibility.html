@@ -1108,6 +1108,16 @@ a:visited {
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
+<ul>
+<li class="fragment"><p>Some matrices are invertible – that is, for some matrices <span class="math inline">\(A\)</span>, there exist a corresponding matrix <span class="math inline">\(A^{-1}\)</span> so that <span class="math inline">\(AA^{-1} = A^{-1}A = I\)</span>.</p></li>
+<li class="fragment"><p>Only square matrices can have inverses, but not every square matrix is invertible.</p></li>
+<li class="fragment"><p>A matrix <span class="math inline">\(A\)</span> is invertible if and only if the REF form of <span class="math inline">\(A\)</span> has a pivot in every row and every column.</p></li>
+<li class="fragment"><p>Given a square matrix <span class="math inline">\(A\)</span>, to find <span class="math inline">\(A^{-1}\)</span> construct the augmented matrix <span class="math inline">\(\left[\begin{array}{c|c} A &amp; I\end{array}\right]\)</span> and use row reduction to obtain the <em>identity matrix</em> to the left of the augmenting line – if possible, the result will be <span class="math inline">\(\left[\begin{array}{c|c} I &amp; A^{-1}\end{array}\right]\)</span>.</p>
+<ul>
+<li class="fragment">There are shortcut formulas for some small matrices, but the strategy above will work every time.</li>
+</ul></li>
+<li class="fragment"><p>If the matrix <span class="math inline">\(A\)</span> is invertible, then the solution to the matrix equation <span class="math inline">\(A\vec{x} = \vec{b}\)</span> is <span class="math inline">\(\vec{x} = A^{-1}\vec{b}\)</span>.</p></li>
+</ul>
 </section>
 <section id="homework" class="slide level2">
 <h2>Homework</h2>
