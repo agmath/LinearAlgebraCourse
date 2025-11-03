@@ -877,6 +877,33 @@ np.linalg.inv(A)
 
 You solved $A\vec{x} = \vec{b_i}$ earlier by finding and using $A^{-1}$. You could have also solved using our old methods by row reducing the augmented matrix $\left[\begin{array}{c|ccc} A & \vec{b_1} & \vec{b_2} & \vec{b_3}\end{array}\right]$. Discuss any advantages/disadvantages that you see.
 
+## Exit Ticket Task
+
+Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header), answer the questions, and complete the *task* below.
+
+<br/>
+
+*Note.* Today's discussion is listed as `14. Invertibility`
+
+<br/>
+
+<div style="font-size: 20pt">
+
+**Task:** The inverse of the matrix $C = \begin{bmatrix} 1 & 2 & 1\\ 0 & 1 & 1\\ 0 & 0 & 1\end{bmatrix}$ is the matrix $C^{-1} = \begin{bmatrix} 1 & -2 & 1\\ 0 & 1 & -1\\ 0 & 0 & 1\end{bmatrix}$. Complete each of the following:
+
+</div>
+
+:::{.nonincremental}
+
+<div style="font-size: 20pt">
+
+1. Describe the procedure for obtaining $C^{-1}$, given $C$.
+2. Use $C^{-1}$ to solve the matrix equation $\begin{bmatrix} 1 & 2 & 1\\ 0 & 1 & 1\\ 0 & 0 & 1\end{bmatrix}\vec{x} = \begin{bmatrix} -3\\ 7\\ 2\end{bmatrix}$
+
+</div>
+
+:::
+
 
 
 ## Summary
