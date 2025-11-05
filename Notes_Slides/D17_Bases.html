@@ -451,12 +451,23 @@ a:visited {
 </section>
 <section id="reminders-and-todays-goal" class="slide level2">
 <h2>Reminders and Today’s Goal</h2>
+<div style="font-size: 18pt">
 <ul>
 <li class="fragment">A vector <span class="math inline">\(\vec{y}\)</span> is a <strong><em>linear combination</em></strong> of a collection of vectors <span class="math inline">\(V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}\)</span> if there exist scalars <span class="math inline">\(c_1,~c_2,~\cdots,~c_p\)</span> such that <span class="math inline">\(\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p}\)</span></li>
 <li class="fragment">The <strong><em>span</em></strong> of a collection of vectors <span class="math inline">\(V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}\)</span> is the set of all <em>linear combinations</em> of vectors in <span class="math inline">\(V\)</span>.</li>
 <li class="fragment">A collection of vectors <span class="math inline">\(V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}\)</span> is <strong><em>linearly independent</em></strong> if the only solution to he <em>homogeneous vector equation</em> <span class="math inline">\(x_1\vec{v_1} + x_2\vec{v_2} + \cdots + x_p\vec{v_p} = \vec{0}\)</span> is <span class="math inline">\(x_1 = x_2 = \cdots = x_p = 0\)</span>.</li>
 <li class="fragment">Removing a <strong><em>linearly dependent</em></strong> vector from a collection does not reduce the <em>span</em> of that collection of vectors.</li>
 </ul>
+</div>
+<div class="fragment">
+<div style="font-size: 18pt">
+<p><strong>Testing for Linear Independence and Spanning:</strong> Consider a collection of vectors <span class="math inline">\(V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}\)</span> from <span class="math inline">\(\mathbb{R}^m\)</span>, and the matrix <span class="math inline">\(A = \begin{bmatrix} \vec{v_1} &amp; \vec{v_2} &amp; \cdots &amp; \vec{v_p}\end{bmatrix}\)</span> whose columns are the vectors from <span class="math inline">\(V\)</span>.</p>
+<ul>
+<li class="fragment">The vectors in <span class="math inline">\(V\)</span> are <em>linearly independent</em> if the REF form of <span class="math inline">\(A\)</span> has a pivot in every column.</li>
+<li class="fragment">The vectors in <span class="math inline">\(V\)</span> <em>span</em> <span class="math inline">\(\mathbb{R}^m\)</span> if the REF form of <span class="math inline">\(A\)</span> has a pivot in every row.</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="reminders-and-todays-goal-1" class="slide level2">
 <h2>Reminders and Today’s Goal</h2>
@@ -515,17 +526,84 @@ a:visited {
 <p>Actually, the final bullet point above encompasses all of the others, so that is the only one we need to check.</p>
 </div>
 </section>
-<section id="examples-to-try-1" class="slide level2">
-<h2>Examples to Try #1</h2>
+<section id="completed-examples-1" class="slide level2">
+<h2>Completed Examples #1</h2>
 <div class="fragment">
 <p><strong>Example 1:</strong> Determine whether the collection of vectors</p>
 <p><span class="math display">\[V = \left\{\begin{bmatrix} 1\\ 0\\ 0\\ 0\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 0\\ 0\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\\ 0\end{bmatrix}\right\}\]</span></p>
 <p>is a <em>basis</em> for <span class="math inline">\(\mathbb{R}^4\)</span>.</p>
 </div>
 <div class="fragment">
+<p><em>Solution.</em> This collection cannot be a basis for <span class="math inline">\(\mathbb{R}^4\)</span> since it contains only three vectors.</p>
+</div>
+</section>
+<section id="completed-examples-2" class="slide level2">
+<h2>Completed Examples #2</h2>
+<div class="fragment">
 <p><strong>Example 2:</strong> Determine whether the collection of vectors</p>
 <p><span class="math display">\[V = \left\{\begin{bmatrix} 3\\ -3\\ 4\end{bmatrix}, \begin{bmatrix} 0\\ 8\\ -1\end{bmatrix}, \begin{bmatrix} 6\\ 18\\ 11\end{bmatrix}\right\}\]</span></p>
 <p>is a basis for <span class="math inline">\(\mathbb{R}^3\)</span>.</p>
+</div>
+<div class="fragment">
+<p><em>Solution.</em> We’ll use the vectors as columns in a matrix <span class="math inline">\(A\)</span> and then determine whether that matrix has a pivot in every row and every column.</p>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb1-4"><a href=""></a>  [<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">6</span>],</span>
+<span id="cb1-5"><a href=""></a>  [<span class="op">-</span><span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">18</span>],</span>
+<span id="cb1-6"><a href=""></a>  [<span class="dv">4</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">11</span>]</span>
+<span id="cb1-7"><a href=""></a>])</span>
+<span id="cb1-8"><a href=""></a></span>
+<span id="cb1-9"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>(Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), (0, 1, 2))</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="completed-examples-2-1" class="slide level2">
+<h2>Completed Examples #2</h2>
+<p><strong>Example 2:</strong> Determine whether the collection of vectors</p>
+<p><span class="math display">\[V = \left\{\begin{bmatrix} 3\\ -3\\ 4\end{bmatrix}, \begin{bmatrix} 0\\ 8\\ -1\end{bmatrix}, \begin{bmatrix} 6\\ 18\\ 11\end{bmatrix}\right\}\]</span></p>
+<p>is a basis for <span class="math inline">\(\mathbb{R}^3\)</span>.</p>
+<p><em>Solution.</em> We’ll use the vectors as columns in a matrix <span class="math inline">\(A\)</span> and then determine whether that matrix has a pivot in every row and every column.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb3-4"><a href=""></a>  [<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">6</span>],</span>
+<span id="cb3-5"><a href=""></a>  [<span class="op">-</span><span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">18</span>],</span>
+<span id="cb3-6"><a href=""></a>  [<span class="dv">4</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">11</span>]</span>
+<span id="cb3-7"><a href=""></a>])</span>
+<span id="cb3-8"><a href=""></a></span>
+<span id="cb3-9"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>(Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), (0, 1, 2))</code></pre>
+</div>
+</div>
+<p>Since there is a <em>pivot</em> in every row and every column of the matrix <span class="math inline">\(A\)</span>, then the collection is both <em>linearly independent</em> and <em>spans</em> <span class="math inline">\(\mathbb{R}^3\)</span>, and so the collection forms a <em>basis</em>.</p>
+</div>
 </div>
 </section>
 <section id="examples-to-try-2" class="slide level2">
@@ -667,7 +745,7 @@ a:visited {
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="D17_Bases_files/figure-revealjs/unnamed-chunk-3-1.png" width="1440"></p>
+<p><img data-src="D17_Bases_files/figure-revealjs/unnamed-chunk-7-1.png" width="1440"></p>
 </figure>
 </div>
 </div>
@@ -758,10 +836,10 @@ a:visited {
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([[<span class="op">-</span><span class="fl">2.0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">14</span>]])</span>
-<span id="cb1-4"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([[<span class="op">-</span><span class="fl">2.0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">14</span>]])</span>
+<span id="cb5-4"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell">
@@ -782,10 +860,10 @@ a:visited {
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([[<span class="op">-</span><span class="fl">2.0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">14</span>]])</span>
-<span id="cb3-4"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([[<span class="op">-</span><span class="fl">2.0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">14</span>]])</span>
+<span id="cb7-4"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell">
@@ -805,12 +883,233 @@ a:visited {
 <p><br></p>
 <p><strong>Example:</strong> Find a basis for the space spanned by the vectors <span class="math inline">\(\left[\begin{array}{r} 1\\ -1\\ -2\\ 3\end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{r} 2\\ -3\\ -1\\ 4\end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{r} 0\\ -1\\ 3\\ -2\end{array}\right]\)</span>, <span class="math inline">\(\left[\begin{array}{r} -1\\ 4\\ -7\\ 7\end{array}\right]\)</span>, and <span class="math inline">\(\left[\begin{array}{r} 3\\ -7\\ 6\\ -9\end{array}\right]\)</span>. What is the dimension of the subspace?</p>
 </section>
-<section id="examples-to-try-4" class="slide level2">
+<section id="examples-to-try-1" class="slide level2">
 <h2>Examples to Try</h2>
 <p><strong>Example:</strong> Consider the basis <span class="math inline">\(\mathscr{B} = \left\{\begin{bmatrix} 1\\ -3\\ 2\end{bmatrix}, \begin{bmatrix} 3\\ 3\\ 1\end{bmatrix}, \begin{bmatrix} -2\\ 0\\ 6\end{bmatrix}\right\}\)</span>. Find the <span class="math inline">\(\mathscr{B}\)</span>-representation of the vector <span class="math inline">\(\begin{bmatrix} 5\\ 4\\ 1\end{bmatrix}\)</span>.</p>
 </section>
+<section id="transformations-between-bases-leftmathscrb-to-mathscrb_sright" class="slide level2">
+<h2>Transformations Between Bases <span class="math inline">\(\left(\mathscr{B} \to \mathscr{B}_S\right)\)</span></h2>
+<div class="fragment">
+<p>It is possible to construct a linear transformation to convert between a non-standard basis <span class="math inline">\(\mathscr{B}\)</span> and our standard basis <span class="math inline">\(\mathscr{B}_S\)</span></p>
+</div>
+<div class="fragment">
+<p><strong>Strategy:</strong> Given a nonstandard basis <span class="math inline">\(\mathscr{B} = \left\{v_1,~v_2,~\cdots,~v_n\right\}\)</span> and a vector <span class="math inline">\(\left[\vec{x}\right]_{\mathscr{B}}\)</span> written in that nonstandard basis, we can find the coordinates of <span class="math inline">\(\left[\vec{x}\right]_{\mathscr{B}}\)</span> in the standard basis by evaluating the matrix-vector product</p>
+<p><span class="math display">\[\begin{bmatrix} \vec{v_1} &amp; \vec{v_2} &amp; \cdots &amp; \vec{v_n}\end{bmatrix}\left[\vec{x}\right]_{\mathscr{B}}\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Transformation Viewpoint:</strong> The matrix transformation <span class="math inline">\(T:~\mathbb{R}^n\to \mathbb{R}^n\)</span> defined by</p>
+<p><span class="math display">\[T\left(\left[\vec{x}\right]_{\mathscr{B}}\right) = \begin{bmatrix} \vec{v_1} &amp; \vec{v_2} &amp; \cdots &amp; \vec{v_n}\end{bmatrix}\left[\vec{x}\right]_{\mathscr{B}}\]</span></p>
+<p>converts between the nonstandard basis <span class="math inline">\(\mathscr{B}\)</span> and the standard basis <span class="math inline">\(\mathscr{B}_S\)</span>.</p>
+</div>
+</section>
+<section id="completed-example-converting-from-mathscrb-to-mathscrb_s" class="slide level2">
+<h2>Completed Example: Converting from <span class="math inline">\(\mathscr{B}\)</span> to <span class="math inline">\(\mathscr{B}_S\)</span></h2>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Consider <span class="math inline">\(\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}\)</span>. Verify that <span class="math inline">\(\mathscr{B}\)</span> is a basis for <span class="math inline">\(\mathbb{R}^3\)</span> and then convert the vector <span class="math inline">\(\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}\)</span> into its corresponding standard basis coordinates.</p>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb9-4"><a href=""></a>  [<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb9-5"><a href=""></a>  [<span class="op">-</span><span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">1</span>],</span>
+<span id="cb9-6"><a href=""></a>  [<span class="dv">0</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">1</span>]</span>
+<span id="cb9-7"><a href=""></a>])</span>
+<span id="cb9-8"><a href=""></a></span>
+<span id="cb9-9"><a href=""></a>A.rref()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>(Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), (0, 1, 2))</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>So <span class="math inline">\(\mathscr{B}\)</span> does form a basis for <span class="math inline">\(\mathbb{R}^3\)</span> because the corresponding matrix <span class="math inline">\(A\)</span> has a pivot in every row and every column.</p>
+</div>
+</section>
+<section id="completed-example-converting-from-mathscrb-to-mathscrb_s-1" class="slide level2">
+<h2>Completed Example: Converting from <span class="math inline">\(\mathscr{B}\)</span> to <span class="math inline">\(\mathscr{B}_S\)</span></h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Consider <span class="math inline">\(\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}\)</span>. Verify that <span class="math inline">\(\mathscr{B}\)</span> is a basis for <span class="math inline">\(\mathbb{R}^3\)</span> and then convert the vector <span class="math inline">\(\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}\)</span> into its corresponding standard basis coordinates.</p>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb11-2"><a href=""></a></span>
+<span id="cb11-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb11-4"><a href=""></a>  [<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb11-5"><a href=""></a>  [<span class="op">-</span><span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">1</span>],</span>
+<span id="cb11-6"><a href=""></a>  [<span class="dv">0</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">1</span>]</span>
+<span id="cb11-7"><a href=""></a>])</span>
+<span id="cb11-8"><a href=""></a></span>
+<span id="cb11-9"><a href=""></a>x <span class="op">=</span> sp.Matrix([<span class="op">-</span><span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">12</span>])</span>
+<span id="cb11-10"><a href=""></a></span>
+<span id="cb11-11"><a href=""></a>A<span class="op">*</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix([
+[  6],
+[104],
+[-72]])</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="completed-example-converting-from-mathscrb-to-mathscrb_s-2" class="slide level2">
+<h2>Completed Example: Converting from <span class="math inline">\(\mathscr{B}\)</span> to <span class="math inline">\(\mathscr{B}_S\)</span></h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Consider <span class="math inline">\(\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}\)</span>. Verify that <span class="math inline">\(\mathscr{B}\)</span> is a basis for <span class="math inline">\(\mathbb{R}^3\)</span> and then convert the vector <span class="math inline">\(\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}\)</span> into its corresponding standard basis coordinates.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb13-4"><a href=""></a>  [<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb13-5"><a href=""></a>  [<span class="op">-</span><span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">1</span>],</span>
+<span id="cb13-6"><a href=""></a>  [<span class="dv">0</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">1</span>]</span>
+<span id="cb13-7"><a href=""></a>])</span>
+<span id="cb13-8"><a href=""></a></span>
+<span id="cb13-9"><a href=""></a>x <span class="op">=</span> sp.Matrix([<span class="op">-</span><span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">12</span>])</span>
+<span id="cb13-10"><a href=""></a></span>
+<span id="cb13-11"><a href=""></a>A<span class="op">*</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix([
+[  6],
+[104],
+[-72]])</code></pre>
+</div>
+</div>
+<div style="font-size:18pt">
+<p>So the vector <span class="math inline">\(\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}\)</span> has coordinates <span class="math inline">\(\begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}\)</span> in the standard basis.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="transformations-between-bases-leftmathscrb_s-to-mathscrbright" class="slide level2">
+<h2>Transformations Between Bases <span class="math inline">\(\left(\mathscr{B}_S \to \mathscr{B}\right)\)</span></h2>
+<div class="fragment">
+<div style="font-size:18pt">
+<p>Similarly, it is possible to construct a linear transformation to convert between the standard basis <span class="math inline">\(\mathscr{B}_S\)</span> and any nonstandard basis <span class="math inline">\(\mathscr{B}\)</span></p>
+</div>
+</div>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><strong>Strategy:</strong> Given a nonstandard basis <span class="math inline">\(\mathscr{B} = \left\{v_1,~v_2,~\cdots,~v_n\right\}\)</span> and a vector <span class="math inline">\(\vec{x}\)</span> written in the standard basis, we can find the coordinates of <span class="math inline">\(\vec{x}\)</span> in the nonstandard basis by evaluating the matrix-vector product</p>
+<p><span class="math display">\[\left(\begin{bmatrix} \vec{v_1} &amp; \vec{v_2} &amp; \cdots &amp; \vec{v_n}\end{bmatrix}\right)^{-1}\vec{x}\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><strong>Transformation Viewpoint:</strong> The matrix transformation <span class="math inline">\(T:~\mathbb{R}^n\to \mathbb{R}^n\)</span> defined by</p>
+<p><span class="math display">\[T\left(\left[\vec{x}\right]_{\mathscr{B}}\right) = \begin{bmatrix} \vec{v_1} &amp; \vec{v_2} &amp; \cdots &amp; \vec{v_n}\end{bmatrix}\left[\vec{x}\right]_{\mathscr{B}}\]</span></p>
+<p>Converts between the nonstandard basis <span class="math inline">\(\mathscr{B}\)</span> and the standard basis <span class="math inline">\(\mathscr{B}_S\)</span>, so the matrix transformation <span class="math inline">\(T^{-1}: \mathbb{R}^n\to \mathbb{R}^n\)</span> defined by</p>
+<p><span class="math display">\[T^{-1}\left(\vec{x}\right) = \left(\begin{bmatrix} \vec{v_1} &amp; \vec{v_2} &amp; \cdots &amp; \vec{v_n}\end{bmatrix}\right)^{-1}\vec{x}\]</span></p>
+<p>converts from the standard basis <span class="math inline">\(\mathscr{B}_S\)</span> to the nonstandard basis <span class="math inline">\(\mathscr{B}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="completed-example-converting-from-mathscrb_s-to-mathscrb" class="slide level2">
+<h2>Completed Example: Converting from <span class="math inline">\(\mathscr{B}_S\)</span> to <span class="math inline">\(\mathscr{B}\)</span></h2>
+<div class="fragment">
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Consider <span class="math inline">\(\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}\)</span>. Convert the vector <span class="math inline">\(\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}\)</span> into its corresponding <span class="math inline">\(\mathscr{B}\)</span>-coordinates.</p>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb15-2"><a href=""></a></span>
+<span id="cb15-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb15-4"><a href=""></a>  [<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb15-5"><a href=""></a>  [<span class="op">-</span><span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">1</span>],</span>
+<span id="cb15-6"><a href=""></a>  [<span class="dv">0</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">1</span>]</span>
+<span id="cb15-7"><a href=""></a>])</span>
+<span id="cb15-8"><a href=""></a></span>
+<span id="cb15-9"><a href=""></a>x <span class="op">=</span> sp.Matrix([<span class="dv">6</span>, <span class="dv">104</span>, <span class="op">-</span><span class="dv">72</span>])</span>
+<span id="cb15-10"><a href=""></a></span>
+<span id="cb15-11"><a href=""></a>A.inv()<span class="op">*</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix([
+[-3],
+[ 7],
+[12]])</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="completed-example-converting-from-mathscrb_s-to-mathscrb-1" class="slide level2">
+<h2>Completed Example: Converting from <span class="math inline">\(\mathscr{B}_S\)</span> to <span class="math inline">\(\mathscr{B}\)</span></h2>
+<div style="font-size:18pt">
+<p><strong>Example:</strong> Consider <span class="math inline">\(\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}\)</span>. Convert the vector <span class="math inline">\(\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}\)</span> into its corresponding <span class="math inline">\(\mathscr{B}\)</span>-coordinates.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a>A <span class="op">=</span> sp.Matrix([</span>
+<span id="cb17-4"><a href=""></a>  [<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb17-5"><a href=""></a>  [<span class="op">-</span><span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">1</span>],</span>
+<span id="cb17-6"><a href=""></a>  [<span class="dv">0</span>, <span class="op">-</span><span class="dv">12</span>, <span class="dv">1</span>]</span>
+<span id="cb17-7"><a href=""></a>])</span>
+<span id="cb17-8"><a href=""></a></span>
+<span id="cb17-9"><a href=""></a>x <span class="op">=</span> sp.Matrix([<span class="dv">6</span>, <span class="dv">104</span>, <span class="op">-</span><span class="dv">72</span>])</span>
+<span id="cb17-10"><a href=""></a></span>
+<span id="cb17-11"><a href=""></a>A.inv()<span class="op">*</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix([
+[-3],
+[ 7],
+[12]])</code></pre>
+</div>
+</div>
+<div style="font-size:18pt">
+<p>So the vector <span class="math inline">\(\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}\)</span> has <span class="math inline">\(\mathscr{B}\)</span>-coordinates <span class="math inline">\(\begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}_{\mathscr{B}}\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
+<ul>
+<li class="fragment">A <em>basis</em> for a space <span class="math inline">\(H\)</span> is a collection of vectors from <span class="math inline">\(H\)</span> which is both <em>linearly independent</em> and <em>spans</em> <span class="math inline">\(H\)</span>.</li>
+<li class="fragment">Regarding bases for <span class="math inline">\(\mathbb{R}^n\)</span>, a collection of vectors from <span class="math inline">\(\mathbb{R}^n\)</span> forms a basis for <span class="math inline">\(\mathbb{R}^n\)</span> if the matrix <span class="math inline">\(A\)</span>, whose columns are formed by those vectors, has a pivot in every row and every column.</li>
+<li class="fragment">The <em>dimension</em> of a space is the number of vectors in any basis for that space.</li>
+<li class="fragment"><strong>Converting Between Bases:</strong> Multiplying a vector by the matrix whose columns are the nonstandard basis vectors converts from nonstandard to standard basis coordinates, and multiplying by its inverse converts from standard to nonstandard coordinates.</li>
+</ul>
 </section>
 <section id="homework" class="slide level2">
 <h2>Homework</h2>

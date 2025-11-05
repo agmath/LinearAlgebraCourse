@@ -82,10 +82,25 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 ## Reminders and Today's Goal
 
+<div style="font-size: 18pt">
+
 + A vector $\vec{y}$ is a ***linear combination*** of a collection of vectors $V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}$ if there exist scalars $c_1,~c_2,~\cdots,~c_p$ such that $\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p}$
 + The ***span*** of a collection of vectors $V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}$ is the set of all *linear combinations* of vectors in $V$.
 + A collection of vectors $V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}$ is ***linearly independent*** if the only solution to he *homogeneous vector equation* $x_1\vec{v_1} + x_2\vec{v_2} + \cdots + x_p\vec{v_p} = \vec{0}$ is $x_1 = x_2 = \cdots = x_p = 0$.
 + Removing a ***linearly dependent*** vector from a collection does not reduce the *span* of that collection of vectors.
+
+</div>
+
+. . . 
+
+<div style="font-size: 18pt">
+
+**Testing for Linear Independence and Spanning:** Consider a collection of vectors $V = \left\{\vec{v_1},~\vec{v_2}~,\cdots,~\vec{v_p}\right\}$ from $\mathbb{R}^m$, and the matrix $A = \begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_p}\end{bmatrix}$ whose columns are the vectors from $V$.
+
++ The vectors in $V$ are *linearly independent* if the REF form of $A$ has a pivot in every column.
++ The vectors in $V$ *span* $\mathbb{R}^m$ if the REF form of $A$ has a pivot in every row.
+
+</div>
 
 ## Reminders and Today's Goal
 
@@ -145,7 +160,7 @@ Such a collection is called a *basis* for the space.
 
 Actually, the final bullet point above encompasses all of the others, so that is the only one we need to check.
 
-## Examples to Try \#1
+## Completed Examples \#1
 
 . . .
 
@@ -157,11 +172,121 @@ is a *basis* for $\mathbb{R}^4$.
 
 . . . 
 
+*Solution.* This collection cannot be a basis for $\mathbb{R}^4$ since it contains only three vectors. 
+
+## Completed Examples \#2
+
+. . .
+
 **Example 2:** Determine whether the collection of vectors 
 
 $$V = \left\{\begin{bmatrix} 3\\ -3\\ 4\end{bmatrix}, \begin{bmatrix} 0\\ 8\\ -1\end{bmatrix}, \begin{bmatrix} 6\\ 18\\ 11\end{bmatrix}\right\}$$
 
 is a basis for $\mathbb{R}^3$.
+
+. . .
+
+*Solution.* We'll use the vectors as columns in a matrix $A$ and then determine whether that matrix has a pivot in every row and every column.
+
+. . .
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [3, 0, 6],
+  [-3, 8, 18],
+  [4, -1, 11]
+])
+
+A.rref()
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([
+  [3, 0, 6],
+  [-3, 8, 18],
+  [4, -1, 11]
+])
+
+A.rref()
+```
+
+:::
+
+::::
+
+## Completed Examples \#2
+
+**Example 2:** Determine whether the collection of vectors 
+
+$$V = \left\{\begin{bmatrix} 3\\ -3\\ 4\end{bmatrix}, \begin{bmatrix} 0\\ 8\\ -1\end{bmatrix}, \begin{bmatrix} 6\\ 18\\ 11\end{bmatrix}\right\}$$
+
+is a basis for $\mathbb{R}^3$.
+
+*Solution.* We'll use the vectors as columns in a matrix $A$ and then determine whether that matrix has a pivot in every row and every column.
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [3, 0, 6],
+  [-3, 8, 18],
+  [4, -1, 11]
+])
+
+A.rref()
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([
+  [3, 0, 6],
+  [-3, 8, 18],
+  [4, -1, 11]
+])
+
+A.rref()
+```
+
+Since there is a *pivot* in every row and every column of the matrix $A$, then the collection is both *linearly independent* and *spans* $\mathbb{R}^3$, and so the collection forms a *basis*.
+
+:::
+
+::::
+
+
 
 ## Examples to Try \#2
 
@@ -581,8 +706,329 @@ From here, we see that $c_1 = 3$ and $c_2 = 1$. That is, the $\mathscr{B}$-coord
 
 **Example:** Consider the basis $\mathscr{B} = \left\{\begin{bmatrix} 1\\ -3\\ 2\end{bmatrix}, \begin{bmatrix} 3\\ 3\\ 1\end{bmatrix}, \begin{bmatrix} -2\\ 0\\ 6\end{bmatrix}\right\}$. Find the $\mathscr{B}$-representation of the vector $\begin{bmatrix} 5\\ 4\\ 1\end{bmatrix}$.
 
+## Transformations Between Bases $\left(\mathscr{B} \to \mathscr{B}_S\right)$
+
+. . . 
+
+It is possible to construct a linear transformation to convert between a non-standard basis $\mathscr{B}$ and our standard basis $\mathscr{B}_S$
+
+. . . 
+
+**Strategy:** Given a nonstandard basis $\mathscr{B} = \left\{v_1,~v_2,~\cdots,~v_n\right\}$ and a vector $\left[\vec{x}\right]_{\mathscr{B}}$ written in that nonstandard basis, we can find the coordinates of $\left[\vec{x}\right]_{\mathscr{B}}$ in the standard basis by evaluating the matrix-vector product
+
+$$\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_n}\end{bmatrix}\left[\vec{x}\right]_{\mathscr{B}}$$
+
+. . . 
+
+**Transformation Viewpoint:** The matrix transformation $T:~\mathbb{R}^n\to \mathbb{R}^n$ defined by 
+
+$$T\left(\left[\vec{x}\right]_{\mathscr{B}}\right) = \begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_n}\end{bmatrix}\left[\vec{x}\right]_{\mathscr{B}}$$
+
+converts between the nonstandard basis $\mathscr{B}$ and the standard basis $\mathscr{B}_S$.
+
+## Completed Example: Converting from $\mathscr{B}$ to $\mathscr{B}_S$
+
+. . . 
+
+<div style="font-size:18pt">
+
+**Example:** Consider $\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}$. Verify that $\mathscr{B}$ is a basis for $\mathbb{R}^3$ and then convert the vector $\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}$ into its corresponding standard basis coordinates.
+
+</div>
+
+. . . 
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [2, 0, 1],
+  [-5, 11, 1],
+  [0, -12, 1]
+])
+
+A.rref()
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+import sympy as sp
+
+A = sp.Matrix([
+  [2, 0, 1],
+  [-5, 11, 1],
+  [0, -12, 1]
+])
+
+A.rref()
+```
+
+:::
+
+::::
+
+. . .
+
+So $\mathscr{B}$ does form a basis for $\mathbb{R}^3$ because the corresponding matrix $A$ has a pivot in every row and every column.
+
+## Completed Example: Converting from $\mathscr{B}$ to $\mathscr{B}_S$
+
+<div style="font-size:18pt">
+
+**Example:** Consider $\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}$. Verify that $\mathscr{B}$ is a basis for $\mathbb{R}^3$ and then convert the vector $\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}$ into its corresponding standard basis coordinates.
+
+</div>
+
+. . .
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [2, 0, 1],
+  [-5, 11, 1],
+  [0, -12, 1]
+])
+
+x = sp.Matrix([-3, 7, 12])
+
+A*x
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+x = sp.Matrix([-3, 7, 12])
+
+A*x
+```
+
+:::
+
+::::
+
+## Completed Example: Converting from $\mathscr{B}$ to $\mathscr{B}_S$
+
+<div style="font-size:18pt">
+
+**Example:** Consider $\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}$. Verify that $\mathscr{B}$ is a basis for $\mathbb{R}^3$ and then convert the vector $\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}$ into its corresponding standard basis coordinates.
+
+</div>
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [2, 0, 1],
+  [-5, 11, 1],
+  [0, -12, 1]
+])
+
+x = sp.Matrix([-3, 7, 12])
+
+A*x
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+x = sp.Matrix([-3, 7, 12])
+
+A*x
+```
+
+<div style="font-size:18pt">
+
+So the vector $\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}$ has coordinates $\begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}$ in the standard basis.
+
+</div>
+
+:::
+
+::::
+
+
+## Transformations Between Bases $\left(\mathscr{B}_S \to \mathscr{B}\right)$
+
+. . . 
+
+<div style="font-size:18pt">
+
+Similarly, it is possible to construct a linear transformation to convert between the standard basis $\mathscr{B}_S$ and any nonstandard basis $\mathscr{B}$
+
+</div>
+
+. . . 
+
+<div style="font-size:18pt">
+
+**Strategy:** Given a nonstandard basis $\mathscr{B} = \left\{v_1,~v_2,~\cdots,~v_n\right\}$ and a vector $\vec{x}$ written in the standard basis, we can find the coordinates of $\vec{x}$ in the nonstandard basis by evaluating the matrix-vector product
+
+$$\left(\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_n}\end{bmatrix}\right)^{-1}\vec{x}$$
+
+</div>
+
+. . . 
+
+<div style="font-size:18pt">
+
+**Transformation Viewpoint:** The matrix transformation $T:~\mathbb{R}^n\to \mathbb{R}^n$ defined by 
+
+$$T\left(\left[\vec{x}\right]_{\mathscr{B}}\right) = \begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_n}\end{bmatrix}\left[\vec{x}\right]_{\mathscr{B}}$$
+
+Converts between the nonstandard basis $\mathscr{B}$ and the standard basis $\mathscr{B}_S$, so the matrix transformation $T^{-1}: \mathbb{R}^n\to \mathbb{R}^n$ defined by
+
+$$T^{-1}\left(\vec{x}\right) = \left(\begin{bmatrix} \vec{v_1} & \vec{v_2} & \cdots & \vec{v_n}\end{bmatrix}\right)^{-1}\vec{x}$$
+
+converts from the standard basis $\mathscr{B}_S$ to the nonstandard basis $\mathscr{B}$.
+
+</div>
+
+## Completed Example: Converting from $\mathscr{B}_S$ to $\mathscr{B}$
+
+. . . 
+
+<div style="font-size:18pt">
+
+**Example:** Consider $\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}$. Convert the vector $\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}$ into its corresponding $\mathscr{B}$-coordinates.
+
+</div>
+
+. . .
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [2, 0, 1],
+  [-5, 11, 1],
+  [0, -12, 1]
+])
+
+x = sp.Matrix([6, 104, -72])
+
+A.inv()*x
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+x = sp.Matrix([6, 104, -72])
+
+A.inv()*x
+```
+
+:::
+
+::::
+
+## Completed Example: Converting from $\mathscr{B}_S$ to $\mathscr{B}$
+
+<div style="font-size:18pt">
+
+**Example:** Consider $\mathscr{B} = \left\{\begin{bmatrix} 2\\ -5\\ 0\end{bmatrix}, \begin{bmatrix} 0\\ 11\\ -12\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 1\end{bmatrix}\right\}$. Convert the vector $\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}$ into its corresponding $\mathscr{B}$-coordinates.
+
+</div>
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+```{python}
+#| echo: true
+#| eval: false
+
+import sympy as sp
+
+A = sp.Matrix([
+  [2, 0, 1],
+  [-5, 11, 1],
+  [0, -12, 1]
+])
+
+x = sp.Matrix([6, 104, -72])
+
+A.inv()*x
+```
+
+:::
+
+:::{.column width="60%"}
+
+```{python}
+#| echo: false
+#| eval: true
+
+x = sp.Matrix([6, 104, -72])
+
+A.inv()*x
+```
+
+<div style="font-size:18pt">
+
+So the vector $\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}$ has $\mathscr{B}$-coordinates $\begin{bmatrix} -3\\ 7\\ 12\end{bmatrix}_{\mathscr{B}}$.
+
+</div>
+
+:::
+
+::::
+
 ## Summary
 
++ A *basis* for a space $H$ is a collection of vectors from $H$ which is both *linearly independent* and *spans* $H$.
++ Regarding bases for $\mathbb{R}^n$, a collection of vectors from $\mathbb{R}^n$ forms a basis for $\mathbb{R}^n$ if the matrix $A$, whose columns are formed by those vectors, has a pivot in every row and every column.
++ The *dimension* of a space is the number of vectors in any basis for that space.
++ **Converting Between Bases:** Multiplying a vector by the matrix whose columns are the nonstandard basis vectors converts from nonstandard to standard basis coordinates, and multiplying by its inverse converts from standard to nonstandard coordinates.
 
 ## Homework
 
