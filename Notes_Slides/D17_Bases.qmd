@@ -53,11 +53,11 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 1. Determine whether the vectors $\left\{\begin{bmatrix} 1\\ 0\\ 0\\ 0\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ 0\\ 0\end{bmatrix}, \begin{bmatrix} 1\\ 1\\ -2\\ 1\end{bmatrix}, \begin{bmatrix} 0\\ 1\\ 0\\ 3\end{bmatrix}\right\}$ span $\mathbb{R}^4$.
 
-2. Does the collection $\left\{\left[\begin{array}{r} 1\\ 0\\ 1\\ 1\end{array}\right], \left[\begin{array}{r} 0\\ 2\\ 0\\ 0\end{array}\right], \left[\begin{array}{r} 1\\ 0\\ 0\\ 1\end{array}\right]\right\}$ also span $\mathbb{R}^4$.
-
 ::::{.columns}
 
 :::{.column width=60%}
+
+2. Does the collection $\left\{\left[\begin{array}{r} 1\\ 0\\ 1\\ 1\end{array}\right], \left[\begin{array}{r} 0\\ 2\\ 0\\ 0\end{array}\right], \left[\begin{array}{r} 1\\ 0\\ 0\\ 1\end{array}\right]\right\}$ also span $\mathbb{R}^4$.
 
 3. How many vectors are required to span $\mathbb{R}^n$?
 
@@ -69,7 +69,8 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 <center>
 
-<img src="https://drive.google.com/uc?id=1fZOcDfS5G-DH7c4E07LEhnDvdKBpTvIJ" width="150">
+<img src="images/BasisMap.png" width="300">
+
 
 </center>
 
