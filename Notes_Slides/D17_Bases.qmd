@@ -1023,6 +1023,18 @@ So the vector $\vec{x} = \begin{bmatrix} 6\\ 104\\ -72\end{bmatrix}$ has $\maths
 
 ::::
 
+## Exit Ticket Task
+
+Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header), answer the questions, and complete the *task* below.
+
+<br/>
+
+*Note.* Today's discussion is listed as `15. Bases and Coordinate Systems`
+
+<br/>
+
+**Task:** Given the vector $\left[\vec{x}\right]_{\mathscr{B}} = \begin{bmatrix} 2\\ -4\end{bmatrix}$ written in the nonstandard basis $\mathscr{B} = \left\{\begin{bmatrix} 7\\ 11\end{bmatrix},~\begin{bmatrix} 6\\ 7\end{bmatrix}\right\}$, find the coordinates of the vector in the standard basis.
+
 ## Summary
 
 + A *basis* for a space $H$ is a collection of vectors from $H$ which is both *linearly independent* and *spans* $H$.
