@@ -611,6 +611,20 @@ $$A = \left[\begin{array}{rrrr} 1 & 2 & -5 & 1\\ -3 & 1 & 8 & 1\\ 0 & 2 & 0 & 0\
 
 :::
 
+## Exit Ticket Task
+
+Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header), answer the questions, and complete the *task* below.
+
+<br/>
+
+*Note.* Today's discussion is listed as `17. Determinants`
+
+<br/>
+
+**Task:** Find the determinant of the $3\times 3$ matrix below, determine what that means geometrically about the column vectors, the corresponding linear transformation, and the matrix itself.
+
+$$A = \begin{bmatrix} 3 & 0 & -6\\ -1 & 5 & 7\\ -4 & 0 & 8\end{bmatrix}
+
 ## Homework
 
 <br/>
