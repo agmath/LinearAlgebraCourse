@@ -623,7 +623,7 @@ Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAI
 
 **Task:** Find the determinant of the $3\times 3$ matrix below, determine what that means geometrically about the column vectors, the corresponding linear transformation, and the matrix itself.
 
-$$A = \begin{bmatrix} 3 & 0 & -6\\ -1 & 5 & 7\\ -4 & 0 & 8\end{bmatrix}
+$$A = \begin{bmatrix} 3 & 0 & -6\\ -1 & 5 & 7\\ -4 & 0 & 8\end{bmatrix}$$
 
 ## Homework
 
