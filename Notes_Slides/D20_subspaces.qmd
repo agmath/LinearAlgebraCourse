@@ -89,15 +89,15 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 **Example:** Determine whether the vectors $\vec{v_1} = \left[\begin{array}{r} 2\\ 1\\ -1\end{array}\right]$, $\vec{v_2} = \left[\begin{array}{r} 1\\ 1\\ 0\end{array}\right]$, and $\vec{v_3} = \left[\begin{array}{r} 1\\ 3\\ 1\end{array}\right]$ are *linearly independent*.
 
-<br/>
-<br/>
+**Example:** Find the determinant of the matrix $A = \left[\begin{array}{rrr} 1 & 5 & 2\\ 0 & -1 & 3\\ 1 & 0 & 1\end{array}\right]$ and then find $A^{-1}$ if it exists.
 
-**Example:** Construct the inverse of the matrix $A = \left[\begin{array}{rrr} 1 & 5 & 2\\ 0 & -1 & 3\\ 1 & 0 & 1\end{array}\right]$ if it exists.
-
+**Example:** Consider $H = \left\{\begin{bmatrix} x_1\\ x_2\end{bmatrix} \mid x_2 = -3x_1\right\}$. Verify that $\vec{u} = \begin{bmatrix} -3\\ 9\end{bmatrix}$ and $\vec{v} = \begin{bmatrix} 4\\ -12\end{bmatrix}$ are both in $H$. Show also that $7\vec{u} + 5\vec{v}$ is also in $H$.
 
 :::
 
 ## Reminders and Today's Goal
+
+<div style="font-size:18pt">
 
 + The space $\mathbb{R}^n$ is the space consisting of all $n$-component vectors whose entries are real numbers. 
 
@@ -114,6 +114,8 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 + The vector $\vec{y}$ is a *linear combination* of the vectors $V = \left\{\vec{v_1},~\vec{v_2},~\cdots,~\vec{v_p}\right\}$ if $\vec{y}$ can be written as a *linear combination* of the vectors in $V$.
 
     + That is, $\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p}$ for some scalars $c_1,~c_2,~\cdots,~c_p$
+    
+</div>
 
 ## Reminders and Today's Goal
 
@@ -136,6 +138,10 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 . . .
 
 **Note:** Items (2.) and (3.) in the definition above are often described as the subspace being *closed under addition and scalar multiplication*.
+
+. . . 
+
+In short, $H$ is closed under the operation of *linear combinations* of vectors.
 
 ## Completed Example \#1
 
@@ -583,19 +589,19 @@ So $H = \text{span}\left(\left\{\begin{bmatrix} 1\\ -3\end{bmatrix}\right\}\righ
 
 . . .
 
-**Definition (Column Space):** The *column space* corresponding to the matrix $A$, denoted by $\text{col}\left(A\right)$ is the set of all linear combinations of the columns of $A$. That is, $\text{col}\left(A\right) = \text{span}\left(\left\{\vec{a_1}, \vec{a_2}, \cdots, \vec{a_n}\right\}\right)$ where $\vec{a_i}$ is the $i^{th}$ column of the matrix $A$.
+**Definition (Column Space):** The *column space* corresponding to the matrix $A$, denoted by $\text{Col}\left(A\right)$ is the set of all linear combinations of the columns of $A$. That is, $\text{Col}\left(A\right) = \text{span}\left(\left\{\vec{a_1}, \vec{a_2}, \cdots, \vec{a_n}\right\}\right)$ where $\vec{a_i}$ is the $i^{th}$ column of the matrix $A$.
 
 . . .
 
-**Theorem (Column Space is a Subspace):** If $A$ is an $m\times n$ matrix, then $\text{col}\left(A\right)$ is a subspace of $\mathbb{R}^m$.
+**Theorem (Column Space is a Subspace):** If $A$ is an $m\times n$ matrix, then $\text{Col}\left(A\right)$ is a subspace of $\mathbb{R}^m$.
 
 . . .
 
-**Theorem (Basis for $\text{col}\left(A\right)$):** The pivot columns of $A$ form a basis for $\text{col}\left(A\right)$.
+**Theorem (Basis for $\text{Col}\left(A\right)$):** The pivot columns of $A$ form a basis for $\text{Col}\left(A\right)$.
 
 . . .
 
-**An Important Note:** In the Theorem listed above, it is important that we use pivot columns of the original matrix $A$ as a basis for its column space. Often times the pivot columns of a row reduced version of $A$ will not span $\text{col}\left(A\right)$.
+**An Important Note:** In the Theorem listed above, it is important that we use pivot columns of the original matrix $A$ as a basis for its column space. Often times the pivot columns of a row reduced version of $A$ will not span $\text{Col}\left(A\right)$.
 
 ## Completed Example \#2
 
@@ -782,6 +788,23 @@ Since $\vec{x} = x_3\left[\begin{array}{r} 2\\ -1\\ 1\end{array}\right]$...
 
 $$\mathscr{B}_{\text{Nul}\left(A\right)} = \left\{\left[\begin{array}{r} 2\\ -1\\ 1\end{array}\right]\right\}$$
 
+## Special Subspaces and Linear Transformations
+
+. . . 
+
+We've talked about special subspaces (the column space and the null space) in terms of matrices, but there are corresponding subspaces for linear transformations as well.
+
+. . . 
+
+Given a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ defined by $T\left(\vec{x}\right) = A\vec{x}$, we have the following special subspaces...
+
++ The **range** of the linear transformation $T$ is the *column space* of the matrix $A$.
++ The **kernel** of the linear transformation $T$ is the *null space* of the matrix $A$.
+
+. . . 
+
+While there is different terminology, depending on whether we're coming from a linear transformation or matrix multiplication context, the subspaces have the same meanings and play the same roles.
+
 ## Dimension, Rank, Null Space, and Column Space
 
 . . .
@@ -790,7 +813,7 @@ We'll close by highlighting a few important observations about the ideas and obj
 
 + The *rank* of a matrix $A$ is the number of pivot positions in $A$.
 + $\dim\left(\text{Col}\left(A\right)\right) = \text{rank}\left(A\right)$
-+ Given an $n\times n$ matrix $A$, we have $\dim\left(\text{Col}\left(A\right)\right) + \dim\left(\text{Null}\left(A\right)\right) = n$
++ Given an $m\times n$ matrix $A$, we have $\dim\left(\text{Col}\left(A\right)\right) + \dim\left(\text{Nul}\left(A\right)\right) = n$
 
 ## Examples to Try (1 of 4)
 

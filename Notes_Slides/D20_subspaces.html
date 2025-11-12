@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-08-13">
+  <meta name="dcterms.date" content="2025-11-12">
   <title>MAT 350: Subspaces</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -337,7 +337,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">August 13, 2025</p>
+  <p class="date">November 12, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -367,12 +367,13 @@ a:visited {
 <div>
 <p>Complete the following warm-up problems to re-familiarize yourself with concepts we’ll be leveraging today.</p>
 <p><strong>Example:</strong> Determine whether the vectors <span class="math inline">\(\vec{v_1} = \left[\begin{array}{r} 2\\ 1\\ -1\end{array}\right]\)</span>, <span class="math inline">\(\vec{v_2} = \left[\begin{array}{r} 1\\ 1\\ 0\end{array}\right]\)</span>, and <span class="math inline">\(\vec{v_3} = \left[\begin{array}{r} 1\\ 3\\ 1\end{array}\right]\)</span> are <em>linearly independent</em>.</p>
-<p><br> <br></p>
-<p><strong>Example:</strong> Construct the inverse of the matrix <span class="math inline">\(A = \left[\begin{array}{rrr} 1 &amp; 5 &amp; 2\\ 0 &amp; -1 &amp; 3\\ 1 &amp; 0 &amp; 1\end{array}\right]\)</span> if it exists.</p>
+<p><strong>Example:</strong> Find the determinant of the matrix <span class="math inline">\(A = \left[\begin{array}{rrr} 1 &amp; 5 &amp; 2\\ 0 &amp; -1 &amp; 3\\ 1 &amp; 0 &amp; 1\end{array}\right]\)</span> and then find <span class="math inline">\(A^{-1}\)</span> if it exists.</p>
+<p><strong>Example:</strong> Consider <span class="math inline">\(H = \left\{\begin{bmatrix} x_1\\ x_2\end{bmatrix} \mid x_2 = -3x_1\right\}\)</span>. Verify that <span class="math inline">\(\vec{u} = \begin{bmatrix} -3\\ 9\end{bmatrix}\)</span> and <span class="math inline">\(\vec{v} = \begin{bmatrix} 4\\ -12\end{bmatrix}\)</span> are both in <span class="math inline">\(H\)</span>. Show also that <span class="math inline">\(7\vec{u} + 5\vec{v}\)</span> is also in <span class="math inline">\(H\)</span>.</p>
 </div>
 </section>
 <section id="reminders-and-todays-goal" class="slide level2">
 <h2>Reminders and Today’s Goal</h2>
+<div style="font-size:18pt">
 <ul>
 <li class="fragment"><p>The space <span class="math inline">\(\mathbb{R}^n\)</span> is the space consisting of all <span class="math inline">\(n\)</span>-component vectors whose entries are real numbers.</p>
 <ul>
@@ -392,6 +393,7 @@ a:visited {
 <li class="fragment">That is, <span class="math inline">\(\vec{y} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_p\vec{v_p}\)</span> for some scalars <span class="math inline">\(c_1,~c_2,~\cdots,~c_p\)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="reminders-and-todays-goal-1" class="slide level2">
 <h2>Reminders and Today’s Goal</h2>
@@ -414,6 +416,9 @@ a:visited {
 </div>
 <div class="fragment">
 <p><strong>Note:</strong> Items (2.) and (3.) in the definition above are often described as the subspace being <em>closed under addition and scalar multiplication</em>.</p>
+</div>
+<div class="fragment">
+<p>In short, <span class="math inline">\(H\)</span> is closed under the operation of <em>linear combinations</em> of vectors.</p>
 </div>
 </section>
 <section id="completed-example-1" class="slide level2">
@@ -731,16 +736,16 @@ a:visited {
 <section id="special-subspaces-column-space" class="slide level2">
 <h2>Special Subspaces (Column Space)</h2>
 <div class="fragment">
-<p><strong>Definition (Column Space):</strong> The <em>column space</em> corresponding to the matrix <span class="math inline">\(A\)</span>, denoted by <span class="math inline">\(\text{col}\left(A\right)\)</span> is the set of all linear combinations of the columns of <span class="math inline">\(A\)</span>. That is, <span class="math inline">\(\text{col}\left(A\right) = \text{span}\left(\left\{\vec{a_1}, \vec{a_2}, \cdots, \vec{a_n}\right\}\right)\)</span> where <span class="math inline">\(\vec{a_i}\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the matrix <span class="math inline">\(A\)</span>.</p>
+<p><strong>Definition (Column Space):</strong> The <em>column space</em> corresponding to the matrix <span class="math inline">\(A\)</span>, denoted by <span class="math inline">\(\text{Col}\left(A\right)\)</span> is the set of all linear combinations of the columns of <span class="math inline">\(A\)</span>. That is, <span class="math inline">\(\text{Col}\left(A\right) = \text{span}\left(\left\{\vec{a_1}, \vec{a_2}, \cdots, \vec{a_n}\right\}\right)\)</span> where <span class="math inline">\(\vec{a_i}\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the matrix <span class="math inline">\(A\)</span>.</p>
 </div>
 <div class="fragment">
-<p><strong>Theorem (Column Space is a Subspace):</strong> If <span class="math inline">\(A\)</span> is an <span class="math inline">\(m\times n\)</span> matrix, then <span class="math inline">\(\text{col}\left(A\right)\)</span> is a subspace of <span class="math inline">\(\mathbb{R}^m\)</span>.</p>
+<p><strong>Theorem (Column Space is a Subspace):</strong> If <span class="math inline">\(A\)</span> is an <span class="math inline">\(m\times n\)</span> matrix, then <span class="math inline">\(\text{Col}\left(A\right)\)</span> is a subspace of <span class="math inline">\(\mathbb{R}^m\)</span>.</p>
 </div>
 <div class="fragment">
-<p><strong>Theorem (Basis for <span class="math inline">\(\text{col}\left(A\right)\)</span>):</strong> The pivot columns of <span class="math inline">\(A\)</span> form a basis for <span class="math inline">\(\text{col}\left(A\right)\)</span>.</p>
+<p><strong>Theorem (Basis for <span class="math inline">\(\text{Col}\left(A\right)\)</span>):</strong> The pivot columns of <span class="math inline">\(A\)</span> form a basis for <span class="math inline">\(\text{Col}\left(A\right)\)</span>.</p>
 </div>
 <div class="fragment">
-<p><strong>An Important Note:</strong> In the Theorem listed above, it is important that we use pivot columns of the original matrix <span class="math inline">\(A\)</span> as a basis for its column space. Often times the pivot columns of a row reduced version of <span class="math inline">\(A\)</span> will not span <span class="math inline">\(\text{col}\left(A\right)\)</span>.</p>
+<p><strong>An Important Note:</strong> In the Theorem listed above, it is important that we use pivot columns of the original matrix <span class="math inline">\(A\)</span> as a basis for its column space. Often times the pivot columns of a row reduced version of <span class="math inline">\(A\)</span> will not span <span class="math inline">\(\text{Col}\left(A\right)\)</span>.</p>
 </div>
 </section>
 <section id="completed-example-2" class="slide level2">
@@ -867,6 +872,22 @@ a:visited {
 <p><span class="math display">\[\mathscr{B}_{\text{Nul}\left(A\right)} = \left\{\left[\begin{array}{r} 2\\ -1\\ 1\end{array}\right]\right\}\]</span></p>
 </div>
 </section>
+<section id="special-subspaces-and-linear-transformations" class="slide level2">
+<h2>Special Subspaces and Linear Transformations</h2>
+<div class="fragment">
+<p>We’ve talked about special subspaces (the column space and the null space) in terms of matrices, but there are corresponding subspaces for linear transformations as well.</p>
+</div>
+<div class="fragment">
+<p>Given a linear transformation <span class="math inline">\(T: \mathbb{R}^n \to \mathbb{R}^m\)</span> defined by <span class="math inline">\(T\left(\vec{x}\right) = A\vec{x}\)</span>, we have the following special subspaces…</p>
+<ul>
+<li class="fragment">The <strong>range</strong> of the linear transformation <span class="math inline">\(T\)</span> is the <em>column space</em> of the matrix <span class="math inline">\(A\)</span>.</li>
+<li class="fragment">The <strong>kernel</strong> of the linear transformation <span class="math inline">\(T\)</span> is the <em>null space</em> of the matrix <span class="math inline">\(A\)</span>.</li>
+</ul>
+</div>
+<div class="fragment">
+<p>While there is different terminology, depending on whether we’re coming from a linear transformation or matrix multiplication context, the subspaces have the same meanings and play the same roles.</p>
+</div>
+</section>
 <section id="dimension-rank-null-space-and-column-space" class="slide level2">
 <h2>Dimension, Rank, Null Space, and Column Space</h2>
 <div class="fragment">
@@ -874,7 +895,7 @@ a:visited {
 <ul>
 <li class="fragment">The <em>rank</em> of a matrix <span class="math inline">\(A\)</span> is the number of pivot positions in <span class="math inline">\(A\)</span>.</li>
 <li class="fragment"><span class="math inline">\(\dim\left(\text{Col}\left(A\right)\right) = \text{rank}\left(A\right)\)</span></li>
-<li class="fragment">Given an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, we have <span class="math inline">\(\dim\left(\text{Col}\left(A\right)\right) + \dim\left(\text{Null}\left(A\right)\right) = n\)</span></li>
+<li class="fragment">Given an <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(A\)</span>, we have <span class="math inline">\(\dim\left(\text{Col}\left(A\right)\right) + \dim\left(\text{Nul}\left(A\right)\right) = n\)</span></li>
 </ul>
 </div>
 </section>
