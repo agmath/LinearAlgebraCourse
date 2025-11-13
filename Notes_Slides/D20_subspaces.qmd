@@ -918,6 +918,19 @@ plt.ylim((-9, 9));
 
 **Example 8:** Let $A = \left[\begin{array}{rrr} 1 & 2 & 3\\ 2 & -1 & 1\\ 1 & 1 & 2\end{array}\right]$. Determine a *basis* for $\text{Col}\left(A\right)$ and a *basis* for $\text{Nul}\left(A\right)$.
 
+## Exit Ticket Task
+
+Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header), answer the questions, and complete the *task* below.
+
+<br/>
+
+*Note.* Today's discussion is listed as `18. Subspaces`
+
+<br/>
+
+**Task:** Find a basis for the *null space* and a basis for the *column space* for the matrix $A$, below.
+
+$$A = \begin{bmatrix} 3 & -12 & 15\\ -1 & 4 & -5\\ -4 & 16 & -20\end{bmatrix}$$
 
 ## Homework
 
