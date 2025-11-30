@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.43">
 
   <meta name="author" content="Dr.&nbsp;Gilbert">
-  <meta name="dcterms.date" content="2025-08-14">
+  <meta name="dcterms.date" content="2025-11-30">
   <title>MAT 350: Finding Eigenvectors and Eigenvalues</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -402,7 +402,7 @@ Dr.&nbsp;Gilbert
 </div>
 </div>
 
-  <p class="date">August 14, 2025</p>
+  <p class="date">November 30, 2025</p>
 </section>
 <section class="slide level2">
 
@@ -478,13 +478,13 @@ a:visited {
 </ul>
 </div>
 <div class="fragment">
-<p>For example, what if we wanted to find the eigenvalues corresponding to the matrix <span class="math inline">\(A = \left[\begin{array}{rr} 1 &amp; 4\\ 3 &amp; 2\end{array}\right]\)</span>. Find the bases for the eigenspaces corresponding to the eigenvectors.</p>
+<p>For example, what if we wanted to find the eigenvalues corresponding to the matrix <span class="math inline">\(A = \left[\begin{array}{rr} 1 &amp; 4\\ 3 &amp; 2\end{array}\right]\)</span>? What about finding the bases for the eigenspaces corresponding to the eigenvectors?</p>
 </div>
 </section>
 <section id="strategy-for-finding-eigenvalues" class="slide level2">
 <h2>Strategy for Finding Eigenvalues</h2>
 <div class="fragment">
-<p>Because <span class="math inline">\(\lambda\)</span> is an <em>eigenvalue</em> of the matrix <span class="math inline">\(A\)</span> if there exist non-trivial (not <span class="math inline">\(\vec{0}\)</span>) solutions to the matrix equation <span class="math inline">\(\left(A - \lambda I\right)\vec{x} = \vec{0}\)</span>, we need $(A - I) to be a non-invertible matrix.</p>
+<p>Because <span class="math inline">\(\lambda\)</span> is an <em>eigenvalue</em> of the matrix <span class="math inline">\(A\)</span> if there exist non-trivial (not <span class="math inline">\(\vec{0}\)</span>) solutions to the matrix equation <span class="math inline">\(\left(A - \lambda I\right)\vec{x} = \vec{0}\)</span>, we need <span class="math inline">\(\left(A - \lambda I\right)\)</span> to be a non-invertible matrix.</p>
 </div>
 <div class="fragment">
 <p><strong>Definition (Characteristic Equation):</strong> Given an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>, the <strong><em>characteristic equation</em></strong> corresponding to <span class="math inline">\(A\)</span> is the equation <span class="math inline">\(\text{det}\left(A - \lambda I\right) = 0\)</span></p>
@@ -560,7 +560,7 @@ a:visited {
 <div class="fragment">
 <p>Once we know the <em>eigenvalues</em> of a matrix, we are prepared to find the corresponding <em>eigenvectors</em>.</p>
 <ul>
-<li class="fragment">In general, there will be infinitely many <em>eigenvectors</em> corresponding to any <em>eigenvalue</em>, so we really seek a <em>basis</em> for the <em>eigenspace</em>!</li>
+<li class="fragment">There will be infinitely many <em>eigenvectors</em> corresponding to any <em>eigenvalue</em>, so we really seek a <em>basis</em> for the <em>eigenspace</em>!</li>
 </ul>
 </div>
 <div class="fragment">
@@ -569,7 +569,7 @@ a:visited {
 <div class="fragment">
 <p><strong>Strategy (Finding Eigenvalues):</strong> Given an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span> and an eigenvalue <span class="math inline">\(\lambda\)</span>, we find a basis for the eigenspace corresponding to <span class="math inline">\(\lambda\)</span> by solving <span class="math inline">\(\left(A - \lambda I\right)\vec{x} = \vec{0}\)</span>. That is, we find a basis for the <em>null space</em> of <span class="math inline">\(\left(A - \lambda I\right)\)</span>.</p>
 <ol type="1">
-<li class="fragment">Construct the augmented matrix <span class="math inline">\(\begin{array}{r|r} A - \lambda I &amp; \vec{0}\end{array}\)</span></li>
+<li class="fragment">Construct the augmented matrix <span class="math inline">\(\left[\begin{array}{r|r} A - \lambda I &amp; \vec{0}\end{array}\right]\)</span></li>
 <li class="fragment">Find the solutions to the corresponding matrix equation by row-reducing</li>
 <li class="fragment">Write the solution in parametric vector form</li>
 <li class="fragment">Use the parametric vector form to construct a basis for the eigenspace, <span class="math inline">\(E_{\lambda}\)</span>.</li>
@@ -784,7 +784,7 @@ a:visited {
 <p><strong>Effects of Row-Reduction on Determinants:</strong> Given an <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>,</p>
 <ol type="1">
 <li class="fragment">if <span class="math inline">\(U\)</span> is obtained from <span class="math inline">\(A\)</span> by <em>swapping</em> two rows, then <span class="math inline">\(\text{det}\left(U\right) = -\text{det}\left(A\right)\)</span></li>
-<li class="fragment">if <span class="math inline">\(U\)</span> is obtained from <span class="math inline">\(A\)</span> by <em>scaling</em> a single row by the scalar <span class="math inline">\(s\)</span>, then <span class="math inline">\(\text{det}\left(U\right) = s\text{det}\left(A\right)\)</span></li>
+<li class="fragment">if <span class="math inline">\(U\)</span> is obtained from <span class="math inline">\(A\)</span> by <em>scaling</em> a single row by the scalar <span class="math inline">\(s\)</span>, then <span class="math inline">\(\text{det}\left(U\right) = s\cdot\text{det}\left(A\right)\)</span></li>
 <li class="fragment">if <span class="math inline">\(U\)</span> is obtained from <span class="math inline">\(A\)</span> by a <em>replacement</em> operation, <span class="math inline">\(R_i \leftarrow R_i + sR_j\)</span>, then <span class="math inline">\(\text{det}\left(U\right) = \text{det}\left(A\right)\)</span></li>
 </ol>
 </div>
@@ -843,7 +843,7 @@ a:visited {
 <p>We can row-reduce <span class="math inline">\(\left(A - \lambda I\right)\)</span> quickly (in comparison) and then calculate the characteristic polynomial as the product of the pivots in the equivalent row-echelon form matrix.</p>
 </div>
 <div class="fragment">
-<p><strong>Comment:</strong> The largest, non-triangular, matrices we’ll work with in MAT350 are <span class="math inline">\(3\times 3\)</span>.</p>
+<p><strong>Comment:</strong> The largest, non-triangular, matrices we’ll work with “by hand” in MAT350 are <span class="math inline">\(3\times 3\)</span>.</p>
 </div>
 </section>
 <section id="characteristic-equation-and-eigenvaluesvectors-with-python" class="slide level2">
@@ -1216,6 +1216,14 @@ eigenbasis vector 1
 <li>Analyze the long-run behavior of the difference equation <span class="math inline">\(\vec{x_{k+1}} = A\vec{x_k}\)</span> making use of the decomposition of <span class="math inline">\(\vec{x_0}\)</span> you found in part (3) and the eigenvalues you found in part (1) and sending <span class="math inline">\(k\to \infty\)</span>.</li>
 </ol>
 </div>
+</section>
+<section id="exit-ticket-task" class="slide level2">
+<h2>Exit Ticket Task</h2>
+<p>Navigate to <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header">our MAT350 Exit Ticket Form</a>, answer the questions, and complete the <em>task</em> below.</p>
+<p><br></p>
+<p><em>Note.</em> Today’s discussion is listed as <code>20. Finding Eigenvalues and Eigenvectors</code></p>
+<p><br></p>
+<p><strong>Task:</strong> Find all eigenvalues of the matrix <span class="math inline">\(A = \begin{bmatrix} -1 &amp; 2\\ 2 &amp; 2\end{bmatrix}\)</span> and construct a corresponding eigenbasis for each of the corresponding eigenspaces.</p>
 </section>
 <section id="homework" class="slide level2">
 <h2>Homework</h2>

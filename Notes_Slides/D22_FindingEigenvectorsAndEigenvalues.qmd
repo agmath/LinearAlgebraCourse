@@ -98,13 +98,13 @@ What if we just have a matrix $A$ and wonder...
 
 . . .
 
-For example, what if we wanted to find the eigenvalues corresponding to the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$. Find the bases for the eigenspaces corresponding to the eigenvectors.
+For example, what if we wanted to find the eigenvalues corresponding to the matrix $A = \left[\begin{array}{rr} 1 & 4\\ 3 & 2\end{array}\right]$? What about finding the bases for the eigenspaces corresponding to the eigenvectors?
 
 ## Strategy for Finding Eigenvalues
 
 . . .
 
-Because $\lambda$ is an *eigenvalue* of the matrix $A$ if there exist non-trivial (not $\vec{0}$) solutions to the matrix equation $\left(A - \lambda I\right)\vec{x} = \vec{0}$, we need $\left(A - \lambda I\right) to be a non-invertible matrix.
+Because $\lambda$ is an *eigenvalue* of the matrix $A$ if there exist non-trivial (not $\vec{0}$) solutions to the matrix equation $\left(A - \lambda I\right)\vec{x} = \vec{0}$, we need $\left(A - \lambda I\right)$ to be a non-invertible matrix.
 
 . . .
 
@@ -192,7 +192,7 @@ This means that $\lambda = 5$ and $\lambda = -2$ are the eigenvalues of the matr
 
 Once we know the *eigenvalues* of a matrix, we are prepared to find the corresponding *eigenvectors*.
 
-+ In general, there will be infinitely many *eigenvectors* corresponding to any *eigenvalue*, so we really seek a *basis* for the *eigenspace*!
++ There will be infinitely many *eigenvectors* corresponding to any *eigenvalue*, so we really seek a *basis* for the *eigenspace*!
 
 . . .
 
@@ -202,7 +202,7 @@ We saw, and practiced, how to do this in our previous discussion.
 
 **Strategy (Finding Eigenvalues):** Given an $n\times n$ matrix $A$ and an eigenvalue $\lambda$, we find a basis for the eigenspace corresponding to $\lambda$ by solving $\left(A - \lambda I\right)\vec{x} = \vec{0}$. That is, we find a basis for the *null space* of $\left(A - \lambda I\right)$.
 
-1. Construct the augmented matrix $\begin{array}{r|r} A - \lambda I & \vec{0}\end{array}$
+1. Construct the augmented matrix $\left[\begin{array}{r|r} A - \lambda I & \vec{0}\end{array}\right]$
 2. Find the solutions to the corresponding matrix equation by row-reducing
 3. Write the solution in parametric vector form
 4. Use the parametric vector form to construct a basis for the eigenspace, $E_{\lambda}$.
@@ -531,7 +531,7 @@ but they do so in small, predictable ways!
 **Effects of Row-Reduction on Determinants:** Given an $n\times n$ matrix $A$, 
 
 1. if $U$ is obtained from $A$ by *swapping* two rows, then $\text{det}\left(U\right) = -\text{det}\left(A\right)$
-2. if $U$ is obtained from $A$ by *scaling* a single row by the scalar $s$, then $\text{det}\left(U\right) = s\text{det}\left(A\right)$
+2. if $U$ is obtained from $A$ by *scaling* a single row by the scalar $s$, then $\text{det}\left(U\right) = s\cdot\text{det}\left(A\right)$
 3. if $U$ is obtained from $A$ by a *replacement* operation, $R_i \leftarrow R_i + sR_j$, then $\text{det}\left(U\right) = \text{det}\left(A\right)$
 
 . . .
@@ -621,7 +621,7 @@ We can row-reduce $\left(A - \lambda I\right)$ quickly (in comparison) and then 
 
 . . .
 
-**Comment:** The largest, non-triangular, matrices we'll work with in MAT350 are $3\times 3$.
+**Comment:** The largest, non-triangular, matrices we'll work with "by hand" in MAT350 are $3\times 3$.
 
 ## Characteristic Equation and Eigenvalues/vectors with Python
 
@@ -1130,6 +1130,18 @@ Analyze the long-term behavior of the system $\vec{x_{k+1}} = A\vec{x_k}$ for a 
 4. Analyze the long-run behavior of the difference equation $\vec{x_{k+1}} = A\vec{x_k}$ making use of the decomposition of $\vec{x_0}$ you found in part (3) and the eigenvalues you found in part (1) and sending $k\to \infty$.
 
 :::
+
+## Exit Ticket Task
+
+Navigate to [our MAT350 Exit Ticket Form](https://docs.google.com/forms/d/e/1FAIpQLSc8TmycI06yujoFNBwAvvbBZbCruUF6dPZZkC49aQ20ZLjDAA/viewform?usp=header), answer the questions, and complete the *task* below.
+
+<br/>
+
+*Note.* Today's discussion is listed as `20. Finding Eigenvalues and Eigenvectors`
+
+<br/>
+
+**Task:** Find all eigenvalues of the matrix $A = \begin{bmatrix} -1 & 2\\ 2 & 2\end{bmatrix}$ and construct a corresponding eigenbasis for each of the corresponding eigenspaces.
 
 ## Homework
 
