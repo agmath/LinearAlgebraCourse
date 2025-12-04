@@ -205,7 +205,7 @@ We'll have *non-trivial* solutions if $\left(A - \lambda I\right)$ is ***not** i
 
 **Note:** The following items follow directly from what we just saw and are worth noting regarding eigenvalues.
 
-+ Notice that $\lambda$ is an *eigenvalue* of $A$ if $\left(A - I_n\right)\vec{x} = \vec{0}$ has a non-trivial solution.
++ Notice that $\lambda$ is an *eigenvalue* of $A$ if $\left(A - \lambda I_n\right)\vec{x} = \vec{0}$ has a non-trivial solution.
 + Notice that $\lambda$ is an *eigenvalue* of $A$ if $\begin{bmatrix} A - \lambda I_n & | & \vec{0}\end{bmatrix}$ has a free variable.
 + Notice that $\lambda$ is an *eigenvalue* of $A$ if the matrix $A - \lambda I_n$ is not invertible.
 + Notice that $\lambda$ is an *eigenvalue* of $A$ if $\text{dim}\left(\text{Nul}\left(A - \lambda I_n\right)\right) > 0$.

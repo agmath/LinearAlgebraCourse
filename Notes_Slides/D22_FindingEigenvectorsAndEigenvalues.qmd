@@ -58,7 +58,7 @@ Complete the following warm-up problems to re-familiarize yourself with concepts
 
 ## Reminders and Today's Goal
 
-+ A scalar $\lambda$ is an *eigenvalue* of $A$ if $\left(A - I_n\right)\vec{x} = \vec{0}$ has a non-trivial solution.
++ A scalar $\lambda$ is an *eigenvalue* of $A$ if $\left(A - \lambda I_n\right)\vec{x} = \vec{0}$ has a non-trivial solution.
 + A scalar $\lambda$ is an *eigenvalue* of $A$ if $\begin{bmatrix} A - \lambda I_n & | & \vec{0}\end{bmatrix}$ has a free variable.
 + $\bigstar$ A scalar $\lambda$ is an *eigenvalue* of $A$ if the matrix $\left(A - \lambda I_n\right)$ is not invertible.
 + A scalar $\lambda$ is an *eigenvalue* of $A$ if $\text{dim}\left(\text{Nul}\left(A - \lambda I_n\right)\right) > 0$.
